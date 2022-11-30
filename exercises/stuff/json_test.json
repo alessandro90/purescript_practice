@@ -1,0 +1,14 @@
+{
+    "status": "NonTenured",
+    "personal": {
+        "weight": 63.5,
+        "height": 162.5,
+        "age": 31
+    },
+    "numberOfStudents": 23,
+    "grades": [
+        "Preschool",
+        "Kindergarten",
+        "Grade 1"
+    ]
+}
