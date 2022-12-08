@@ -1,0 +1,4 @@
+{
+    "purescript.buildCommand": "npx spago build --purs-args --json-errors",
+    "purescript.pursExe": "node_modules\\.bin\\purs"
+}

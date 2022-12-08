@@ -182,7 +182,7 @@ derive newtype instance EncodeJson Teacher
 
 instance DecodeJson Teacher where
   decodeJson json = do
-    obj <- decodeJObject json
+    obj <- decodeJson json
     grades <- obj .: "grades"
     status <- obj .: "status"
     personal <- obj .: "personal"
