@@ -2,7 +2,7 @@ module Test where
 
 import Prelude
 
-import Api.Logon (LogonRequest(..), LogonResponse(..), LogonResultSuccessContents(..), LogonResults(..))
+import Api.Logon (LogonRequest(..), LogonResponse(..), LogonResults(..))
 import Data.Argonaut (decodeJson, encodeJson)
 import Data.Either (Either(..))
 import Data.UUID (emptyUUID, toString)
@@ -13,7 +13,7 @@ testLogonRequest :: LogonRequest
 testLogonRequest = LogonRequest { userName: "John", password: "1234" }
 
 testLogonResponseSuccess :: LogonResponse
-testLogonResponseSuccess = LogonResponse $ LogonResultsSuccess $ LogonResultSuccessContents
+testLogonResponseSuccess = LogonResponse $ LogonResultsSuccess
   { authToken: emptyUUID
   , mustChangePassword: true
   }
@@ -38,7 +38,7 @@ runTestLogonResponse resp = do
   let json = encodeJson resp
   let logonResponse = decodeJson json
   log case logonResponse of
-    Right (LogonResponse (LogonResultsSuccess (LogonResultSuccessContents { authToken, mustChangePassword }))) ->
+    Right (LogonResponse (LogonResultsSuccess { authToken, mustChangePassword })) ->
       "{ authToken: "
         <> (toString authToken)
         <> "; "

@@ -33,23 +33,15 @@ instance DecodeJson LogonRequest where
     else
       Left $ tagError json
 
-newtype LogonResultSuccessContents = LogonResultSuccessContents
+type LogonResultSuccessContents =
   { authToken :: UUID
   , mustChangePassword :: Boolean
   }
 
-instance EncodeJson LogonResultSuccessContents where
-  encodeJson (LogonResultSuccessContents { authToken, mustChangePassword }) =
-    encodeJson { authToken: toString authToken, mustChangePassword }
-
-instance DecodeJson LogonResultSuccessContents where
-  decodeJson json = do
-    obj <- decodeJObject json
-    token <- obj .: "authToken"
-    mustChangePassword <- obj .: "mustChangePassword"
-    case parseUUID token of
-      Nothing -> Left $ AtKey "authToken" $ UnexpectedValue json
-      Just authToken -> Right $ LogonResultSuccessContents { authToken, mustChangePassword }
+type LogonResultSuccessContentsString =
+  { authToken :: String
+  , mustChangePassword :: Boolean
+  }
 
 data LogonResults
   = LogonResultsFailure
@@ -57,7 +49,7 @@ data LogonResults
 
 instance EncodeJson LogonResults where
   encodeJson LogonResultsFailure = encodeJson { tag: "LogonResultsFailure" }
-  encodeJson (LogonResultsSuccess (LogonResultSuccessContents { authToken, mustChangePassword })) =
+  encodeJson (LogonResultsSuccess { authToken, mustChangePassword }) =
     encodeJson
       { tag: "LogonResultsSuccess"
       , contents: { authToken: toString authToken, mustChangePassword }
@@ -70,8 +62,10 @@ instance DecodeJson LogonResults where
     case tag of
       "LogonResultsFailure" -> Right LogonResultsFailure
       "LogonResultsSuccess" -> do
-        contents <- obj .: "contents"
-        Right $ LogonResultsSuccess contents
+        { authToken, mustChangePassword } <- obj .: "contents" :: _ LogonResultSuccessContentsString
+        case parseUUID authToken of
+          Nothing -> Left $ AtKey "authToken" $ UnexpectedValue json
+          Just token -> Right $ LogonResultsSuccess { authToken: token, mustChangePassword }
       _ -> Left $ tagError json
 
 newtype LogonResponse = LogonResponse LogonResults
