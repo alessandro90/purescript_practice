@@ -1,4 +1,4 @@
-module Api.QueryUsers where
+module Data.Api.QueryUsers where
 
 import Prelude
 

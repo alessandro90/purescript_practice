@@ -1,4 +1,4 @@
-module Api.Logoff where
+module Data.Api.Logoff where
 
 import Prelude
 

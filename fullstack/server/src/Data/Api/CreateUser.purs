@@ -1,4 +1,4 @@
-module Api.CreateUser where
+module Data.Api.CreateUser where
 
 import Prelude
 

@@ -22,7 +22,14 @@ to generate this file without the comments in this block.
   , "either"
   , "httpure"
   , "maybe"
+  , "node-buffer"
+  , "node-fs"
+  , "node-fs-aff"
+  , "node-process"
+  , "parsing"
+  , "posix-types"
   , "prelude"
+  , "stringutils"
   , "uuid"
   ]
 , packages = ./packages.dhall
