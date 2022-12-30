@@ -53,16 +53,11 @@ lastName = properName
 
 accountParser :: AccountParserT Account
 accountParser = do
-  uname <- userName
-  consumeComma
-  tpassword <- temporaryPassword
-  consumeComma
-  isadmin <- admin
-  consumeComma
-  fname <- firstName
-  consumeComma
-  lname <- lastName
-  consumeComma
+  uname <- userName <* comma
+  tpassword <- temporaryPassword <* comma
+  isadmin <- admin <* comma
+  fname <- firstName <* comma
+  lname <- lastName <* comma
   pswd <- passwordHash
   pure $ Account
     { userName: uname
@@ -73,4 +68,4 @@ accountParser = do
     , passwordHash: pswd
     }
   where
-  consumeComma = void $ char ','
+  comma = char ','

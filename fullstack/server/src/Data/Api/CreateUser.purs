@@ -34,7 +34,7 @@ instance DecodeJson CreateUserRequest where
     else
       Left $ AtKey "tag" $ UnexpectedValue json
 
-data CreateUserResultsFailureReason = AlreadyExists | NotAuthenticated | NotAuthorized
+data CreateUserResultsFailureReason = AlreadyExists | NotAuthenticated | NotAuthorized | FileIOError String
 
 instance EncodeJson CreateUserResultsFailureReason where
   encodeJson AlreadyExists = encodeJson
@@ -49,6 +49,10 @@ instance EncodeJson CreateUserResultsFailureReason where
     { tag: "CreateUserResultsFailureReason"
     , contents: { reason: "NotAuthorized" }
     }
+  encodeJson (FileIOError s) = encodeJson
+    { tag: "CreateUserResultsFailureReason"
+    , contents: { reason: s }
+    }
 
 instance DecodeJson CreateUserResultsFailureReason where
   decodeJson json = do
@@ -60,7 +64,7 @@ instance DecodeJson CreateUserResultsFailureReason where
         "AlreadyExists" -> Right AlreadyExists
         "NotAuthenticated" -> Right NotAuthenticated
         "NotAuthorized" -> Right NotAuthorized
-        _ -> Left $ AtKey "contents.reason" $ UnexpectedValue json
+        s -> Right $ FileIOError s
     else
       Left $ AtKey "tag" $ UnexpectedValue json
 
