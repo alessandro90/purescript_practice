@@ -2,23 +2,25 @@ module Main where
 
 import Prelude
 
+import Control.Monad.Reader (runReaderT)
+import Data.Argonaut (fromString)
+import Data.Array (head)
+import Data.Either (Either(..), hush)
+import Data.Maybe (Maybe(..))
+import Data.NonEmpty (oneOf, (:|))
 import Data.Posix.Signal (Signal(..))
 import Effect (Effect)
+import Effect.Aff (launchAff_)
+import Effect.Class (liftEffect)
 import Effect.Class.Console (log)
 import HTTPure (Request, ResponseM)
 import HTTPure as HTTPure
+import Handler.Account (loadAccounts)
+import Handler.Api.Logon (Logon)
+import Handler.Class.ApiHandler (HandlerEnv, handle)
+import Manager.Account (startup)
 import Node.Process (onSignal)
-
--- import Data.Array ((!!))
--- import Data.Maybe (fromMaybe)
--- import Effect (Effect)
--- import Effect.Class.Console (log)
--- import HTTPure (Method(..), ServerM)
--- import HTTPure as HTTPure
--- import HTTPure.Lookup ((!@))
--- import HTTPure.Request (Request)
--- import HTTPure.Response (ResponseM)
--- import Test (test)
+import Type.Proxy (Proxy(..))
 
 -- postRouter :: Request -> ResponseM
 -- postRouter { path }
@@ -26,30 +28,31 @@ import Node.Process (onSignal)
 --   | path !@ 0 == "that" = HTTPure.ok $ fromMaybe "missing path[2]" $ path !! 2
 --   | otherwise = HTTPure.notFound
 
--- router :: Request -> ResponseM
--- router { path: [ "goodbye" ] } = HTTPure.ok "Goodbye"
--- router request@{ method }
---   | method == Get = HTTPure.methodNotAllowed
---   | method == Post = postRouter request
--- router _ = HTTPure.notFound
-
 port :: Int
 port = 3000
 
--- main :: Effect Unit
--- main = test
-
-router :: Request -> ResponseM
-router _ = HTTPure.notFound
+router :: HandlerEnv -> Request -> ResponseM
+router env { body } = do
+  body' <- HTTPure.toString body
+  case hush =<< (head $ oneOf $ (handle (fromString body') (Proxy :: _ Logon)) :| []) of
+    Nothing -> HTTPure.badRequest body'
+    Just readerT -> runReaderT readerT env
 
 main :: Effect Unit
-main = do
-  shutdown <- HTTPure.serve port router $ log $ "Server running on port " <> show port
+main = launchAff_ do
+  accounts' <- loadAccounts
+  case accounts' of
+    Left err -> log $ "Cannot load accounts: " <> show err
+    Right accounts -> do
+      accountsAVar <- startup accounts
 
-  let
-    shutdownServer = do
-      log "Shutting down the server"
-      shutdown $ log "Server shutdown"
+      liftEffect do
+        shutdown <- HTTPure.serve port (router { accountsAVar }) $ log $ "Server running on port " <> show port
 
-  onSignal SIGINT shutdownServer
-  onSignal SIGTERM shutdownServer
+        let
+          shutdownServer = do
+            log "Shutting down the server"
+            shutdown $ log "Server shutdown"
+
+        onSignal SIGINT shutdownServer
+        onSignal SIGTERM shutdownServer

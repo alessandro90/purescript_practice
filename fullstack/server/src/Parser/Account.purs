@@ -8,6 +8,7 @@ import Data.CodePoint.Unicode (isAlpha, isAlphaNum, isLower, isUpper)
 import Data.Identity (Identity)
 import Data.String (codePointFromChar)
 import Data.String.CodeUnits (fromCharArray)
+import Effect.Class.Console (log)
 import Entity.Account (Account(..))
 import Parsing (ParserT)
 import Parsing.String (char, satisfy, string)
@@ -25,7 +26,7 @@ hex = do
   chars <- fromCharArray <$> (some $ satisfy isHex)
   pure chars
   where
-  isHex c = (c >= '0' && c <= '9') || (c <= 'a' && c <= 'f')
+  isHex c = (c >= '0' && c <= '9') || (c >= 'a' && c <= 'f')
 
 passwordHash :: AccountParserT String
 passwordHash = hex
@@ -54,11 +55,11 @@ lastName = properName
 accountParser :: AccountParserT Account
 accountParser = do
   uname <- userName <* comma
+  pswd <- passwordHash <* comma
   tpassword <- temporaryPassword <* comma
   isadmin <- admin <* comma
   fname <- firstName <* comma
-  lname <- lastName <* comma
-  pswd <- passwordHash
+  lname <- lastName
   pure $ Account
     { userName: uname
     , temporaryPassword: tpassword
