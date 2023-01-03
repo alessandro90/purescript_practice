@@ -3,9 +3,9 @@ module Main where
 import Prelude
 
 import Control.Monad.Reader (runReaderT)
-import Data.Argonaut (fromString)
+import Data.Argonaut (jsonParser)
 import Data.Array (head)
-import Data.Either (Either(..), hush)
+import Data.Either (Either(..), either, hush)
 import Data.Maybe (Maybe(..))
 import Data.NonEmpty (oneOf, (:|))
 import Data.Posix.Signal (Signal(..))
@@ -31,12 +31,27 @@ import Type.Proxy (Proxy(..))
 port :: Int
 port = 3000
 
+-- router :: HandlerEnv -> Request -> ResponseM
+-- router env { body } = do
+--   body' <- HTTPure.toString body
+--   case jsonParser body' of
+--     Left e -> HTTPure.badRequest e
+--     Right b -> do
+--       case hush =<< (head $ oneOf $ (handle b (Proxy :: _ Logon)) :| []) of
+--         Nothing -> HTTPure.badRequest body'
+--         Just readerT -> runReaderT readerT env
+
 router :: HandlerEnv -> Request -> ResponseM
-router env { body } = do
-  body' <- HTTPure.toString body
-  case hush =<< (head $ oneOf $ (handle (fromString body') (Proxy :: _ Logon)) :| []) of
-    Nothing -> HTTPure.badRequest body'
-    Just readerT -> runReaderT readerT env
+router env { method, body }
+  | method == HTTPure.Post =
+      do
+        body' <- HTTPure.toString body
+        either HTTPure.badRequest (reqHandler body') $ jsonParser body'
+      where
+      reqHandler b json = case hush =<< (head $ oneOf $ (handle json (Proxy :: _ Logon)) :| []) of
+        Nothing -> HTTPure.badRequest b
+        Just readerT -> runReaderT readerT env
+  | otherwise = HTTPure.methodNotAllowed
 
 main :: Effect Unit
 main = launchAff_ do
