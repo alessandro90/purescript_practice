@@ -14,7 +14,6 @@ import Data.Traversable (sequence)
 import Effect (Effect)
 import Effect.Aff (Aff, try)
 import Effect.Class (liftEffect)
-import Effect.Class.Console (log)
 import Entity.Account (Account(..))
 import Node.Buffer as Buffer
 import Node.Crypto.Hash as Hash
@@ -35,9 +34,14 @@ bootstrapAccount = do
   let userName = "admin"
   let password = "admin"
   passwordHash <- passwordHashHex userName password
-  pure $ intercalate "," [ userName, passwordHash, trueStr, trueStr, "Joe", "Admin" ]
-  where
-  trueStr = "true"
+  pure $ accountToCSV $ Account
+    { userName
+    , temporaryPassword: true
+    , admin: true
+    , firstName: "Joe"
+    , lastName: "Admin"
+    , passwordHash
+    }
 
 writeBootstrapAccount :: Aff Unit
 writeBootstrapAccount = bootstrapAccount >>= writeTextFile ASCII accountsFile
@@ -49,7 +53,6 @@ loadAccounts = do
     Left _ -> writeBootstrapAccount
     Right itExists -> when (not itExists) $ writeBootstrapAccount
   accountLines <- lines <$> readTextFile ASCII accountsFile
-  log $ "AccountLines:\n" <> show accountLines
   pure $ sequence $ unwrap <<< flip runParserT accountParser <$> accountLines
 
 accountToCSV :: Account -> String

@@ -55,11 +55,11 @@ lastName = properName
 accountParser :: AccountParserT Account
 accountParser = do
   uname <- userName <* comma
-  pswd <- passwordHash <* comma
   tpassword <- temporaryPassword <* comma
   isadmin <- admin <* comma
   fname <- firstName <* comma
-  lname <- lastName
+  lname <- lastName <* comma
+  pswd <- passwordHash
   pure $ Account
     { userName: uname
     , temporaryPassword: tpassword
