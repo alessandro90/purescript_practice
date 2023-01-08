@@ -9,12 +9,16 @@ import Effect.Aff (Aff)
 import Effect.Aff.AVar (AVar)
 import HTTPure (Response)
 import Manager.Account (Accounts)
+import Manager.Session (Sessions)
 import Type.Proxy (Proxy)
 
-type HandlerEnv = { accountsAVar :: AVar Accounts }
+type HandlerEnv =
+  { accountsAVar :: AVar Accounts
+  , sessionsAVar :: AVar Sessions
+  }
 
 type Handler = ReaderT HandlerEnv Aff Response
 
 class ApiHandler :: ∀ k. k -> Constraint
 class ApiHandler a where
-  handle :: Json -> Proxy a -> Either JsonDecodeError Handler
+  handle :: Proxy a -> Json -> Either JsonDecodeError Handler

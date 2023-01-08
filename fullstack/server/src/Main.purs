@@ -2,31 +2,31 @@ module Main where
 
 import Prelude
 
+import Control.Alt ((<|>))
 import Control.Monad.Reader (runReaderT)
 import Data.Argonaut (jsonParser)
-import Data.Array (head)
 import Data.Either (Either(..), either, hush)
+import Data.Foldable (class Foldable)
+import Data.JSDate (getTime, now, toUTCString)
 import Data.Maybe (Maybe(..))
-import Data.NonEmpty (oneOf, (:|))
+import Data.NonEmpty (NonEmpty, foldl1, (:|))
 import Data.Posix.Signal (Signal(..))
+import Data.UUID (genUUID)
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
 import Effect.Class.Console (log)
-import HTTPure (Request, ResponseM)
+import HTTPure (ResponseM, Request)
 import HTTPure as HTTPure
 import Handler.Account (loadAccounts)
+import Handler.Api.Logoff (Logoff)
 import Handler.Api.Logon (Logon)
 import Handler.Class.ApiHandler (HandlerEnv, handle)
-import Manager.Account (startup)
+import Manager.Account as AccountManager
+import Manager.Session as SessionManager
 import Node.Process (onSignal)
+import Record as Record
 import Type.Proxy (Proxy(..))
-
--- postRouter :: Request -> ResponseM
--- postRouter { path }
---   | path !@ 0 == "this" = HTTPure.ok $ fromMaybe "missing path[1]" $ path !! 1
---   | path !@ 0 == "that" = HTTPure.ok $ fromMaybe "missing path[2]" $ path !! 2
---   | otherwise = HTTPure.notFound
 
 port :: Int
 port = 3000
@@ -41,6 +41,9 @@ port = 3000
 --         Nothing -> HTTPure.badRequest body'
 --         Just readerT -> runReaderT readerT env
 
+oneOf :: ∀ a e f. Foldable f => NonEmpty f (Either e a) -> Either e a
+oneOf x = foldl1 (<|>) x
+
 router :: HandlerEnv -> Request -> ResponseM
 router env { method, body }
   | method == HTTPure.Post =
@@ -48,10 +51,32 @@ router env { method, body }
         body' <- HTTPure.toString body
         either HTTPure.badRequest (reqHandler body') $ jsonParser body'
       where
-      reqHandler b json = case hush =<< (head $ oneOf $ (handle json (Proxy :: _ Logon)) :| []) of
+      handlers json =
+        (handle (Proxy :: _ Logon)) :|
+          [ handle (Proxy :: _ Logoff)
+          ] <#> (_ $ json)
+      reqHandler b json = case hush $ oneOf $ handlers json of
         Nothing -> HTTPure.badRequest b
         Just readerT -> runReaderT readerT env
   | otherwise = HTTPure.methodNotAllowed
+
+loggingRouter :: HandlerEnv -> Request -> ResponseM
+loggingRouter env req@{ method, body } = do
+  id <- liftEffect $ show <$> genUUID
+  let idStr = "(id: " <> id <> ")"
+  body' <- HTTPure.toString body
+  start <- liftEffect now
+  log $ ts start <> " Method: " <> show method <> " Body: " <> show body' <> idStr
+  res <- router env req
+  end <- liftEffect now
+  let duration = " [" <> show (getTime end - getTime start) <> "ms]"
+  log $ ts end <> " Response: "
+    <> show (Record.delete (Proxy :: _ "writeBody") res)
+    <> duration
+    <> idStr
+  pure res
+  where
+  ts dt = "[" <> toUTCString dt <> "]"
 
 main :: Effect Unit
 main = launchAff_ do
@@ -59,15 +84,17 @@ main = launchAff_ do
   case accounts' of
     Left err -> log $ "Cannot load accounts: " <> show err
     Right accounts -> do
-      accountsAVar <- startup accounts
-
+      accountsAVar <- AccountManager.startup accounts
+      sessionsAVar <- SessionManager.startup
       liftEffect do
-        shutdown <- HTTPure.serve port (router { accountsAVar }) $ log $ "Server running on port " <> show port
+        shutdown <- HTTPure.serve port (loggingRouter { accountsAVar, sessionsAVar }) $ log $ "Server running on port " <> show port
 
         let
-          shutdownServer = do
+          shutdownServer = launchAff_ do
             log "Shutting down the server"
-            shutdown $ log "Server shutdown"
+            SessionManager.shutdown sessionsAVar
+            AccountManager.shutdown accountsAVar
+            liftEffect $ shutdown $ log "Server shutdown"
 
         onSignal SIGINT shutdownServer
         onSignal SIGTERM shutdownServer
