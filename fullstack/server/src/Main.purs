@@ -22,6 +22,7 @@ import Handler.Account (loadAccounts)
 import Handler.Api.CreateUser (CreateUser)
 import Handler.Api.Logoff (Logoff)
 import Handler.Api.Logon (Logon)
+import Handler.Api.QueryUsers (QueryUsers)
 import Handler.Class.ApiHandler (HandlerEnv, handle)
 import Manager.Account as AccountManager
 import Manager.Session as SessionManager
@@ -46,6 +47,7 @@ router env { method, body }
         (handle (Proxy :: _ Logon)) :|
           [ handle (Proxy :: _ Logoff)
           , handle (Proxy :: _ CreateUser)
+          , handle (Proxy :: _ QueryUsers)
           ] <#> (_ $ json)
       reqHandler b json = case hush $ oneOf $ handlers json of
         Nothing -> HTTPure.badRequest b

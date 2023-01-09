@@ -3,6 +3,7 @@ module Manager.Account where
 import Prelude
 
 import Crypto (passwordHashHex)
+import Data.Array (fromFoldable)
 import Data.Either (Either(..))
 import Data.Map (Map)
 import Data.Map as Map
@@ -45,3 +46,6 @@ createAccount accountsAVar account@(Account { userName }) = do
 
 findAccount :: AVar Accounts -> String -> Aff (Maybe Account)
 findAccount accountsAVar userName = AVar.read accountsAVar >>= pure <<< Map.lookup userName
+
+getAccounts :: AVar Accounts -> Aff (Array Account)
+getAccounts accountsAVar = AVar.read accountsAVar >>= pure <<< fromFoldable <<< Map.values
