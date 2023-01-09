@@ -74,7 +74,7 @@ data CreateUserResults = CreateUserResultsSuccess | CreateUserResultsFailure Cre
 
 instance EncodeJson CreateUserResults where
   encodeJson CreateUserResultsSuccess = encodeJson { tag: "CreateUserResultsSuccess" }
-  encodeJson (CreateUserResultsFailure reason) = encodeJson { tag: "CreateUserResultsFailure", contents: { reason } }
+  encodeJson (CreateUserResultsFailure { reason }) = encodeJson { tag: "CreateUserResultsFailure", contents: { reason } }
 
 instance DecodeJson CreateUserResults where
   decodeJson json = do
