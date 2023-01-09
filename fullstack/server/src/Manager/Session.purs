@@ -13,6 +13,7 @@ import Effect.Aff.AVar (AVar)
 import Effect.Aff.AVar as AVar
 import Effect.Class (liftEffect)
 import Entity.Session (Session(..))
+import Utils (withAVar)
 
 type Sessions = Map UUID Session
 
@@ -28,10 +29,9 @@ shutdown = void <<< AVar.take
 verifySession :: AVar Sessions -> UUID -> Aff (Maybe Session)
 verifySession sessionsAVar authToken = do
   expireSessions sessionsAVar
-  sessions <- AVar.take sessionsAVar
-  lastTime <- sinceEpoch
-  let
-    Tuple newSessions newSession = case Map.lookup authToken sessions of
+  withAVar sessionsAVar \sessions -> do
+    lastTime <- sinceEpoch
+    pure $ case Map.lookup authToken sessions of
       Nothing -> Tuple sessions Nothing
       Just (Session session) ->
         let
@@ -39,8 +39,6 @@ verifySession sessionsAVar authToken = do
           newSessions' = Map.update (const newSession') authToken sessions
         in
           Tuple newSessions' newSession'
-  AVar.put newSessions sessionsAVar
-  pure newSession
 
 createSession :: AVar Sessions -> String -> Aff UUID
 createSession sessionsAVar userName = do

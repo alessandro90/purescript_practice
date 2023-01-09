@@ -19,6 +19,7 @@ import Effect.Class.Console (log)
 import HTTPure (ResponseM, Request)
 import HTTPure as HTTPure
 import Handler.Account (loadAccounts)
+import Handler.Api.CreateUser (CreateUser)
 import Handler.Api.Logoff (Logoff)
 import Handler.Api.Logon (Logon)
 import Handler.Class.ApiHandler (HandlerEnv, handle)
@@ -30,16 +31,6 @@ import Type.Proxy (Proxy(..))
 
 port :: Int
 port = 3000
-
--- router :: HandlerEnv -> Request -> ResponseM
--- router env { body } = do
---   body' <- HTTPure.toString body
---   case jsonParser body' of
---     Left e -> HTTPure.badRequest e
---     Right b -> do
---       case hush =<< (head $ oneOf $ (handle b (Proxy :: _ Logon)) :| []) of
---         Nothing -> HTTPure.badRequest body'
---         Just readerT -> runReaderT readerT env
 
 oneOf :: ∀ a e f. Foldable f => NonEmpty f (Either e a) -> Either e a
 oneOf x = foldl1 (<|>) x
@@ -54,6 +45,7 @@ router env { method, body }
       handlers json =
         (handle (Proxy :: _ Logon)) :|
           [ handle (Proxy :: _ Logoff)
+          , handle (Proxy :: _ CreateUser)
           ] <#> (_ $ json)
       reqHandler b json = case hush $ oneOf $ handlers json of
         Nothing -> HTTPure.badRequest b
