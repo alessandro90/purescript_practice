@@ -10,3 +10,4 @@
 **/*.spago
 **/.vscode
 fullstack/server/accounts.csv
+halo/index.js
