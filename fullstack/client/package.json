@@ -1,0 +1,20 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "purescript": "^0.15.7",
+    "spago": "^0.20.9"
+  },
+  "dependencies": {
+    "esbuild": "0.17.5",
+    "uuid": "^9.0.0"
+  }
+}

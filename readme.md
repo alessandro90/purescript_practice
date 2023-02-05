@@ -48,6 +48,10 @@ npx spago run
 
 ## Notes
 
+### Client
+
+Apparently the client works properly only with Chrome and not with Firefox.
+
 ### Recurse to the end before doing any computation
 
 The way to go down to a recursion chain and then "go back" to perform a computation is by directly pipe the result of a recursive call into another function.
