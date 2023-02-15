@@ -1,10 +1,6 @@
 build:
-	npx spago build
-
-run:
 	npx spago bundle-app
-	python -m http.server
+	mkdir -p dist
+	cp {index.html,index.js} dist
 
-build_run: build run
-
-.PHONY: build run build_run
+.PHONY: build
