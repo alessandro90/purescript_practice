@@ -5,15 +5,16 @@ import Prelude
 import CSS (white, color)
 import Capability.Log (class Log)
 import Capability.LogonRoute (class LogonRoute)
-import Capability.Navigate (class Navigate)
+import Capability.Navigate (class Navigate, navigate)
 import Component.ChangePassword as ChangePassword
 import Component.Logon as Logon
 import Component.Page as Page
-import Control.Monad.Reader (class MonadAsk)
+import Control.Monad.Reader (class MonadAsk, ask)
 import Data.Const (Const)
-import Data.Maybe (Maybe(..))
+import Data.Maybe (Maybe(..), isNothing)
 import Data.Route (Route(..))
 import Effect.Aff.Class (class MonadAff)
+import Effect.Ref as Ref
 import Env (Env)
 import Halogen as H
 import Halogen.HTML as HH
@@ -63,4 +64,9 @@ component = H.mkComponent
 
   handleQuery :: ∀ a. Query a -> H.HalogenM State Action Slots Output m (Maybe a)
   handleQuery = case _ of
-    Navigate route a -> H.modify_ _ { route = route } *> pure (Just a)
+    Navigate route a -> do
+      { userRef } <- ask
+      ref <- H.liftEffect $ Ref.read userRef
+      if isNothing ref then navigate Logon
+      else H.modify_ _ { route = route }
+      pure $ Just a

@@ -1022,11 +1022,11 @@
     };
   };
   var composeKleisli = function(dictBind) {
-    var bind17 = bind(dictBind);
+    var bind18 = bind(dictBind);
     return function(f) {
       return function(g) {
         return function(a2) {
-          return bind17(f(a2))(g);
+          return bind18(f(a2))(g);
         };
       };
     };
@@ -1037,9 +1037,9 @@
     }
   };
   var join = function(dictBind) {
-    var bind17 = bind(dictBind);
+    var bind18 = bind(dictBind);
     return function(m) {
-      return bind17(m)(identity4);
+      return bind18(m)(identity4);
     };
   };
 
@@ -1366,13 +1366,13 @@
     return dict.foldr;
   };
   var traverse_ = function(dictApplicative) {
-    var applySecond3 = applySecond(dictApplicative.Apply0());
+    var applySecond2 = applySecond(dictApplicative.Apply0());
     var pure18 = pure(dictApplicative);
     return function(dictFoldable) {
       var foldr22 = foldr(dictFoldable);
       return function(f) {
         return foldr22(function($454) {
-          return applySecond3(f($454));
+          return applySecond2(f($454));
         })(pure18(unit));
       };
     };
@@ -1598,23 +1598,23 @@
 
   // output/Control.Monad/index.js
   var unlessM = function(dictMonad) {
-    var bind17 = bind(dictMonad.Bind1());
+    var bind18 = bind(dictMonad.Bind1());
     var unless2 = unless(dictMonad.Applicative0());
     return function(mb) {
       return function(m) {
-        return bind17(mb)(function(b2) {
+        return bind18(mb)(function(b2) {
           return unless2(b2)(m);
         });
       };
     };
   };
   var ap = function(dictMonad) {
-    var bind17 = bind(dictMonad.Bind1());
+    var bind18 = bind(dictMonad.Bind1());
     var pure18 = pure(dictMonad.Applicative0());
     return function(f) {
       return function(a2) {
-        return bind17(f)(function(f$prime) {
-          return bind17(a2)(function(a$prime) {
+        return bind18(f)(function(f$prime) {
+          return bind18(a2)(function(a$prime) {
             return pure18(f$prime(a$prime));
           });
         });
@@ -2830,7 +2830,6 @@
       }
     };
   });
-  var freeApply = /* @__PURE__ */ $lazy_freeApply(77);
   var bind2 = /* @__PURE__ */ bind(freeBind);
   var pure2 = /* @__PURE__ */ pure(freeApplicative);
   var liftF = function(f) {
@@ -3782,12 +3781,12 @@
     };
   };
   var bindExceptT = function(dictMonad) {
-    var bind17 = bind(dictMonad.Bind1());
+    var bind18 = bind(dictMonad.Bind1());
     var pure18 = pure(dictMonad.Applicative0());
     return {
       bind: function(v) {
         return function(k) {
-          return bind17(v)(either(function($187) {
+          return bind18(v)(either(function($187) {
             return pure18(Left.create($187));
           })(function(a2) {
             var v1 = k(a2);
@@ -3840,19 +3839,19 @@
     var append13 = append(dictSemigroup);
     return function(dictMonad) {
       var Bind1 = dictMonad.Bind1();
-      var bind17 = bind(Bind1);
+      var bind18 = bind(Bind1);
       var pure18 = pure(dictMonad.Applicative0());
       var functorExceptT1 = functorExceptT(Bind1.Apply0().Functor0());
       return {
         alt: function(v) {
           return function(v1) {
-            return bind17(v)(function(rm) {
+            return bind18(v)(function(rm) {
               if (rm instanceof Right) {
                 return pure18(new Right(rm.value0));
               }
               ;
               if (rm instanceof Left) {
-                return bind17(v1)(function(rn) {
+                return bind18(v1)(function(rn) {
                   if (rn instanceof Right) {
                     return pure18(new Right(rn.value0));
                   }
@@ -3925,13 +3924,13 @@
     };
   };
   var bindReaderT = function(dictBind) {
-    var bind17 = bind(dictBind);
+    var bind18 = bind(dictBind);
     var applyReaderT1 = applyReaderT(dictBind.Apply0());
     return {
       bind: function(v) {
         return function(k) {
           return function(r) {
-            return bind17(v(r))(function(a2) {
+            return bind18(v(r))(function(a2) {
               var v1 = k(a2);
               return v1(r);
             });
@@ -4045,14 +4044,14 @@
     var append13 = append(dictSemigroup);
     var applyWriterT1 = applyWriterT(dictSemigroup);
     return function(dictBind) {
-      var bind17 = bind(dictBind);
+      var bind18 = bind(dictBind);
       var Apply0 = dictBind.Apply0();
       var map39 = map(Apply0.Functor0());
       var applyWriterT2 = applyWriterT1(Apply0);
       return {
         bind: function(v) {
           return function(k) {
-            return bind17(v)(function(v1) {
+            return bind18(v)(function(v1) {
               var v2 = k(v1.value0);
               return map39(function(v3) {
                 return new Tuple(v3.value0, append13(v1.value1)(v3.value1));
@@ -6159,7 +6158,6 @@
   };
   var functorHalogenM = freeFunctor;
   var bindHalogenM = freeBind;
-  var applyHalogenM = freeApply;
   var applicativeHalogenM = freeApplicative;
 
   // output/Capability.Log/index.js
@@ -9240,6 +9238,26 @@
   };
   var color = /* @__PURE__ */ key(valColor)(/* @__PURE__ */ fromString12("color"));
 
+  // output/Capability.Navigate/index.js
+  var lift7 = /* @__PURE__ */ lift(monadTransHalogenM);
+  var navigate = function(dict) {
+    return dict.navigate;
+  };
+  var navigateHalogenM = function(dictNavigate) {
+    return {
+      navigate: function() {
+        var $8 = lift7(dictNavigate.Monad0());
+        var $9 = navigate(dictNavigate);
+        return function($10) {
+          return $8($9($10));
+        };
+      }(),
+      Monad0: function() {
+        return monadHalogenM;
+      }
+    };
+  };
+
   // output/AppTheme/index.js
   var themeFont = /* @__PURE__ */ function() {
     return fontFamily(["Verdana"])(new NonEmpty(sansSerif, []));
@@ -9777,26 +9795,6 @@
   };
   var minHeight = /* @__PURE__ */ key5(/* @__PURE__ */ fromString11("min-height"));
   var height8 = /* @__PURE__ */ key5(/* @__PURE__ */ fromString11("height"));
-
-  // output/Capability.Navigate/index.js
-  var lift7 = /* @__PURE__ */ lift(monadTransHalogenM);
-  var navigate = function(dict) {
-    return dict.navigate;
-  };
-  var navigateHalogenM = function(dictNavigate) {
-    return {
-      navigate: function() {
-        var $8 = lift7(dictNavigate.Monad0());
-        var $9 = navigate(dictNavigate);
-        return function($10) {
-          return $8($9($10));
-        };
-      }(),
-      Monad0: function() {
-        return monadHalogenM;
-      }
-    };
-  };
 
   // output/Data.Coyoneda/index.js
   var CoyonedaF = /* @__PURE__ */ function() {
@@ -10935,7 +10933,7 @@
   function runST(f) {
     return f();
   }
-  function _foldM(bind17) {
+  function _foldM(bind18) {
     return function(f) {
       return function(mz) {
         return function(m) {
@@ -10947,7 +10945,7 @@
           }
           for (var k in m) {
             if (hasOwnProperty.call(m, k)) {
-              acc = bind17(acc)(g(k));
+              acc = bind18(acc)(g(k));
             }
           }
           return acc;
@@ -13848,7 +13846,8 @@
       return "changePassword";
     }
   })(ordUnit);
-  var applySecond2 = /* @__PURE__ */ applySecond(applyHalogenM);
+  var bind10 = /* @__PURE__ */ bind(bindHalogenM);
+  var discard5 = /* @__PURE__ */ discard(discardUnit)(bindHalogenM);
   var modify_5 = /* @__PURE__ */ modify_2(monadStateHalogenM);
   var pure11 = /* @__PURE__ */ pure(applicativeHalogenM);
   var Navigate = /* @__PURE__ */ function() {
@@ -13874,11 +13873,14 @@
     var component1 = component3(dictMonadAff);
     var component22 = component2(dictMonadAff);
     var component32 = component(dictMonadAff);
+    var liftEffect9 = liftEffect(monadEffectHalogenM(dictMonadAff.MonadEffect0()));
     return function(dictNavigate) {
       var component42 = component1(dictNavigate);
       var component52 = component32(dictNavigate);
+      var navigate2 = navigate(navigateHalogenM(dictNavigate));
       return function(dictMonadAsk) {
         var component6 = component22(dictMonadAsk)(dictNavigate);
+        var ask2 = ask(monadAskHalogenM(dictMonadAsk));
         return function(dictLogonRoute) {
           var component7 = component6(dictLogonRoute);
           return function(dictLog) {
@@ -13900,21 +13902,34 @@
                 return slot_2(_changePassword)(unit)(component42(component52))(unit);
               }
               ;
-              throw new Error("Failed pattern match at Component.Router (line 58, column 22 - line 62, column 99): " + [v.route.constructor.name]);
+              throw new Error("Failed pattern match at Component.Router (line 59, column 22 - line 63, column 99): " + [v.route.constructor.name]);
             };
             var handleQuery = function(v) {
-              return applySecond2(modify_5(function(v1) {
-                var $34 = {};
-                for (var $35 in v1) {
-                  if ({}.hasOwnProperty.call(v1, $35)) {
-                    $34[$35] = v1[$35];
-                  }
-                  ;
-                }
-                ;
-                $34.route = v.value0;
-                return $34;
-              }))(pure11(new Just(v.value1)));
+              return bind10(ask2)(function(v1) {
+                return bind10(liftEffect9(read(v1.userRef)))(function(ref2) {
+                  return discard5(function() {
+                    var $45 = isNothing(ref2);
+                    if ($45) {
+                      return navigate2(Logon.value);
+                    }
+                    ;
+                    return modify_5(function(v2) {
+                      var $46 = {};
+                      for (var $47 in v2) {
+                        if ({}.hasOwnProperty.call(v2, $47)) {
+                          $46[$47] = v2[$47];
+                        }
+                        ;
+                      }
+                      ;
+                      $46.route = v.value0;
+                      return $46;
+                    });
+                  }())(function() {
+                    return pure11(new Just(v.value1));
+                  });
+                });
+              });
             };
             return mkComponent({
               initialState: $$const({
@@ -13936,7 +13951,7 @@
   };
 
   // output/Halogen.Aff.Util/index.js
-  var bind10 = /* @__PURE__ */ bind(bindAff);
+  var bind11 = /* @__PURE__ */ bind(bindAff);
   var liftEffect4 = /* @__PURE__ */ liftEffect(monadEffectAff);
   var bindFlipped8 = /* @__PURE__ */ bindFlipped(bindEffect);
   var composeKleisliFlipped5 = /* @__PURE__ */ composeKleisliFlipped(bindEffect);
@@ -13944,10 +13959,10 @@
   var bindFlipped1 = /* @__PURE__ */ bindFlipped(bindMaybe);
   var pure13 = /* @__PURE__ */ pure(applicativeEffect);
   var map34 = /* @__PURE__ */ map(functorEffect);
-  var discard5 = /* @__PURE__ */ discard(discardUnit);
+  var discard6 = /* @__PURE__ */ discard(discardUnit);
   var throwError2 = /* @__PURE__ */ throwError(monadThrowAff);
   var selectElement = function(query3) {
-    return bind10(liftEffect4(bindFlipped8(composeKleisliFlipped5(function() {
+    return bind11(liftEffect4(bindFlipped8(composeKleisliFlipped5(function() {
       var $16 = querySelector(query3);
       return function($17) {
         return $16(toParentNode($17));
@@ -13973,8 +13988,8 @@
       return nonCanceler;
     };
   });
-  var awaitBody = /* @__PURE__ */ discard5(bindAff)(awaitLoad)(function() {
-    return bind10(selectElement("body"))(function(body2) {
+  var awaitBody = /* @__PURE__ */ discard6(bindAff)(awaitLoad)(function() {
+    return bind11(selectElement("body"))(function(body2) {
       return maybe(throwError2(error("Could not find body")))(pure12)(body2);
     });
   });
@@ -14072,8 +14087,8 @@
   var lookup9 = /* @__PURE__ */ lookup2(ordSubscriptionId);
   var bind13 = /* @__PURE__ */ bind(bindAff);
   var liftEffect5 = /* @__PURE__ */ liftEffect(monadEffectAff);
-  var discard6 = /* @__PURE__ */ discard(discardUnit);
-  var discard12 = /* @__PURE__ */ discard6(bindAff);
+  var discard7 = /* @__PURE__ */ discard(discardUnit);
+  var discard12 = /* @__PURE__ */ discard7(bindAff);
   var traverse_12 = /* @__PURE__ */ traverse_(applicativeAff);
   var traverse_22 = /* @__PURE__ */ traverse_12(foldableList);
   var fork3 = /* @__PURE__ */ fork2(monadForkAff);
@@ -14350,8 +14365,8 @@
   };
 
   // output/Halogen.Aff.Driver/index.js
-  var bind11 = /* @__PURE__ */ bind(bindEffect);
-  var discard7 = /* @__PURE__ */ discard(discardUnit);
+  var bind14 = /* @__PURE__ */ bind(bindEffect);
+  var discard8 = /* @__PURE__ */ discard(discardUnit);
   var for_2 = /* @__PURE__ */ for_(applicativeEffect)(foldableMaybe);
   var traverse_5 = /* @__PURE__ */ traverse_(applicativeAff)(foldableList);
   var fork4 = /* @__PURE__ */ fork2(monadForkAff);
@@ -14359,7 +14374,7 @@
   var traverse_13 = /* @__PURE__ */ traverse_(applicativeEffect);
   var traverse_23 = /* @__PURE__ */ traverse_13(foldableMaybe);
   var traverse_33 = /* @__PURE__ */ traverse_13(foldableMap);
-  var discard23 = /* @__PURE__ */ discard7(bindAff);
+  var discard23 = /* @__PURE__ */ discard8(bindAff);
   var parSequence_3 = /* @__PURE__ */ parSequence_(parallelAff)(foldableList);
   var liftEffect6 = /* @__PURE__ */ liftEffect(monadEffectAff);
   var pure15 = /* @__PURE__ */ pure(applicativeEffect);
@@ -14372,7 +14387,7 @@
   var renderStateX_2 = /* @__PURE__ */ renderStateX_(applicativeEffect);
   var tailRecM3 = /* @__PURE__ */ tailRecM(monadRecEffect);
   var voidLeft3 = /* @__PURE__ */ voidLeft(functorEffect);
-  var bind14 = /* @__PURE__ */ bind(bindAff);
+  var bind15 = /* @__PURE__ */ bind(bindAff);
   var liftEffect1 = /* @__PURE__ */ liftEffect(monadEffectEffect);
   var newLifecycleHandlers = /* @__PURE__ */ function() {
     return $$new({
@@ -14496,7 +14511,7 @@
                     })(read(childrenOutRef))();
                     when2(isDuplicate)(warn("Halogen: Duplicate slot address was detected during rendering, unexpected results may occur"))();
                     modify_(slot4.set($$var2))(childrenOutRef)();
-                    return bind11(read($$var2))(renderStateX2(function(v) {
+                    return bind14(read($$var2))(renderStateX2(function(v) {
                       if (v instanceof Nothing) {
                         return $$throw("Halogen internal error: child was not initialized in renderChild");
                       }
@@ -14611,7 +14626,7 @@
         var evalDriver = function(disposed) {
           return function(ref2) {
             return function(q2) {
-              return bind14(liftEffect6(read(disposed)))(function(v) {
+              return bind15(liftEffect6(read(disposed)))(function(v) {
                 if (v) {
                   return pure16(Nothing.value);
                 }
@@ -14642,8 +14657,8 @@
             };
           };
         };
-        return bind14(liftEffect6(newLifecycleHandlers))(function(lchs) {
-          return bind14(liftEffect6($$new(false)))(function(disposed) {
+        return bind15(liftEffect6(newLifecycleHandlers))(function(lchs) {
+          return bind15(liftEffect6($$new(false)))(function(disposed) {
             return handleLifecycle(lchs)(function __do3() {
               var sio = create();
               var dsx = bindFlipped10(read)(runComponent(lchs)(function() {
@@ -14746,7 +14761,7 @@
   var when3 = /* @__PURE__ */ when(applicativeEffect);
   var not2 = /* @__PURE__ */ not(/* @__PURE__ */ heytingAlgebraFunction(/* @__PURE__ */ heytingAlgebraFunction(heytingAlgebraBoolean)));
   var identity12 = /* @__PURE__ */ identity(categoryFn);
-  var bind15 = /* @__PURE__ */ bind(bindAff);
+  var bind16 = /* @__PURE__ */ bind(bindAff);
   var liftEffect7 = /* @__PURE__ */ liftEffect(monadEffectAff);
   var map38 = /* @__PURE__ */ map(functorEffect);
   var bindFlipped11 = /* @__PURE__ */ bindFlipped(bindEffect);
@@ -14896,7 +14911,7 @@
   var runUI2 = function(component6) {
     return function(i2) {
       return function(element4) {
-        return bind15(liftEffect7(map38(toDocument)(bindFlipped11(document)(windowImpl))))(function(document2) {
+        return bind16(liftEffect7(map38(toDocument)(bindFlipped11(document)(windowImpl))))(function(document2) {
           return runUI(renderSpec(document2)(element4))(component6)(i2);
         });
       };
@@ -14904,7 +14919,7 @@
   };
 
   // output/Main/index.js
-  var bind16 = /* @__PURE__ */ bind(bindAff);
+  var bind17 = /* @__PURE__ */ bind(bindAff);
   var hoist4 = /* @__PURE__ */ hoist3(functorAff);
   var component5 = /* @__PURE__ */ component4(monadAffAppM)(navigateAppMRoute)(monadAskEnvAppM)(logonRouteAppMRoute)(logAppM);
   var liftEffect8 = /* @__PURE__ */ liftEffect(monadEffectAff);
@@ -14914,11 +14929,11 @@
   var $$void8 = /* @__PURE__ */ $$void(functorAff);
   var main2 = function __do2() {
     var userRef = $$new(Nothing.value)();
-    return runHalogenAff(bind16(awaitBody)(function(body2) {
+    return runHalogenAff(bind17(awaitBody)(function(body2) {
       var router = hoist4(runAppM({
         userRef
       }))(component5);
-      return bind16(runUI2(router)(unit)(body2))(function(io) {
+      return bind17(runUI2(router)(unit)(body2))(function(io) {
         return liftEffect8(matchesWith2(parse(routeCodec))(function(old$prime) {
           return function($$new2) {
             return when4(notEq2(old$prime)(new Just($$new2)))(launchAff_($$void8(io.query(mkTell(Navigate.create($$new2))))));
