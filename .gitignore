@@ -13,3 +13,5 @@ fullstack/server/accounts.csv
 halo/index.js
 fullstack/client/index.js
 fullstack/client/dist/
+fullstack/client/.cache
+fullstack/client/.parcel-cache
