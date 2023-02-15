@@ -6,6 +6,7 @@ import CSS (white, color)
 import Capability.Log (class Log)
 import Capability.LogonRoute (class LogonRoute)
 import Capability.Navigate (class Navigate)
+import Component.ChangePassword as ChangePassword
 import Component.Logon as Logon
 import Component.Page as Page
 import Control.Monad.Reader (class MonadAsk)
@@ -55,10 +56,10 @@ component = H.mkComponent
   where
   render :: State -> H.ComponentHTML Action Slots m
   render { route } = case route of
-    Logon -> HH.slot _logon unit (Page.component Logon.component) unit absurd
+    Logon -> HH.slot _logon unit (Page.component Logon.component) unit absurd -- Or use HH.slot_
     Logoff -> HH.span [ HC.style $ color white ] [ HH.text "Logoff" ]
     Users _ -> HH.span [ HC.style $ color white ] [ HH.text "Users" ]
-    ChangePassword -> HH.span [ HC.style $ color white ] [ HH.text "ChangePassword" ]
+    ChangePassword -> HH.slot_ _changePassword unit (Page.component ChangePassword.component) unit
 
   handleQuery :: ∀ a. Query a -> H.HalogenM State Action Slots Output m (Maybe a)
   handleQuery = case _ of
