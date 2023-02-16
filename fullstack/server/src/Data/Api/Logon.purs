@@ -35,11 +35,13 @@ instance DecodeJson LogonRequest where
 
 type LogonResultSuccessContents =
   { authToken :: UUID
+  , admin :: Boolean
   , mustChangePassword :: Boolean
   }
 
 type LogonResultSuccessContentsString =
   { authToken :: String
+  , admin :: Boolean
   , mustChangePassword :: Boolean
   }
 
@@ -49,10 +51,10 @@ data LogonResults
 
 instance EncodeJson LogonResults where
   encodeJson LogonResultsFailure = encodeJson { tag: "LogonResultsFailure" }
-  encodeJson (LogonResultsSuccess { authToken, mustChangePassword }) =
+  encodeJson (LogonResultsSuccess { authToken, admin, mustChangePassword }) =
     encodeJson
       { tag: "LogonResultsSuccess"
-      , contents: { authToken: toString authToken, mustChangePassword }
+      , contents: { authToken: toString authToken, admin, mustChangePassword }
       }
 
 instance DecodeJson LogonResults where
@@ -62,10 +64,10 @@ instance DecodeJson LogonResults where
     case tag of
       "LogonResultsFailure" -> Right LogonResultsFailure
       "LogonResultsSuccess" -> do
-        { authToken, mustChangePassword } <- obj .: "contents" :: _ LogonResultSuccessContentsString
+        { authToken, admin, mustChangePassword } <- obj .: "contents" :: _ LogonResultSuccessContentsString
         case parseUUID authToken of
           Nothing -> Left $ AtKey "authToken" $ UnexpectedValue json
-          Just token -> Right $ LogonResultsSuccess { authToken: token, mustChangePassword }
+          Just token -> Right $ LogonResultsSuccess { authToken: token, admin, mustChangePassword }
       _ -> Left $ tagError json
 
 newtype LogonResponse = LogonResponse LogonResults

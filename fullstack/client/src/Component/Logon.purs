@@ -2,9 +2,6 @@ module Component.Logon where
 
 import Prelude
 
-import Affjax.RequestBody as RequestBody
-import Affjax.ResponseFormat as ResponseFormat
-import Affjax.Web as Ajax
 import AppTheme (paperColor, themeColor, themeFont)
 import CSS.Background (backgroundColor)
 import CSS.Border (borderRadius)
@@ -25,8 +22,6 @@ import Capability.Navigate (class Navigate, navigate)
 import Control.Monad.Reader (class MonadAsk, ask)
 import DOM.HTML.Indexed.InputType (InputType(..))
 import Data.Api.Logon (LogonRequest(..), LogonResponse(..), LogonResults(..))
-import Data.Argonaut (decodeJson, encodeJson, printJsonDecodeError)
-import Data.Bifunctor (lmap)
 import Data.Const (Const)
 import Data.Either (Either(..))
 import Data.Maybe (Maybe(..))
@@ -41,6 +36,8 @@ import Halogen.HTML.CSS as HC
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Image.BookCover (bookCover)
+import Type.Proxy (Proxy(..))
+import Utils (apiCall)
 import Web.HTML (window)
 import Web.HTML.Window (alert)
 
@@ -81,23 +78,14 @@ component = H.mkComponent
     Input f -> H.modify_ f
     Logon -> do
       { userName, password } <- H.get
-      ajaxResult <- H.liftAff $ Ajax.post ResponseFormat.json "http://localhost:3000/"
-        $ Just
-        $ RequestBody.json
-        $ encodeJson
-        $ LogonRequest { userName, password }
-      let
-        logonResponse = do
-          { body } <- lmap Ajax.printError ajaxResult
-          decodedResp <- lmap printJsonDecodeError (decodeJson body :: _ LogonResponse)
-          pure decodedResp
+      logonResponse <- apiCall (LogonRequest { userName, password }) (Proxy :: _ LogonResponse)
       case logonResponse of
         Left err -> alertError err
         Right (LogonResponse LogonResultsFailure) -> alertError "Invalid logon crediantials"
-        Right (LogonResponse (LogonResultsSuccess { authToken, mustChangePassword })) -> do
+        Right (LogonResponse (LogonResultsSuccess { authToken, admin, mustChangePassword })) -> do
           log =<< logEntry Info "User logged on"
           { userRef } <- ask
-          H.liftEffect $ Ref.write (Just { authToken }) userRef
+          H.liftEffect $ Ref.write (Just { admin, authToken }) userRef
           navigate <=< logonRoute $ if mustChangePassword then PasswordTemporary else PasswordPermanent
     where
     alertError :: String -> H.HalogenM State Action Slots Output m Unit
