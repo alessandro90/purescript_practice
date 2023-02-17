@@ -18,7 +18,6 @@ import Halogen.HTML as HH
 import Halogen.HTML.CSS as HC
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Type.Proxy (Proxy(..))
 import Utils (apiCall)
 import Web.HTML (window)
 import Web.HTML.Window (alert)
@@ -66,7 +65,7 @@ component = H.mkComponent
     loggedOnUser' <- H.liftEffect $ Ref.read userRef
     loggedOnUser' # maybe (pure unit) \{ authToken, admin } ->
       when admin do
-        queryResponse <- apiCall (QueryUsersRequest { authToken }) (Proxy :: _ QueryUsersResponse)
+        queryResponse <- apiCall $ QueryUsersRequest { authToken }
         case queryResponse of
           Left err -> alertError err
           Right (QueryUsersResponse (QueryUsersResultsFailure { reason })) ->

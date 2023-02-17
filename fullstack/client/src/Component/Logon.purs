@@ -36,7 +36,6 @@ import Halogen.HTML.CSS as HC
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Image.BookCover (bookCover)
-import Type.Proxy (Proxy(..))
 import Utils (apiCall)
 import Web.HTML (window)
 import Web.HTML.Window (alert)
@@ -78,7 +77,7 @@ component = H.mkComponent
     Input f -> H.modify_ f
     Logon -> do
       { userName, password } <- H.get
-      logonResponse <- apiCall (LogonRequest { userName, password }) (Proxy :: _ LogonResponse)
+      logonResponse <- apiCall $ LogonRequest { userName, password }
       case logonResponse of
         Left err -> alertError err
         Right (LogonResponse LogonResultsFailure) -> alertError "Invalid logon crediantials"
