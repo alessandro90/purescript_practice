@@ -4,6 +4,7 @@ import Prelude
 
 import AppTheme (paperColor, themeColor, themeFont)
 import CSS (boxShadow)
+import CSS.Stylesheet (StyleM)
 import CSS as CSS
 import CSS.Background (backgroundColor)
 import CSS.Box (bsColor, shadow)
@@ -47,9 +48,10 @@ component
   :: ∀ iQuery iInput iOutput m
    . MonadAff m
   => Navigate m Route
-  => H.Component iQuery iInput iOutput m
+  => StyleM Unit
   -> H.Component iQuery iInput iOutput m
-component innerComponent = H.mkComponent
+  -> H.Component iQuery iInput iOutput m
+component style innerComponent = H.mkComponent
   { initialState: { iInput: _ }
   , render
   , eval: H.mkEval $ H.defaultEval
@@ -134,11 +136,13 @@ component innerComponent = H.mkComponent
               ]
           ]
       , HH.div
-          [ HC.style do
-              display flex
-              alignItems center
-              justifyContent center
-              minHeight $ vh 90.0
+          [ HC.style $ defaultInnerStyle *> style
           ]
           [ HH.slot _inner unit innerComponent iInput Output ]
       ]
+    where
+    defaultInnerStyle = do
+      display flex
+      alignItems center
+      justifyContent center
+      minHeight $ vh 90.0

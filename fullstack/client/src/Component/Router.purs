@@ -2,13 +2,14 @@ module Component.Router where
 
 import Prelude
 
-import CSS (white, color)
+import CSS (alignItems, color, flexStart, justifyContent, padding, rem, stretch, white)
 import Capability.Log (class Log)
 import Capability.LogonRoute (class LogonRoute)
 import Capability.Navigate (class Navigate, navigate)
 import Component.ChangePassword as ChangePassword
 import Component.Logon as Logon
 import Component.Page as Page
+import Component.Users as Users
 import Control.Monad.Reader (class MonadAsk, ask)
 import Data.Const (Const)
 import Data.Maybe (Maybe(..), isNothing)
@@ -57,10 +58,16 @@ component = H.mkComponent
   where
   render :: State -> H.ComponentHTML Action Slots m
   render { route } = case route of
-    Logon -> HH.slot _logon unit (Page.component Logon.component) unit absurd -- Or use HH.slot_
+    Logon -> HH.slot _logon unit (defaultPage Logon.component) unit absurd -- Or use HH.slot_
     Logoff -> HH.span [ HC.style $ color white ] [ HH.text "Logoff" ]
-    Users _ -> HH.span [ HC.style $ color white ] [ HH.text "Users" ]
-    ChangePassword -> HH.slot_ _changePassword unit (Page.component ChangePassword.component) unit
+    Users userName' -> HH.slot_ _users unit (wholePage Users.component) userName'
+    ChangePassword -> HH.slot_ _changePassword unit (defaultPage ChangePassword.component) unit
+    where
+    defaultPage = Page.component $ pure unit
+    wholePage = Page.component do
+      alignItems stretch
+      justifyContent flexStart
+      padding (rem 2.0) (rem 2.0) (rem 2.0) (rem 2.0)
 
   handleQuery :: ∀ a. Query a -> H.HalogenM State Action Slots Output m (Maybe a)
   handleQuery = case _ of

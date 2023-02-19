@@ -5,6 +5,8 @@ import Prelude
 import Data.Argonaut (class DecodeJson, class EncodeJson, JsonDecodeError(..), encodeJson, (.:))
 import Data.Argonaut.Decode.Decoders (decodeJObject)
 import Data.Either (Either(..))
+import Data.Generic.Rep (class Generic)
+import Data.Newtype (class Newtype)
 
 type UserRow r =
   ( userName :: String
@@ -16,6 +18,10 @@ type UserRow r =
   )
 
 newtype User = User { | UserRow () }
+
+derive instance Generic User _
+derive instance Newtype User _
+derive instance Eq User
 
 instance EncodeJson User where
   encodeJson (User userData) = encodeJson { tag: "User", contents: userData }
