@@ -27,9 +27,14 @@ import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.CSS as HC
 import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties as HP
 import Type.Proxy (Proxy(..))
 
-type State iInput = { iInput :: iInput }
+type State iInput =
+  { iInput :: iInput
+  , affirmativeDisabled :: Boolean
+  , negativeDisabled :: Boolean
+  }
 
 data Output iOutput
   = Affirmative
@@ -38,11 +43,11 @@ data Output iOutput
 
 data Action iInput iOuput
   = Input iInput
-  | Output iOuput
+  | Output (InnerOutput iOuput)
   | AffirmativeClicked
   | NegativeClicked
 
-type Slots iQuery iOutput = (inner :: H.Slot iQuery iOutput Unit)
+type Slots iQuery iOutput = (inner :: H.Slot iQuery (InnerOutput iOutput) Unit)
 
 _inner = Proxy :: Proxy "inner"
 
@@ -56,6 +61,8 @@ type Config =
   { affirmativeLabel :: String
   , negativeLabel :: String
   , displayButtons :: ButtonDisplay
+  , affirmativeDisabled :: Boolean
+  , negativeDisabled :: Boolean
   }
 
 data InnerOutput iOutput
@@ -72,16 +79,25 @@ defaultConfig =
   { affirmativeLabel: "OK"
   , negativeLabel: "CANCEL"
   , displayButtons: DisplayBothButtons
+  , affirmativeDisabled: false
+  , negativeDisabled: false
   }
 
 component
   :: ∀ iQuery iInput iOutput m
    . MonadAff m
   => Config
-  -> H.Component iQuery iInput iOutput m
+  -> H.Component iQuery iInput (InnerOutput iOutput) m
   -> H.Component iQuery iInput (Output iOutput) m
-component { affirmativeLabel, negativeLabel, displayButtons } innerComponent = H.mkComponent
-  { initialState: { iInput: _ }
+component
+  { affirmativeLabel
+  , negativeLabel
+  , displayButtons
+  , affirmativeDisabled
+  , negativeDisabled
+  }
+  innerComponent = H.mkComponent
+  { initialState: { iInput: _, affirmativeDisabled, negativeDisabled }
   , render
   , eval: H.mkEval $ H.defaultEval
       { handleAction = handleAction
@@ -95,7 +111,14 @@ component { affirmativeLabel, negativeLabel, displayButtons } innerComponent = H
     -> H.HalogenM (State iInput) (Action iInput iOutput) (Slots iQuery iOutput) (Output iOutput) m Unit
   handleAction = case _ of
     Input input -> H.modify_ _ { iInput = input }
-    Output output -> H.raise $ InnerOutput output
+    Output innerOutput -> case innerOutput of
+      PassThrough output -> H.raise $ InnerOutput output
+      EnableAffirmative -> H.modify_ _ { affirmativeDisabled = false }
+      DisableAffirmative -> H.modify_ _ { affirmativeDisabled = true }
+      EnableNegative -> H.modify_ _ { negativeDisabled = false }
+      DisableNegative -> H.modify_ _ { negativeDisabled = true }
+      CloseAffirmative -> handleAction AffirmativeClicked
+      CloseNegative -> handleAction NegativeClicked
     AffirmativeClicked -> H.raise Affirmative
     NegativeClicked -> H.raise Negative
 
@@ -160,12 +183,14 @@ component { affirmativeLabel, negativeLabel, displayButtons } innerComponent = H
                 [ if not displayAffirmative then HH.text ""
                   else HH.button
                     [ buttonStyle
+                    , HP.disabled affirmativeDisabled
                     , HE.onClick $ const AffirmativeClicked
                     ]
                     [ HH.text affirmativeLabel ]
                 , if not displayNegative then HH.text ""
                   else HH.button
                     [ buttonStyle
+                    , HP.disabled negativeDisabled
                     , HE.onClick $ const NegativeClicked
                     ]
                     [ HH.text negativeLabel ]

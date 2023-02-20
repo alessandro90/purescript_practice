@@ -19,8 +19,9 @@ import CSS.Size (rem, px, pct, vw)
 import Capability.Log (class Log, LogLevel(..), log, logEntry)
 import Capability.LogonRoute (class LogonRoute, PasswordType(..), logonRoute)
 import Capability.Navigate (class Navigate, navigate)
-import Component.Message as Message
 import Component.Modal as Modal
+import Component.Modal.Common as ModalCommon
+import Component.Modal.Message as Message
 import Control.Monad.Reader (class MonadAsk, ask)
 import DOM.HTML.Indexed.InputType (InputType(..))
 import Data.Api.Logon (LogonRequest(..), LogonResponse(..), LogonResults(..))
@@ -206,7 +207,7 @@ component = H.mkComponent
               [ HH.text "LOGON" ]
           ]
       , ( errorMessage # maybe (HH.text "") \message ->
-            HH.slot _modal unit (Modal.component Modal.defaultConfig Message.component) message Modal
+            HH.slot _modal unit (Modal.component ModalCommon.errorConfig Message.component) message Modal
         )
       ]
     where

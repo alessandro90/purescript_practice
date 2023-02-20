@@ -6,8 +6,9 @@ import AppTheme (paperColor, selectedColor)
 import CSS (alignItems, backgroundColor, black, color, column, cursor, display, flex, flexBasis, flexDirection, flexGrow, flexStart, justifyContent, minWidth, padding, paddingBottom, paddingRight, pct, rem, row, white)
 import CSS.Cursor (pointer)
 import Capability.Navigate (class Navigate, navigate)
-import Component.Message as Message
 import Component.Modal as Modal
+import Component.Modal.Common as ModalCommon
+import Component.Modal.Message as Message
 import Control.Monad.Reader (class MonadAsk, ask)
 import Data.Api.QueryUsers (QueryUsersRequest(..), QueryUsersResponse(..), QueryUsersResults(..))
 import Data.Array (fromFoldable)
@@ -183,6 +184,6 @@ component = H.mkComponent
                     ]
                 ]
         , ( errorMessage # maybe (HH.text "") \message ->
-              HH.slot _modal unit (Modal.component Modal.defaultConfig Message.component) message Modal
+              HH.slot _modal unit (Modal.component ModalCommon.errorConfig Message.component) message Modal
           )
         ]

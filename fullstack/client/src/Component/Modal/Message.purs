@@ -1,9 +1,10 @@
-module Component.Message where
+module Component.Modal.Message where
 
 import Prelude
 
 import AppTheme (paperColor, themeFont)
 import CSS (backgroundColor)
+import Component.Modal (InnerOutput)
 import Data.Const (Const)
 import Effect.Aff.Class (class MonadAff)
 import Halogen as H
@@ -26,7 +27,7 @@ type State = { message :: String }
 component
   :: ∀ m
    . MonadAff m
-  => H.Component Query Input Output m
+  => H.Component Query Input (InnerOutput Output) m
 component = H.mkComponent
   { initialState: { message: _ }
   , render

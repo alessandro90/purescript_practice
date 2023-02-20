@@ -12186,25 +12186,6 @@
     return dict.spaceEvenly;
   };
 
-  // output/Component.Message/index.js
-  var discard3 = /* @__PURE__ */ discard(discardUnit)(bindStyleM);
-  var component2 = function(dictMonadAff) {
-    var render2 = function(v) {
-      return div2([style2(discard3(themeFont)(function() {
-        return backgroundColor(paperColor);
-      }))])([text5(v.message)]);
-    };
-    return mkComponent({
-      initialState: function(v) {
-        return {
-          message: v
-        };
-      },
-      render: render2,
-      "eval": mkEval(defaultEval)
-    });
-  };
-
   // output/CSS.Overflow/index.js
   var fromString17 = /* @__PURE__ */ fromString4(isStringValue);
   var fromString18 = /* @__PURE__ */ fromString4(isStringKey);
@@ -12259,7 +12240,7 @@
   };
 
   // output/Component.Modal/index.js
-  var discard4 = /* @__PURE__ */ discard(discardUnit)(bindStyleM);
+  var discard3 = /* @__PURE__ */ discard(discardUnit)(bindStyleM);
   var value15 = /* @__PURE__ */ value12(valString);
   var center3 = /* @__PURE__ */ center(centerAlignItemsValue);
   var center12 = /* @__PURE__ */ center(centerJustifyContentValue);
@@ -12297,6 +12278,58 @@
       return new InnerOutput2(value0);
     };
     return InnerOutput2;
+  }();
+  var PassThrough = /* @__PURE__ */ function() {
+    function PassThrough2(value0) {
+      this.value0 = value0;
+    }
+    ;
+    PassThrough2.create = function(value0) {
+      return new PassThrough2(value0);
+    };
+    return PassThrough2;
+  }();
+  var EnableAffirmative = /* @__PURE__ */ function() {
+    function EnableAffirmative2() {
+    }
+    ;
+    EnableAffirmative2.value = new EnableAffirmative2();
+    return EnableAffirmative2;
+  }();
+  var DisableAffirmative = /* @__PURE__ */ function() {
+    function DisableAffirmative2() {
+    }
+    ;
+    DisableAffirmative2.value = new DisableAffirmative2();
+    return DisableAffirmative2;
+  }();
+  var EnableNegative = /* @__PURE__ */ function() {
+    function EnableNegative2() {
+    }
+    ;
+    EnableNegative2.value = new EnableNegative2();
+    return EnableNegative2;
+  }();
+  var DisableNegative = /* @__PURE__ */ function() {
+    function DisableNegative2() {
+    }
+    ;
+    DisableNegative2.value = new DisableNegative2();
+    return DisableNegative2;
+  }();
+  var CloseAffirmative = /* @__PURE__ */ function() {
+    function CloseAffirmative2() {
+    }
+    ;
+    CloseAffirmative2.value = new CloseAffirmative2();
+    return CloseAffirmative2;
+  }();
+  var CloseNegative = /* @__PURE__ */ function() {
+    function CloseNegative2() {
+    }
+    ;
+    CloseNegative2.value = new CloseNegative2();
+    return CloseNegative2;
   }();
   var DisplayBothButtons = /* @__PURE__ */ function() {
     function DisplayBothButtons2() {
@@ -12357,23 +12390,25 @@
     return {
       affirmativeLabel: "OK",
       negativeLabel: "CANCEL",
-      displayButtons: DisplayBothButtons.value
+      displayButtons: DisplayBothButtons.value,
+      affirmativeDisabled: false,
+      negativeDisabled: false
     };
   }();
   var _inner = /* @__PURE__ */ function() {
     return $$Proxy.value;
   }();
-  var component3 = function(dictMonadAff) {
+  var component2 = function(dictMonadAff) {
     return function(v) {
       return function(innerComponent) {
         var render2 = function(v1) {
-          var buttonStyle = style2(discard4(themeFont)(function() {
-            return discard4(fontWeight(value15("500")))(function() {
-              return discard4(color(white))(function() {
-                return discard4(padding(rem2(0.5))(rem2(0.5))(rem2(0.5))(rem2(0.5)))(function() {
-                  return discard4(backgroundColor(themeColor))(function() {
-                    return discard4(width8(rem2(8)))(function() {
-                      return discard4(marginLeft(rem2(2)))(function() {
+          var buttonStyle = style2(discard3(themeFont)(function() {
+            return discard3(fontWeight(value15("500")))(function() {
+              return discard3(color(white))(function() {
+                return discard3(padding(rem2(0.5))(rem2(0.5))(rem2(0.5))(rem2(0.5)))(function() {
+                  return discard3(backgroundColor(themeColor))(function() {
+                    return discard3(width8(rem2(8)))(function() {
+                      return discard3(marginLeft(rem2(2)))(function() {
                         return fontSize(rem2(0.9));
                       });
                     });
@@ -12404,16 +12439,16 @@
             ;
             return false;
           }();
-          return div2([style2(discard4(display(flex))(function() {
-            return discard4(alignItems(center3))(function() {
-              return discard4(justifyContent(center12))(function() {
-                return discard4(position2(fixed))(function() {
-                  return discard4(top3(new BasicSize(value16(0))))(function() {
-                    return discard4(left(new BasicSize(value16(0))))(function() {
-                      return discard4(width8(pct(100)))(function() {
-                        return discard4(height8(pct(100)))(function() {
-                          return discard4(overflow(overflowAuto))(function() {
-                            return discard4(backgroundColor(rgba(0)(0)(0)(0.4)))(function() {
+          return div2([style2(discard3(display(flex))(function() {
+            return discard3(alignItems(center3))(function() {
+              return discard3(justifyContent(center12))(function() {
+                return discard3(position2(fixed))(function() {
+                  return discard3(top3(new BasicSize(value16(0))))(function() {
+                    return discard3(left(new BasicSize(value16(0))))(function() {
+                      return discard3(width8(pct(100)))(function() {
+                        return discard3(height8(pct(100)))(function() {
+                          return discard3(overflow(overflowAuto))(function() {
+                            return discard3(backgroundColor(rgba(0)(0)(0)(0.4)))(function() {
                               return zIndex(1);
                             });
                           });
@@ -12424,91 +12459,185 @@
                 });
               });
             });
-          }))])([div2([style2(discard4(display(flex))(function() {
-            return discard4(flexDirection(column))(function() {
-              return discard4(justifyContent(spaceAround2))(function() {
-                return discard4(padding(rem2(1))(rem2(1))(rem2(1))(rem2(1)))(function() {
-                  return discard4(backgroundColor(paperColor))(function() {
-                    return discard4(minWidth(rem2(40)))(function() {
+          }))])([div2([style2(discard3(display(flex))(function() {
+            return discard3(flexDirection(column))(function() {
+              return discard3(justifyContent(spaceAround2))(function() {
+                return discard3(padding(rem2(1))(rem2(1))(rem2(1))(rem2(1)))(function() {
+                  return discard3(backgroundColor(paperColor))(function() {
+                    return discard3(minWidth(rem2(40)))(function() {
                       return minHeight(rem2(10));
                     });
                   });
                 });
               });
             });
-          }))])([div2([style2(discard4(display(flex))(function() {
-            return discard4(flexDirection(column))(function() {
+          }))])([div2([style2(discard3(display(flex))(function() {
+            return discard3(flexDirection(column))(function() {
               return padding(rem2(1))(rem2(1))(rem2(1))(rem2(1));
             });
-          }))])([slot2(_inner)(unit)(innerComponent)(v1.iInput)(Output.create)]), div2([style2(discard4(display(flex))(function() {
-            return discard4(flexDirection(row))(function() {
-              return discard4(alignItems(center3))(function() {
-                return discard4(justifyContent(flexEnd2))(function() {
-                  return discard4(width8(pct(100)))(function() {
+          }))])([slot2(_inner)(unit)(innerComponent)(v1.iInput)(Output.create)]), div2([style2(discard3(display(flex))(function() {
+            return discard3(flexDirection(row))(function() {
+              return discard3(alignItems(center3))(function() {
+                return discard3(justifyContent(flexEnd2))(function() {
+                  return discard3(width8(pct(100)))(function() {
                     return backgroundColor(paperColor);
                   });
                 });
               });
             });
           }))])([function() {
-            var $30 = !displayAffirmative;
-            if ($30) {
+            var $34 = !displayAffirmative;
+            if ($34) {
               return text5("");
             }
             ;
-            return button([buttonStyle, onClick($$const(AffirmativeClicked.value))])([text5(v.affirmativeLabel)]);
+            return button([buttonStyle, disabled10(v.affirmativeDisabled), onClick($$const(AffirmativeClicked.value))])([text5(v.affirmativeLabel)]);
           }(), function() {
-            var $31 = !displayNegative;
-            if ($31) {
+            var $35 = !displayNegative;
+            if ($35) {
               return text5("");
             }
             ;
-            return button([buttonStyle, onClick($$const(NegativeClicked.value))])([text5(v.negativeLabel)]);
+            return button([buttonStyle, disabled10(v.negativeDisabled), onClick($$const(NegativeClicked.value))])([text5(v.negativeLabel)]);
           }()])])]);
         };
         var handleQuery = query2(_inner)(unit);
-        var handleAction = function(v1) {
-          if (v1 instanceof Input) {
-            return modify_3(function(v2) {
-              var $34 = {};
-              for (var $35 in v2) {
-                if ({}.hasOwnProperty.call(v2, $35)) {
-                  $34[$35] = v2[$35];
+        var handleAction = function($copy_v1) {
+          var $tco_done = false;
+          var $tco_result;
+          function $tco_loop(v1) {
+            if (v1 instanceof Input) {
+              $tco_done = true;
+              return modify_3(function(v2) {
+                var $38 = {};
+                for (var $39 in v2) {
+                  if ({}.hasOwnProperty.call(v2, $39)) {
+                    $38[$39] = v2[$39];
+                  }
+                  ;
                 }
                 ;
+                $38.iInput = v1.value0;
+                return $38;
+              });
+            }
+            ;
+            if (v1 instanceof Output) {
+              if (v1.value0 instanceof PassThrough) {
+                $tco_done = true;
+                return raise(new InnerOutput(v1.value0.value0));
               }
               ;
-              $34.iInput = v1.value0;
-              return $34;
-            });
+              if (v1.value0 instanceof EnableAffirmative) {
+                $tco_done = true;
+                return modify_3(function(v2) {
+                  var $44 = {};
+                  for (var $45 in v2) {
+                    if ({}.hasOwnProperty.call(v2, $45)) {
+                      $44[$45] = v2[$45];
+                    }
+                    ;
+                  }
+                  ;
+                  $44.affirmativeDisabled = false;
+                  return $44;
+                });
+              }
+              ;
+              if (v1.value0 instanceof DisableAffirmative) {
+                $tco_done = true;
+                return modify_3(function(v2) {
+                  var $47 = {};
+                  for (var $48 in v2) {
+                    if ({}.hasOwnProperty.call(v2, $48)) {
+                      $47[$48] = v2[$48];
+                    }
+                    ;
+                  }
+                  ;
+                  $47.affirmativeDisabled = true;
+                  return $47;
+                });
+              }
+              ;
+              if (v1.value0 instanceof EnableNegative) {
+                $tco_done = true;
+                return modify_3(function(v2) {
+                  var $50 = {};
+                  for (var $51 in v2) {
+                    if ({}.hasOwnProperty.call(v2, $51)) {
+                      $50[$51] = v2[$51];
+                    }
+                    ;
+                  }
+                  ;
+                  $50.negativeDisabled = false;
+                  return $50;
+                });
+              }
+              ;
+              if (v1.value0 instanceof DisableNegative) {
+                $tco_done = true;
+                return modify_3(function(v2) {
+                  var $53 = {};
+                  for (var $54 in v2) {
+                    if ({}.hasOwnProperty.call(v2, $54)) {
+                      $53[$54] = v2[$54];
+                    }
+                    ;
+                  }
+                  ;
+                  $53.negativeDisabled = true;
+                  return $53;
+                });
+              }
+              ;
+              if (v1.value0 instanceof CloseAffirmative) {
+                $copy_v1 = AffirmativeClicked.value;
+                return;
+              }
+              ;
+              if (v1.value0 instanceof CloseNegative) {
+                $copy_v1 = NegativeClicked.value;
+                return;
+              }
+              ;
+              throw new Error("Failed pattern match at Component.Modal (line 114, column 27 - line 121, column 52): " + [v1.value0.constructor.name]);
+            }
+            ;
+            if (v1 instanceof AffirmativeClicked) {
+              $tco_done = true;
+              return raise(Affirmative.value);
+            }
+            ;
+            if (v1 instanceof NegativeClicked) {
+              $tco_done = true;
+              return raise(Negative.value);
+            }
+            ;
+            throw new Error("Failed pattern match at Component.Modal (line 112, column 18 - line 123, column 40): " + [v1.constructor.name]);
           }
           ;
-          if (v1 instanceof Output) {
-            return raise(new InnerOutput(v1.value0));
+          while (!$tco_done) {
+            $tco_result = $tco_loop($copy_v1);
           }
           ;
-          if (v1 instanceof AffirmativeClicked) {
-            return raise(Affirmative.value);
-          }
-          ;
-          if (v1 instanceof NegativeClicked) {
-            return raise(Negative.value);
-          }
-          ;
-          throw new Error("Failed pattern match at Component.Modal (line 96, column 18 - line 100, column 40): " + [v1.constructor.name]);
+          return $tco_result;
         };
         return mkComponent({
           initialState: function(v1) {
             return {
-              iInput: v1
+              iInput: v1,
+              affirmativeDisabled: v.affirmativeDisabled,
+              negativeDisabled: v.negativeDisabled
             };
           },
           render: render2,
           "eval": mkEval({
             handleAction,
             handleQuery,
-            receive: function($42) {
-              return Just.create(Input.create($42));
+            receive: function($62) {
+              return Just.create(Input.create($62));
             },
             initialize: defaultEval.initialize,
             finalize: defaultEval.finalize
@@ -12516,6 +12645,36 @@
         });
       };
     };
+  };
+
+  // output/Component.Modal.Common/index.js
+  var errorConfig = /* @__PURE__ */ function() {
+    return {
+      affirmativeLabel: defaultConfig.affirmativeLabel,
+      negativeLabel: defaultConfig.negativeLabel,
+      displayButtons: DisplayAffirmative.value,
+      affirmativeDisabled: defaultConfig.affirmativeDisabled,
+      negativeDisabled: defaultConfig.negativeDisabled
+    };
+  }();
+
+  // output/Component.Modal.Message/index.js
+  var discard4 = /* @__PURE__ */ discard(discardUnit)(bindStyleM);
+  var component3 = function(dictMonadAff) {
+    var render2 = function(v) {
+      return div2([style2(discard4(themeFont)(function() {
+        return backgroundColor(paperColor);
+      }))])([text5(v.message)]);
+    };
+    return mkComponent({
+      initialState: function(v) {
+        return {
+          message: v
+        };
+      },
+      render: render2,
+      "eval": mkEval(defaultEval)
+    });
   };
 
   // output/Data.Argonaut.Core/foreign.js
@@ -13987,8 +14146,8 @@
     return $$Proxy.value;
   }();
   var component4 = function(dictMonadAff) {
-    var component1 = component3(dictMonadAff);
-    var component22 = component2(dictMonadAff);
+    var component1 = component2(dictMonadAff);
+    var component22 = component3(dictMonadAff);
     var apiCall2 = apiCall(monadAffHalogenM(dictMonadAff))(encodeJsonLogonRequest)(decodeJsonLogonResponse);
     var liftEffect9 = liftEffect(monadEffectHalogenM(dictMonadAff.MonadEffect0()));
     return function(dictMonadAsk) {
@@ -14129,7 +14288,7 @@
                   });
                 });
               })), onClick($$const(Logon2.value)), disabled10(logonDisabled)])([text5("LOGON")])]), maybe(text5(""))(function(message2) {
-                return slot3(_modal)(unit)(component1(defaultConfig)(component22))(message2)(Modal.create);
+                return slot3(_modal)(unit)(component1(errorConfig)(component22))(message2)(Modal.create);
               })(v.errorMessage)]);
             };
             var handleAction = function(v) {
@@ -14192,7 +14351,7 @@
                       });
                     }
                     ;
-                    throw new Error("Failed pattern match at Component.Logon (line 85, column 7 - line 92, column 104): " + [logonResponse.constructor.name]);
+                    throw new Error("Failed pattern match at Component.Logon (line 86, column 7 - line 93, column 104): " + [logonResponse.constructor.name]);
                   });
                 });
               }
@@ -14232,10 +14391,10 @@
                   return pure10(unit);
                 }
                 ;
-                throw new Error("Failed pattern match at Component.Logon (line 93, column 21 - line 96, column 39): " + [v.value0.constructor.name]);
+                throw new Error("Failed pattern match at Component.Logon (line 94, column 21 - line 97, column 39): " + [v.value0.constructor.name]);
               }
               ;
-              throw new Error("Failed pattern match at Component.Logon (line 80, column 18 - line 96, column 39): " + [v.constructor.name]);
+              throw new Error("Failed pattern match at Component.Logon (line 81, column 18 - line 97, column 39): " + [v.constructor.name]);
             };
             return mkComponent({
               initialState: $$const({
@@ -14805,8 +14964,8 @@
     return $$Proxy.value;
   }();
   var component6 = function(dictMonadAff) {
-    var component1 = component3(dictMonadAff);
-    var component22 = component2(dictMonadAff);
+    var component1 = component2(dictMonadAff);
+    var component22 = component3(dictMonadAff);
     var liftEffect9 = liftEffect(monadEffectHalogenM(dictMonadAff.MonadEffect0()));
     var apiCall2 = apiCall(monadAffHalogenM(dictMonadAff))(encodeJsonQueryUsersReque)(decodeJsonQueryUsersRespo);
     return function(dictMonadAsk) {
@@ -14882,7 +15041,7 @@
               return "No";
             }()))])]);
           })(v.selectedUser), maybe(text5(""))(function(message2) {
-            return slot5(_modal2)(unit)(component1(defaultConfig)(component22))(message2)(Modal2.create);
+            return slot5(_modal2)(unit)(component1(errorConfig)(component22))(message2)(Modal2.create);
           })(v.errorMessage)]);
         };
         var handleAction = function(v) {
@@ -14954,7 +15113,7 @@
                       });
                     }
                     ;
-                    throw new Error("Failed pattern match at Component.Users (line 91, column 11 - line 104, column 18): " + [queryResponse.constructor.name]);
+                    throw new Error("Failed pattern match at Component.Users (line 92, column 11 - line 105, column 18): " + [queryResponse.constructor.name]);
                   }));
                 })(loggedOnUser$prime);
               });
@@ -15017,10 +15176,10 @@
               return pure11(unit);
             }
             ;
-            throw new Error("Failed pattern match at Component.Users (line 109, column 21 - line 112, column 39): " + [v.value0.constructor.name]);
+            throw new Error("Failed pattern match at Component.Users (line 110, column 21 - line 113, column 39): " + [v.value0.constructor.name]);
           }
           ;
-          throw new Error("Failed pattern match at Component.Users (line 84, column 18 - line 112, column 39): " + [v.constructor.name]);
+          throw new Error("Failed pattern match at Component.Users (line 85, column 18 - line 113, column 39): " + [v.constructor.name]);
         };
         return mkComponent({
           initialState: function(v) {
