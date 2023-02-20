@@ -12298,6 +12298,27 @@
     };
     return InnerOutput2;
   }();
+  var DisplayBothButtons = /* @__PURE__ */ function() {
+    function DisplayBothButtons2() {
+    }
+    ;
+    DisplayBothButtons2.value = new DisplayBothButtons2();
+    return DisplayBothButtons2;
+  }();
+  var DisplayAffirmative = /* @__PURE__ */ function() {
+    function DisplayAffirmative2() {
+    }
+    ;
+    DisplayAffirmative2.value = new DisplayAffirmative2();
+    return DisplayAffirmative2;
+  }();
+  var DisplayNegative = /* @__PURE__ */ function() {
+    function DisplayNegative2() {
+    }
+    ;
+    DisplayNegative2.value = new DisplayNegative2();
+    return DisplayNegative2;
+  }();
   var Input = /* @__PURE__ */ function() {
     function Input4(value0) {
       this.value0 = value0;
@@ -12332,38 +12353,69 @@
     NegativeClicked2.value = new NegativeClicked2();
     return NegativeClicked2;
   }();
+  var defaultConfig = /* @__PURE__ */ function() {
+    return {
+      affirmativeLabel: "OK",
+      negativeLabel: "CANCEL",
+      displayButtons: DisplayBothButtons.value
+    };
+  }();
   var _inner = /* @__PURE__ */ function() {
     return $$Proxy.value;
   }();
   var component3 = function(dictMonadAff) {
-    return function(innerComponent) {
-      var render2 = function(v) {
-        var buttonStyle = style2(discard4(themeFont)(function() {
-          return discard4(fontWeight(value15("500")))(function() {
-            return discard4(color(white))(function() {
-              return discard4(padding(rem2(0.5))(rem2(0.5))(rem2(0.5))(rem2(0.5)))(function() {
-                return discard4(backgroundColor(themeColor))(function() {
-                  return discard4(width8(rem2(8)))(function() {
-                    return discard4(marginLeft(rem2(2)))(function() {
-                      return fontSize(rem2(0.9));
+    return function(v) {
+      return function(innerComponent) {
+        var render2 = function(v1) {
+          var buttonStyle = style2(discard4(themeFont)(function() {
+            return discard4(fontWeight(value15("500")))(function() {
+              return discard4(color(white))(function() {
+                return discard4(padding(rem2(0.5))(rem2(0.5))(rem2(0.5))(rem2(0.5)))(function() {
+                  return discard4(backgroundColor(themeColor))(function() {
+                    return discard4(width8(rem2(8)))(function() {
+                      return discard4(marginLeft(rem2(2)))(function() {
+                        return fontSize(rem2(0.9));
+                      });
                     });
                   });
                 });
               });
             });
-          });
-        }));
-        return div2([style2(discard4(display(flex))(function() {
-          return discard4(alignItems(center3))(function() {
-            return discard4(justifyContent(center12))(function() {
-              return discard4(position2(fixed))(function() {
-                return discard4(top3(new BasicSize(value16(0))))(function() {
-                  return discard4(left(new BasicSize(value16(0))))(function() {
-                    return discard4(width8(pct(100)))(function() {
-                      return discard4(height8(pct(100)))(function() {
-                        return discard4(overflow(overflowAuto))(function() {
-                          return discard4(backgroundColor(rgba(0)(0)(0)(0.4)))(function() {
-                            return zIndex(1);
+          }));
+          var displayNegative = function() {
+            if (v.displayButtons instanceof DisplayBothButtons) {
+              return true;
+            }
+            ;
+            if (v.displayButtons instanceof DisplayNegative) {
+              return true;
+            }
+            ;
+            return false;
+          }();
+          var displayAffirmative = function() {
+            if (v.displayButtons instanceof DisplayBothButtons) {
+              return true;
+            }
+            ;
+            if (v.displayButtons instanceof DisplayAffirmative) {
+              return true;
+            }
+            ;
+            return false;
+          }();
+          return div2([style2(discard4(display(flex))(function() {
+            return discard4(alignItems(center3))(function() {
+              return discard4(justifyContent(center12))(function() {
+                return discard4(position2(fixed))(function() {
+                  return discard4(top3(new BasicSize(value16(0))))(function() {
+                    return discard4(left(new BasicSize(value16(0))))(function() {
+                      return discard4(width8(pct(100)))(function() {
+                        return discard4(height8(pct(100)))(function() {
+                          return discard4(overflow(overflowAuto))(function() {
+                            return discard4(backgroundColor(rgba(0)(0)(0)(0.4)))(function() {
+                              return zIndex(1);
+                            });
                           });
                         });
                       });
@@ -12372,83 +12424,97 @@
                 });
               });
             });
-          });
-        }))])([div2([style2(discard4(display(flex))(function() {
-          return discard4(flexDirection(column))(function() {
-            return discard4(justifyContent(spaceAround2))(function() {
-              return discard4(padding(rem2(1))(rem2(1))(rem2(1))(rem2(1)))(function() {
-                return discard4(backgroundColor(paperColor))(function() {
-                  return discard4(minWidth(rem2(40)))(function() {
-                    return minHeight(rem2(10));
+          }))])([div2([style2(discard4(display(flex))(function() {
+            return discard4(flexDirection(column))(function() {
+              return discard4(justifyContent(spaceAround2))(function() {
+                return discard4(padding(rem2(1))(rem2(1))(rem2(1))(rem2(1)))(function() {
+                  return discard4(backgroundColor(paperColor))(function() {
+                    return discard4(minWidth(rem2(40)))(function() {
+                      return minHeight(rem2(10));
+                    });
                   });
                 });
               });
             });
-          });
-        }))])([div2([style2(discard4(display(flex))(function() {
-          return discard4(flexDirection(column))(function() {
-            return padding(rem2(1))(rem2(1))(rem2(1))(rem2(1));
-          });
-        }))])([slot2(_inner)(unit)(innerComponent)(v.iInput)(Output.create)]), div2([style2(discard4(display(flex))(function() {
-          return discard4(flexDirection(row))(function() {
-            return discard4(alignItems(center3))(function() {
-              return discard4(justifyContent(flexEnd2))(function() {
-                return discard4(width8(pct(100)))(function() {
-                  return backgroundColor(paperColor);
+          }))])([div2([style2(discard4(display(flex))(function() {
+            return discard4(flexDirection(column))(function() {
+              return padding(rem2(1))(rem2(1))(rem2(1))(rem2(1));
+            });
+          }))])([slot2(_inner)(unit)(innerComponent)(v1.iInput)(Output.create)]), div2([style2(discard4(display(flex))(function() {
+            return discard4(flexDirection(row))(function() {
+              return discard4(alignItems(center3))(function() {
+                return discard4(justifyContent(flexEnd2))(function() {
+                  return discard4(width8(pct(100)))(function() {
+                    return backgroundColor(paperColor);
+                  });
                 });
               });
             });
-          });
-        }))])([button([buttonStyle, onClick($$const(AffirmativeClicked.value))])([text5("OK")]), button([buttonStyle, onClick($$const(NegativeClicked.value))])([text5("CANCEL")])])])]);
-      };
-      var handleQuery = query2(_inner)(unit);
-      var handleAction = function(v) {
-        if (v instanceof Input) {
-          return modify_3(function(v1) {
-            var $26 = {};
-            for (var $27 in v1) {
-              if ({}.hasOwnProperty.call(v1, $27)) {
-                $26[$27] = v1[$27];
-              }
-              ;
+          }))])([function() {
+            var $30 = !displayAffirmative;
+            if ($30) {
+              return text5("");
             }
             ;
-            $26.iInput = v.value0;
-            return $26;
-          });
-        }
-        ;
-        if (v instanceof Output) {
-          return raise(new InnerOutput(v.value0));
-        }
-        ;
-        if (v instanceof AffirmativeClicked) {
-          return raise(Affirmative.value);
-        }
-        ;
-        if (v instanceof NegativeClicked) {
-          return raise(Negative.value);
-        }
-        ;
-        throw new Error("Failed pattern match at Component.Modal (line 67, column 18 - line 71, column 40): " + [v.constructor.name]);
-      };
-      return mkComponent({
-        initialState: function(v) {
-          return {
-            iInput: v
-          };
-        },
-        render: render2,
-        "eval": mkEval({
-          handleAction,
-          handleQuery,
-          receive: function($31) {
-            return Just.create(Input.create($31));
+            return button([buttonStyle, onClick($$const(AffirmativeClicked.value))])([text5(v.affirmativeLabel)]);
+          }(), function() {
+            var $31 = !displayNegative;
+            if ($31) {
+              return text5("");
+            }
+            ;
+            return button([buttonStyle, onClick($$const(NegativeClicked.value))])([text5(v.negativeLabel)]);
+          }()])])]);
+        };
+        var handleQuery = query2(_inner)(unit);
+        var handleAction = function(v1) {
+          if (v1 instanceof Input) {
+            return modify_3(function(v2) {
+              var $34 = {};
+              for (var $35 in v2) {
+                if ({}.hasOwnProperty.call(v2, $35)) {
+                  $34[$35] = v2[$35];
+                }
+                ;
+              }
+              ;
+              $34.iInput = v1.value0;
+              return $34;
+            });
+          }
+          ;
+          if (v1 instanceof Output) {
+            return raise(new InnerOutput(v1.value0));
+          }
+          ;
+          if (v1 instanceof AffirmativeClicked) {
+            return raise(Affirmative.value);
+          }
+          ;
+          if (v1 instanceof NegativeClicked) {
+            return raise(Negative.value);
+          }
+          ;
+          throw new Error("Failed pattern match at Component.Modal (line 96, column 18 - line 100, column 40): " + [v1.constructor.name]);
+        };
+        return mkComponent({
+          initialState: function(v1) {
+            return {
+              iInput: v1
+            };
           },
-          initialize: defaultEval.initialize,
-          finalize: defaultEval.finalize
-        })
-      });
+          render: render2,
+          "eval": mkEval({
+            handleAction,
+            handleQuery,
+            receive: function($42) {
+              return Just.create(Input.create($42));
+            },
+            initialize: defaultEval.initialize,
+            finalize: defaultEval.finalize
+          })
+        });
+      };
     };
   };
 
@@ -14063,7 +14129,7 @@
                   });
                 });
               })), onClick($$const(Logon2.value)), disabled10(logonDisabled)])([text5("LOGON")])]), maybe(text5(""))(function(message2) {
-                return slot3(_modal)(unit)(component1(component22))(message2)(Modal.create);
+                return slot3(_modal)(unit)(component1(defaultConfig)(component22))(message2)(Modal.create);
               })(v.errorMessage)]);
             };
             var handleAction = function(v) {
@@ -14816,7 +14882,7 @@
               return "No";
             }()))])]);
           })(v.selectedUser), maybe(text5(""))(function(message2) {
-            return slot5(_modal2)(unit)(component1(component22))(message2)(Modal2.create);
+            return slot5(_modal2)(unit)(component1(defaultConfig)(component22))(message2)(Modal2.create);
           })(v.errorMessage)]);
         };
         var handleAction = function(v) {

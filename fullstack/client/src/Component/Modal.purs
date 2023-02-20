@@ -46,12 +46,41 @@ type Slots iQuery iOutput = (inner :: H.Slot iQuery iOutput Unit)
 
 _inner = Proxy :: Proxy "inner"
 
+data ButtonDisplay
+  = DisplayBothButtons
+  | DisplayAffirmative
+  | DisplayNegative
+  | DisplayNoButtons
+
+type Config =
+  { affirmativeLabel :: String
+  , negativeLabel :: String
+  , displayButtons :: ButtonDisplay
+  }
+
+data InnerOutput iOutput
+  = PassThrough iOutput
+  | EnableAffirmative
+  | DisableAffirmative
+  | EnableNegative
+  | DisableNegative
+  | CloseAffirmative
+  | CloseNegative
+
+defaultConfig :: Config
+defaultConfig =
+  { affirmativeLabel: "OK"
+  , negativeLabel: "CANCEL"
+  , displayButtons: DisplayBothButtons
+  }
+
 component
   :: ∀ iQuery iInput iOutput m
    . MonadAff m
-  => H.Component iQuery iInput iOutput m
+  => Config
+  -> H.Component iQuery iInput iOutput m
   -> H.Component iQuery iInput (Output iOutput) m
-component innerComponent = H.mkComponent
+component { affirmativeLabel, negativeLabel, displayButtons } innerComponent = H.mkComponent
   { initialState: { iInput: _ }
   , render
   , eval: H.mkEval $ H.defaultEval
@@ -78,59 +107,71 @@ component innerComponent = H.mkComponent
 
   render :: State iInput -> H.ComponentHTML (Action iInput iOutput) (Slots iQuery iOutput) m
   render { iInput } =
-    HH.div
-      [ HC.style do
-          display flex
-          alignItems center
-          justifyContent center
-          position fixed
-          top $ BasicSize $ value 0.0
-          left $ BasicSize $ value 0.0
-          width $ pct 100.0
-          height $ pct 100.0
-          overflow overflowAuto
-          backgroundColor $ rgba 0 0 0 0.4
-          zIndex 1
-      ]
-      [ HH.div
-          [ HC.style do
-              display flex
-              flexDirection column
-              justifyContent spaceAround
-              padding (rem 1.0) (rem 1.0) (rem 1.0) (rem 1.0)
-              backgroundColor paperColor
-              minWidth (rem 40.0)
-              minHeight (rem 10.0)
-          ]
-          [ HH.div
-              [ HC.style do
-                  display flex
-                  flexDirection column
-                  padding (rem 1.0) (rem 1.0) (rem 1.0) (rem 1.0)
-              ]
-              [ HH.slot _inner unit innerComponent iInput Output ]
-          , HH.div
-              [ HC.style do
-                  display flex
-                  flexDirection row
-                  alignItems center
-                  justifyContent flexEnd
-                  width $ pct 100.0
-                  backgroundColor paperColor
-              ]
-              [ HH.button
-                  [ buttonStyle
-                  , HE.onClick $ const AffirmativeClicked
-                  ]
-                  [ HH.text "OK" ]
-              , HH.button
-                  [ buttonStyle
-                  , HE.onClick $ const NegativeClicked
-                  ]
-                  [ HH.text "CANCEL" ]
-              ]
-          ]
-      ]
+    let
+      displayAffirmative = case displayButtons of
+        DisplayBothButtons -> true
+        DisplayAffirmative -> true
+        _ -> false
+      displayNegative = case displayButtons of
+        DisplayBothButtons -> true
+        DisplayNegative -> true
+        _ -> false
+    in
+      HH.div
+        [ HC.style do
+            display flex
+            alignItems center
+            justifyContent center
+            position fixed
+            top $ BasicSize $ value 0.0
+            left $ BasicSize $ value 0.0
+            width $ pct 100.0
+            height $ pct 100.0
+            overflow overflowAuto
+            backgroundColor $ rgba 0 0 0 0.4
+            zIndex 1
+        ]
+        [ HH.div
+            [ HC.style do
+                display flex
+                flexDirection column
+                justifyContent spaceAround
+                padding (rem 1.0) (rem 1.0) (rem 1.0) (rem 1.0)
+                backgroundColor paperColor
+                minWidth (rem 40.0)
+                minHeight (rem 10.0)
+            ]
+            [ HH.div
+                [ HC.style do
+                    display flex
+                    flexDirection column
+                    padding (rem 1.0) (rem 1.0) (rem 1.0) (rem 1.0)
+                ]
+                [ HH.slot _inner unit innerComponent iInput Output ]
+            , HH.div
+                [ HC.style do
+                    display flex
+                    flexDirection row
+                    alignItems center
+                    justifyContent flexEnd
+                    width $ pct 100.0
+                    backgroundColor paperColor
+                ]
+                [ if not displayAffirmative then HH.text ""
+                  else HH.button
+                    [ buttonStyle
+                    , HE.onClick $ const AffirmativeClicked
+                    ]
+                    [ HH.text affirmativeLabel ]
+                , if not displayNegative then HH.text ""
+                  else HH.button
+                    [ buttonStyle
+                    , HE.onClick $ const NegativeClicked
+                    ]
+                    [ HH.text negativeLabel ]
+                ]
+            ]
+        ]
     where
     buttonStyle = HC.style do
       themeFont

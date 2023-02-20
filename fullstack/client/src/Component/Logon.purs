@@ -206,7 +206,7 @@ component = H.mkComponent
               [ HH.text "LOGON" ]
           ]
       , ( errorMessage # maybe (HH.text "") \message ->
-            HH.slot _modal unit (Modal.component Message.component) message Modal
+            HH.slot _modal unit (Modal.component Modal.defaultConfig Message.component) message Modal
         )
       ]
     where

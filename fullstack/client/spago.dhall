@@ -41,7 +41,6 @@ to generate this file without the comments in this block.
   , "strings"
   , "transformers"
   , "uuid"
-  , "web-html"
   ]
 , packages = ./packages.dhall
 , sources =
