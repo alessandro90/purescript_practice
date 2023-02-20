@@ -3,31 +3,11 @@ module Component.Users where
 import Prelude
 
 import AppTheme (paperColor, selectedColor)
-import CSS
-  ( alignItems
-  , backgroundColor
-  , black
-  , color
-  , column
-  , cursor
-  , display
-  , flex
-  , flexBasis
-  , flexDirection
-  , flexGrow
-  , flexStart
-  , justifyContent
-  , minWidth
-  , padding
-  , paddingBottom
-  , paddingRight
-  , pct
-  , rem
-  , row
-  , white
-  )
+import CSS (alignItems, backgroundColor, black, color, column, cursor, display, flex, flexBasis, flexDirection, flexGrow, flexStart, justifyContent, minWidth, padding, paddingBottom, paddingRight, pct, rem, row, white)
 import CSS.Cursor (pointer)
 import Capability.Navigate (class Navigate, navigate)
+import Component.Message as Message
+import Component.Modal as Modal
 import Control.Monad.Reader (class MonadAsk, ask)
 import Data.Api.QueryUsers (QueryUsersRequest(..), QueryUsersResponse(..), QueryUsersResults(..))
 import Data.Array (fromFoldable)
@@ -50,9 +30,8 @@ import Halogen.HTML as HH
 import Halogen.HTML.CSS as HC
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
+import Type.Proxy (Proxy(..))
 import Utils (apiCall)
-import Web.HTML (window)
-import Web.HTML.Window (alert)
 
 type Input = Maybe String
 
@@ -63,18 +42,21 @@ type State =
   , selectedUser :: Maybe User
   , users :: Map String User
   , initUserName :: Maybe String
+  , errorMessage :: Maybe String
   }
 
 data Action
   = Initialize
   | UserSelected User
   | SelectedUserName (Maybe String)
+  | Modal (Modal.Output Message.Output)
 
 type Query :: ∀ k. k -> Type
 type Query = Const Void
 
-type Slots :: ∀ k. Row k
-type Slots = ()
+type Slots = (modal :: H.Slot Message.Query (Modal.Output Message.Output) Unit)
+
+_modal = Proxy :: Proxy "modal"
 
 component
   :: ∀ m
@@ -88,6 +70,7 @@ component = H.mkComponent
       , selectedUser: Nothing
       , users: Map.empty
       , initUserName: _
+      , errorMessage: Nothing
       }
   , render
   , eval: H.mkEval H.defaultEval
@@ -106,9 +89,9 @@ component = H.mkComponent
         when admin do
           queryResponse <- apiCall $ QueryUsersRequest { authToken }
           case queryResponse of
-            Left err -> alertError err
+            Left err -> H.modify_ _ { errorMessage = Just err }
             Right (QueryUsersResponse (QueryUsersResultsFailure { reason })) ->
-              alertError $ "Query Users: " <> show reason
+              H.modify_ _ { errorMessage = Just $ "Query Users: " <> show reason }
             Right (QueryUsersResponse (QueryUsersResultsSuccess { users })) -> do
               let
                 mkMap f = foldl (\m r -> Map.insert (f r) r m) Map.empty
@@ -123,12 +106,13 @@ component = H.mkComponent
     SelectedUserName userName' -> do
       { users } <- H.get
       H.modify_ _ { selectedUser = userName' >>= flip Map.lookup users }
-    where
-    alertError :: String -> H.HalogenM State Action Slots Output m Unit
-    alertError msg = H.liftEffect $ window >>= alert msg
+    Modal output -> case output of
+      Modal.Affirmative -> H.modify_ _ { errorMessage = Nothing }
+      Modal.Negative -> H.modify_ _ { errorMessage = Nothing }
+      Modal.InnerOutput _ -> pure unit
 
   render :: State -> H.ComponentHTML Action Slots m
-  render { authorized, users, selectedUser } =
+  render { authorized, users, selectedUser, errorMessage } =
     if not authorized then HH.text "Not Authorized"
     else
       HH.div
@@ -198,4 +182,7 @@ component = H.mkComponent
                     , item $ HH.text if user.admin then "Yes" else "No"
                     ]
                 ]
+        , ( errorMessage # maybe (HH.text "") \message ->
+              HH.slot _modal unit (Modal.component Message.component) message Modal
+          )
         ]

@@ -83,15 +83,15 @@
     };
   };
   var unsafeSet = function(label5) {
-    return function(value19) {
+    return function(value21) {
       return function(rec) {
         var copy2 = {};
-        for (var key7 in rec) {
-          if ({}.hasOwnProperty.call(rec, key7)) {
-            copy2[key7] = rec[key7];
+        for (var key8 in rec) {
+          if ({}.hasOwnProperty.call(rec, key8)) {
+            copy2[key8] = rec[key8];
           }
         }
-        copy2[label5] = value19;
+        copy2[label5] = value21;
         return copy2;
       };
     };
@@ -135,9 +135,9 @@
           showRecordFields: function(v) {
             return function(record) {
               var tail3 = showRecordFields1($$Proxy.value)(record);
-              var key7 = reflectSymbol2($$Proxy.value);
-              var focus3 = unsafeGet(key7)(record);
-              return " " + (key7 + (": " + (show17(focus3) + ("," + tail3))));
+              var key8 = reflectSymbol2($$Proxy.value);
+              var focus3 = unsafeGet(key8)(record);
+              return " " + (key8 + (": " + (show17(focus3) + ("," + tail3))));
             };
           }
         };
@@ -151,9 +151,9 @@
       return {
         showRecordFields: function(v) {
           return function(record) {
-            var key7 = reflectSymbol2($$Proxy.value);
-            var focus3 = unsafeGet(key7)(record);
-            return " " + (key7 + (": " + (show17(focus3) + " ")));
+            var key8 = reflectSymbol2($$Proxy.value);
+            var focus3 = unsafeGet(key8)(record);
+            return " " + (key8 + (": " + (show17(focus3) + " ")));
           };
         }
       };
@@ -467,7 +467,7 @@
     return dict.pure;
   };
   var unless = function(dictApplicative) {
-    var pure19 = pure(dictApplicative);
+    var pure110 = pure(dictApplicative);
     return function(v) {
       return function(v1) {
         if (!v) {
@@ -475,7 +475,7 @@
         }
         ;
         if (v) {
-          return pure19(unit);
+          return pure110(unit);
         }
         ;
         throw new Error("Failed pattern match at Control.Applicative (line 68, column 1 - line 68, column 65): " + [v.constructor.name, v1.constructor.name]);
@@ -483,7 +483,7 @@
     };
   };
   var when = function(dictApplicative) {
-    var pure19 = pure(dictApplicative);
+    var pure110 = pure(dictApplicative);
     return function(v) {
       return function(v1) {
         if (v) {
@@ -491,7 +491,7 @@
         }
         ;
         if (!v) {
-          return pure19(unit);
+          return pure110(unit);
         }
         ;
         throw new Error("Failed pattern match at Control.Applicative (line 63, column 1 - line 63, column 63): " + [v.constructor.name, v1.constructor.name]);
@@ -500,10 +500,10 @@
   };
   var liftA1 = function(dictApplicative) {
     var apply6 = apply(dictApplicative.Apply0());
-    var pure19 = pure(dictApplicative);
+    var pure110 = pure(dictApplicative);
     return function(f) {
       return function(a2) {
-        return apply6(pure19(f))(a2);
+        return apply6(pure110(f))(a2);
       };
     };
   };
@@ -1022,11 +1022,11 @@
     };
   };
   var composeKleisli = function(dictBind) {
-    var bind112 = bind(dictBind);
+    var bind111 = bind(dictBind);
     return function(f) {
       return function(g) {
         return function(a2) {
-          return bind112(f(a2))(g);
+          return bind111(f(a2))(g);
         };
       };
     };
@@ -1037,9 +1037,9 @@
     }
   };
   var join = function(dictBind) {
-    var bind112 = bind(dictBind);
+    var bind111 = bind(dictBind);
     return function(m) {
-      return bind112(m)(identity4);
+      return bind111(m)(identity4);
     };
   };
 
@@ -1171,14 +1171,14 @@
 
   // output/Data.Tuple/index.js
   var Tuple = /* @__PURE__ */ function() {
-    function Tuple2(value0, value19) {
+    function Tuple2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Tuple2.create = function(value0) {
-      return function(value19) {
-        return new Tuple2(value0, value19);
+      return function(value110) {
+        return new Tuple2(value0, value110);
       };
     };
     return Tuple2;
@@ -1367,13 +1367,13 @@
   };
   var traverse_ = function(dictApplicative) {
     var applySecond3 = applySecond(dictApplicative.Apply0());
-    var pure19 = pure(dictApplicative);
+    var pure20 = pure(dictApplicative);
     return function(dictFoldable) {
       var foldr22 = foldr(dictFoldable);
       return function(f) {
         return foldr22(function($454) {
           return applySecond3(f($454));
-        })(pure19(unit));
+        })(pure20(unit));
       };
     };
   };
@@ -1610,12 +1610,12 @@
   };
   var ap = function(dictMonad) {
     var bind21 = bind(dictMonad.Bind1());
-    var pure19 = pure(dictMonad.Applicative0());
+    var pure20 = pure(dictMonad.Applicative0());
     return function(f) {
       return function(a2) {
         return bind21(f)(function(f$prime) {
           return bind21(a2)(function(a$prime) {
-            return pure19(f$prime(a$prime));
+            return pure20(f$prime(a$prime));
           });
         });
       };
@@ -1951,13 +1951,13 @@
     }
     return function(apply6) {
       return function(map39) {
-        return function(pure19) {
+        return function(pure20) {
           return function(f) {
             return function(array) {
               function go2(bot, top4) {
                 switch (top4 - bot) {
                   case 0:
-                    return pure19([]);
+                    return pure20([]);
                   case 1:
                     return map39(array1)(f(array[bot]));
                   case 2:
@@ -2041,14 +2041,14 @@
 
   // output/Data.NonEmpty/index.js
   var NonEmpty = /* @__PURE__ */ function() {
-    function NonEmpty2(value0, value19) {
+    function NonEmpty2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     NonEmpty2.create = function(value0) {
-      return function(value19) {
-        return new NonEmpty2(value0, value19);
+      return function(value110) {
+        return new NonEmpty2(value0, value110);
       };
     };
     return NonEmpty2;
@@ -2061,9 +2061,9 @@
   };
   var oneOf2 = function(dictAlternative) {
     var alt8 = alt(dictAlternative.Plus1().Alt0());
-    var pure19 = pure(dictAlternative.Applicative0());
+    var pure20 = pure(dictAlternative.Applicative0());
     return function(v) {
-      return alt8(pure19(v.value0))(v.value1);
+      return alt8(pure20(v.value0))(v.value1);
     };
   };
   var functorNonEmpty = function(dictFunctor) {
@@ -2086,14 +2086,14 @@
     return Nil3;
   }();
   var Cons = /* @__PURE__ */ function() {
-    function Cons3(value0, value19) {
+    function Cons3(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Cons3.create = function(value0) {
-      return function(value19) {
-        return new Cons3(value0, value19);
+      return function(value110) {
+        return new Cons3(value0, value110);
       };
     };
     return Cons3;
@@ -2382,14 +2382,14 @@
     return Lift3;
   }();
   var Ap = /* @__PURE__ */ function() {
-    function Ap2(value0, value19) {
+    function Ap2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Ap2.create = function(value0) {
-      return function(value19) {
-        return new Ap2(value0, value19);
+      return function(value110) {
+        return new Ap2(value0, value110);
       };
     };
     return Ap2;
@@ -2403,7 +2403,7 @@
     return Lift.create;
   }();
   var goLeft = function(dictApplicative) {
-    var pure19 = pure(dictApplicative);
+    var pure20 = pure(dictApplicative);
     return function(fStack) {
       return function(valStack) {
         return function(nat) {
@@ -2411,7 +2411,7 @@
             return function(count) {
               if (func instanceof Pure) {
                 return new Tuple(new Cons({
-                  func: pure19(func.value0),
+                  func: pure20(func.value0),
                   count
                 }, fStack), valStack);
               }
@@ -2482,7 +2482,7 @@
   };
   var foldFreeAp = function(dictApplicative) {
     var goApply1 = goApply(dictApplicative);
-    var pure19 = pure(dictApplicative);
+    var pure20 = pure(dictApplicative);
     var goLeft1 = goLeft(dictApplicative);
     return function(nat) {
       return function(z) {
@@ -2491,7 +2491,7 @@
           var $tco_result;
           function $tco_loop(v) {
             if (v.value1.value0 instanceof Pure) {
-              var v1 = goApply1(v.value0)(v.value1.value1)(pure19(v.value1.value0.value0));
+              var v1 = goApply1(v.value0)(v.value1.value1)(pure20(v.value1.value0.value0));
               if (v1 instanceof Left) {
                 $tco_done = true;
                 return v1.value0;
@@ -2596,24 +2596,24 @@
     var catchError1 = catchError(dictMonadError);
     var Monad0 = dictMonadError.MonadThrow0().Monad0();
     var map39 = map(Monad0.Bind1().Apply0().Functor0());
-    var pure19 = pure(Monad0.Applicative0());
+    var pure20 = pure(Monad0.Applicative0());
     return function(a2) {
       return catchError1(map39(Right.create)(a2))(function($52) {
-        return pure19(Left.create($52));
+        return pure20(Left.create($52));
       });
     };
   };
 
   // output/Data.CatQueue/index.js
   var CatQueue = /* @__PURE__ */ function() {
-    function CatQueue2(value0, value19) {
+    function CatQueue2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     CatQueue2.create = function(value0) {
-      return function(value19) {
-        return new CatQueue2(value0, value19);
+      return function(value110) {
+        return new CatQueue2(value0, value110);
       };
     };
     return CatQueue2;
@@ -2671,14 +2671,14 @@
     return CatNil2;
   }();
   var CatCons = /* @__PURE__ */ function() {
-    function CatCons2(value0, value19) {
+    function CatCons2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     CatCons2.create = function(value0) {
-      return function(value19) {
-        return new CatCons2(value0, value19);
+      return function(value110) {
+        return new CatCons2(value0, value110);
       };
     };
     return CatCons2;
@@ -2819,14 +2819,14 @@
   var append4 = /* @__PURE__ */ append(semigroupCatList);
   var map5 = /* @__PURE__ */ map(functorFn);
   var Free = /* @__PURE__ */ function() {
-    function Free2(value0, value19) {
+    function Free2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Free2.create = function(value0) {
-      return function(value19) {
-        return new Free2(value0, value19);
+      return function(value110) {
+        return new Free2(value0, value110);
       };
     };
     return Free2;
@@ -2842,14 +2842,14 @@
     return Return2;
   }();
   var Bind = /* @__PURE__ */ function() {
-    function Bind2(value0, value19) {
+    function Bind2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Bind2.create = function(value0) {
-      return function(value19) {
-        return new Bind2(value0, value19);
+      return function(value110) {
+        return new Bind2(value0, value110);
       };
     };
     return Bind2;
@@ -2976,13 +2976,13 @@
   var foldFree = function(dictMonadRec) {
     var Monad0 = dictMonadRec.Monad0();
     var map115 = map(Monad0.Bind1().Apply0().Functor0());
-    var pure19 = pure(Monad0.Applicative0());
+    var pure110 = pure(Monad0.Applicative0());
     var tailRecM4 = tailRecM(dictMonadRec);
     return function(k) {
       var go2 = function(f) {
         var v = toView(f);
         if (v instanceof Return) {
-          return map115(Done.create)(pure19(v.value0));
+          return map115(Done.create)(pure110(v.value0));
         }
         ;
         if (v instanceof Bind) {
@@ -3016,18 +3016,18 @@
     return Leaf2;
   }();
   var Two = /* @__PURE__ */ function() {
-    function Two2(value0, value19, value24, value33) {
+    function Two2(value0, value110, value24, value33) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
       this.value2 = value24;
       this.value3 = value33;
     }
     ;
     Two2.create = function(value0) {
-      return function(value19) {
+      return function(value110) {
         return function(value24) {
           return function(value33) {
-            return new Two2(value0, value19, value24, value33);
+            return new Two2(value0, value110, value24, value33);
           };
         };
       };
@@ -3035,9 +3035,9 @@
     return Two2;
   }();
   var Three = /* @__PURE__ */ function() {
-    function Three2(value0, value19, value24, value33, value43, value52, value62) {
+    function Three2(value0, value110, value24, value33, value43, value52, value62) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
       this.value2 = value24;
       this.value3 = value33;
       this.value4 = value43;
@@ -3046,13 +3046,13 @@
     }
     ;
     Three2.create = function(value0) {
-      return function(value19) {
+      return function(value110) {
         return function(value24) {
           return function(value33) {
             return function(value43) {
               return function(value52) {
                 return function(value62) {
-                  return new Three2(value0, value19, value24, value33, value43, value52, value62);
+                  return new Three2(value0, value110, value24, value33, value43, value52, value62);
                 };
               };
             };
@@ -3063,41 +3063,41 @@
     return Three2;
   }();
   var TwoLeft = /* @__PURE__ */ function() {
-    function TwoLeft2(value0, value19, value24) {
+    function TwoLeft2(value0, value110, value24) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
       this.value2 = value24;
     }
     ;
     TwoLeft2.create = function(value0) {
-      return function(value19) {
+      return function(value110) {
         return function(value24) {
-          return new TwoLeft2(value0, value19, value24);
+          return new TwoLeft2(value0, value110, value24);
         };
       };
     };
     return TwoLeft2;
   }();
   var TwoRight = /* @__PURE__ */ function() {
-    function TwoRight2(value0, value19, value24) {
+    function TwoRight2(value0, value110, value24) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
       this.value2 = value24;
     }
     ;
     TwoRight2.create = function(value0) {
-      return function(value19) {
+      return function(value110) {
         return function(value24) {
-          return new TwoRight2(value0, value19, value24);
+          return new TwoRight2(value0, value110, value24);
         };
       };
     };
     return TwoRight2;
   }();
   var ThreeLeft = /* @__PURE__ */ function() {
-    function ThreeLeft2(value0, value19, value24, value33, value43, value52) {
+    function ThreeLeft2(value0, value110, value24, value33, value43, value52) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
       this.value2 = value24;
       this.value3 = value33;
       this.value4 = value43;
@@ -3105,12 +3105,12 @@
     }
     ;
     ThreeLeft2.create = function(value0) {
-      return function(value19) {
+      return function(value110) {
         return function(value24) {
           return function(value33) {
             return function(value43) {
               return function(value52) {
-                return new ThreeLeft2(value0, value19, value24, value33, value43, value52);
+                return new ThreeLeft2(value0, value110, value24, value33, value43, value52);
               };
             };
           };
@@ -3120,9 +3120,9 @@
     return ThreeLeft2;
   }();
   var ThreeMiddle = /* @__PURE__ */ function() {
-    function ThreeMiddle2(value0, value19, value24, value33, value43, value52) {
+    function ThreeMiddle2(value0, value110, value24, value33, value43, value52) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
       this.value2 = value24;
       this.value3 = value33;
       this.value4 = value43;
@@ -3130,12 +3130,12 @@
     }
     ;
     ThreeMiddle2.create = function(value0) {
-      return function(value19) {
+      return function(value110) {
         return function(value24) {
           return function(value33) {
             return function(value43) {
               return function(value52) {
-                return new ThreeMiddle2(value0, value19, value24, value33, value43, value52);
+                return new ThreeMiddle2(value0, value110, value24, value33, value43, value52);
               };
             };
           };
@@ -3145,9 +3145,9 @@
     return ThreeMiddle2;
   }();
   var ThreeRight = /* @__PURE__ */ function() {
-    function ThreeRight2(value0, value19, value24, value33, value43, value52) {
+    function ThreeRight2(value0, value110, value24, value33, value43, value52) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
       this.value2 = value24;
       this.value3 = value33;
       this.value4 = value43;
@@ -3155,12 +3155,12 @@
     }
     ;
     ThreeRight2.create = function(value0) {
-      return function(value19) {
+      return function(value110) {
         return function(value24) {
           return function(value33) {
             return function(value43) {
               return function(value52) {
-                return new ThreeRight2(value0, value19, value24, value33, value43, value52);
+                return new ThreeRight2(value0, value110, value24, value33, value43, value52);
               };
             };
           };
@@ -3170,18 +3170,18 @@
     return ThreeRight2;
   }();
   var KickUp = /* @__PURE__ */ function() {
-    function KickUp2(value0, value19, value24, value33) {
+    function KickUp2(value0, value110, value24, value33) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
       this.value2 = value24;
       this.value3 = value33;
     }
     ;
     KickUp2.create = function(value0) {
-      return function(value19) {
+      return function(value110) {
         return function(value24) {
           return function(value33) {
-            return new KickUp2(value0, value19, value24, value33);
+            return new KickUp2(value0, value110, value24, value33);
           };
         };
       };
@@ -3901,12 +3901,12 @@
   };
   var bindExceptT = function(dictMonad) {
     var bind21 = bind(dictMonad.Bind1());
-    var pure19 = pure(dictMonad.Applicative0());
+    var pure20 = pure(dictMonad.Applicative0());
     return {
       bind: function(v) {
         return function(k) {
           return bind21(v)(either(function($187) {
-            return pure19(Left.create($187));
+            return pure20(Left.create($187));
           })(function(a2) {
             var v1 = k(a2);
             return v1;
@@ -3959,24 +3959,24 @@
     return function(dictMonad) {
       var Bind1 = dictMonad.Bind1();
       var bind21 = bind(Bind1);
-      var pure19 = pure(dictMonad.Applicative0());
+      var pure20 = pure(dictMonad.Applicative0());
       var functorExceptT1 = functorExceptT(Bind1.Apply0().Functor0());
       return {
         alt: function(v) {
           return function(v1) {
             return bind21(v)(function(rm) {
               if (rm instanceof Right) {
-                return pure19(new Right(rm.value0));
+                return pure20(new Right(rm.value0));
               }
               ;
               if (rm instanceof Left) {
                 return bind21(v1)(function(rn) {
                   if (rn instanceof Right) {
-                    return pure19(new Right(rn.value0));
+                    return pure20(new Right(rn.value0));
                   }
                   ;
                   if (rn instanceof Left) {
-                    return pure19(new Left(append13(rm.value0)(rn.value0)));
+                    return pure20(new Left(append13(rm.value0)(rn.value0)));
                   }
                   ;
                   throw new Error("Failed pattern match at Control.Monad.Except.Trans (line 86, column 9 - line 88, column 49): " + [rn.constructor.name]);
@@ -4188,11 +4188,11 @@
     var mempty3 = mempty(dictMonoid);
     var applyWriterT1 = applyWriterT(dictMonoid.Semigroup0());
     return function(dictApplicative) {
-      var pure19 = pure(dictApplicative);
+      var pure20 = pure(dictApplicative);
       var applyWriterT2 = applyWriterT1(dictApplicative.Apply0());
       return {
         pure: function(a2) {
-          return pure19(new Tuple(a2, mempty3));
+          return pure20(new Tuple(a2, mempty3));
         },
         Apply0: function() {
           return applyWriterT2;
@@ -4287,18 +4287,18 @@
         }, 0);
       }
     }
-    function runSync(left, right, eff) {
+    function runSync(left2, right, eff) {
       try {
         return right(eff());
       } catch (error4) {
-        return left(error4);
+        return left2(error4);
       }
     }
-    function runAsync(left, eff, k) {
+    function runAsync(left2, eff, k) {
       try {
         return eff(k)();
       } catch (error4) {
-        k(left(error4))();
+        k(left2(error4))();
         return nonCanceler2;
       }
     }
@@ -5073,8 +5073,8 @@
       if (aff.tag === Aff.Pure.tag) {
         return Aff.Pure(f(aff._1));
       } else {
-        return Aff.Bind(aff, function(value19) {
-          return Aff.Pure(f(value19));
+        return Aff.Bind(aff, function(value21) {
+          return Aff.Pure(f(value21));
         });
       }
     };
@@ -5493,16 +5493,16 @@
 
   // output/Halogen.Data.OrdBox/index.js
   var OrdBox = /* @__PURE__ */ function() {
-    function OrdBox2(value0, value19, value24) {
+    function OrdBox2(value0, value110, value24) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
       this.value2 = value24;
     }
     ;
     OrdBox2.create = function(value0) {
-      return function(value19) {
+      return function(value110) {
         return function(value24) {
-          return new OrdBox2(value0, value19, value24);
+          return new OrdBox2(value0, value110, value24);
         };
       };
     };
@@ -5540,9 +5540,9 @@
       return function(dictOrd) {
         var mkOrdBox2 = mkOrdBox(dictOrd);
         return function(sym) {
-          return function(key7) {
+          return function(key8) {
             return function(v) {
-              return pop1(new Tuple(reflectSymbol2(sym), mkOrdBox2(key7)))(v);
+              return pop1(new Tuple(reflectSymbol2(sym), mkOrdBox2(key8)))(v);
             };
           };
         };
@@ -5555,9 +5555,9 @@
       return function(dictOrd) {
         var mkOrdBox2 = mkOrdBox(dictOrd);
         return function(sym) {
-          return function(key7) {
+          return function(key8) {
             return function(v) {
-              return lookup1(new Tuple(reflectSymbol2(sym), mkOrdBox2(key7)))(v);
+              return lookup1(new Tuple(reflectSymbol2(sym), mkOrdBox2(key8)))(v);
             };
           };
         };
@@ -5570,10 +5570,10 @@
       return function(dictOrd) {
         var mkOrdBox2 = mkOrdBox(dictOrd);
         return function(sym) {
-          return function(key7) {
+          return function(key8) {
             return function(val) {
               return function(v) {
-                return insert1(new Tuple(reflectSymbol2(sym), mkOrdBox2(key7)))(val)(v);
+                return insert1(new Tuple(reflectSymbol2(sym), mkOrdBox2(key8)))(val)(v);
               };
             };
           };
@@ -5595,16 +5595,16 @@
 
   // output/Halogen.Query.ChildQuery/index.js
   var ChildQuery = /* @__PURE__ */ function() {
-    function ChildQuery3(value0, value19, value24) {
+    function ChildQuery3(value0, value110, value24) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
       this.value2 = value24;
     }
     ;
     ChildQuery3.create = function(value0) {
-      return function(value19) {
+      return function(value110) {
         return function(value24) {
-          return new ChildQuery3(value0, value19, value24);
+          return new ChildQuery3(value0, value110, value24);
         };
       };
     };
@@ -5615,20 +5615,20 @@
 
   // output/Data.Array/foreign.js
   var replicateFill = function(count) {
-    return function(value19) {
+    return function(value21) {
       if (count < 1) {
         return [];
       }
       var result = new Array(count);
-      return result.fill(value19);
+      return result.fill(value21);
     };
   };
   var replicatePolyfill = function(count) {
-    return function(value19) {
+    return function(value21) {
       var result = [];
       var n = 0;
       for (var i2 = 0; i2 < count; i2++) {
-        result[n++] = value19;
+        result[n++] = value21;
       }
       return result;
     };
@@ -6015,27 +6015,27 @@
     return State2;
   }();
   var Subscribe = /* @__PURE__ */ function() {
-    function Subscribe2(value0, value19) {
+    function Subscribe2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Subscribe2.create = function(value0) {
-      return function(value19) {
-        return new Subscribe2(value0, value19);
+      return function(value110) {
+        return new Subscribe2(value0, value110);
       };
     };
     return Subscribe2;
   }();
   var Unsubscribe = /* @__PURE__ */ function() {
-    function Unsubscribe2(value0, value19) {
+    function Unsubscribe2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Unsubscribe2.create = function(value0) {
-      return function(value19) {
-        return new Unsubscribe2(value0, value19);
+      return function(value110) {
+        return new Unsubscribe2(value0, value110);
       };
     };
     return Unsubscribe2;
@@ -6061,14 +6061,14 @@
     return ChildQuery3;
   }();
   var Raise = /* @__PURE__ */ function() {
-    function Raise2(value0, value19) {
+    function Raise2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Raise2.create = function(value0) {
-      return function(value19) {
-        return new Raise2(value0, value19);
+      return function(value110) {
+        return new Raise2(value0, value110);
       };
     };
     return Raise2;
@@ -6084,53 +6084,53 @@
     return Par2;
   }();
   var Fork = /* @__PURE__ */ function() {
-    function Fork2(value0, value19) {
+    function Fork2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Fork2.create = function(value0) {
-      return function(value19) {
-        return new Fork2(value0, value19);
+      return function(value110) {
+        return new Fork2(value0, value110);
       };
     };
     return Fork2;
   }();
   var Join = /* @__PURE__ */ function() {
-    function Join2(value0, value19) {
+    function Join2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Join2.create = function(value0) {
-      return function(value19) {
-        return new Join2(value0, value19);
+      return function(value110) {
+        return new Join2(value0, value110);
       };
     };
     return Join2;
   }();
   var Kill = /* @__PURE__ */ function() {
-    function Kill2(value0, value19) {
+    function Kill2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Kill2.create = function(value0) {
-      return function(value19) {
-        return new Kill2(value0, value19);
+      return function(value110) {
+        return new Kill2(value0, value110);
       };
     };
     return Kill2;
   }();
   var GetRef = /* @__PURE__ */ function() {
-    function GetRef2(value0, value19) {
+    function GetRef2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     GetRef2.create = function(value0) {
-      return function(value19) {
-        return new GetRef2(value0, value19);
+      return function(value110) {
+        return new GetRef2(value0, value110);
       };
     };
     return GetRef2;
@@ -6153,9 +6153,9 @@
           return function(p2) {
             return function(q2) {
               return liftF(new ChildQuery2(mkChildQueryBox(new ChildQuery(function(dictApplicative) {
-                var pure19 = pure(dictApplicative);
+                var pure110 = pure(dictApplicative);
                 return function(k) {
-                  var $177 = maybe(pure19(Nothing.value))(k);
+                  var $177 = maybe(pure110(Nothing.value))(k);
                   var $178 = lookup23(label5)(p2);
                   return function($179) {
                     return $177($178($179));
@@ -7031,16 +7031,16 @@
   var show22 = /* @__PURE__ */ show(showDay);
   var toEnum2 = /* @__PURE__ */ toEnum(boundedEnumMonth);
   var $$Date = /* @__PURE__ */ function() {
-    function $$Date2(value0, value19, value24) {
+    function $$Date2(value0, value110, value24) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
       this.value2 = value24;
     }
     ;
     $$Date2.create = function(value0) {
-      return function(value19) {
+      return function(value110) {
         return function(value24) {
-          return new $$Date2(value0, value19, value24);
+          return new $$Date2(value0, value110, value24);
         };
       };
     };
@@ -7095,18 +7095,18 @@
   var show23 = /* @__PURE__ */ show(showSecond);
   var show32 = /* @__PURE__ */ show(showMillisecond);
   var Time = /* @__PURE__ */ function() {
-    function Time2(value0, value19, value24, value33) {
+    function Time2(value0, value110, value24, value33) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
       this.value2 = value24;
       this.value3 = value33;
     }
     ;
     Time2.create = function(value0) {
-      return function(value19) {
+      return function(value110) {
         return function(value24) {
           return function(value33) {
-            return new Time2(value0, value19, value24, value33);
+            return new Time2(value0, value110, value24, value33);
           };
         };
       };
@@ -7123,14 +7123,14 @@
   var show6 = /* @__PURE__ */ show(showDate);
   var show13 = /* @__PURE__ */ show(showTime);
   var DateTime = /* @__PURE__ */ function() {
-    function DateTime2(value0, value19) {
+    function DateTime2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     DateTime2.create = function(value0) {
-      return function(value19) {
-        return new DateTime2(value0, value19);
+      return function(value110) {
+        return new DateTime2(value0, value110);
       };
     };
     return DateTime2;
@@ -7368,9 +7368,9 @@
     var bitraverse1 = bitraverse(dictBitraversable);
     return function(dictApplicative) {
       var bitraverse22 = bitraverse1(dictApplicative);
-      var pure19 = pure(dictApplicative);
+      var pure20 = pure(dictApplicative);
       return function(f) {
-        return bitraverse22(f)(pure19);
+        return bitraverse22(f)(pure20);
       };
     };
   };
@@ -7518,14 +7518,14 @@
   var composeKleisli2 = /* @__PURE__ */ composeKleisli(bindEither);
   var append7 = /* @__PURE__ */ append(semigroupNonEmptyArray);
   var Expected = /* @__PURE__ */ function() {
-    function Expected2(value0, value19) {
+    function Expected2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Expected2.create = function(value0) {
-      return function(value19) {
-        return new Expected2(value0, value19);
+      return function(value110) {
+        return new Expected2(value0, value110);
       };
     };
     return Expected2;
@@ -7568,14 +7568,14 @@
     return Fail3;
   }();
   var Success = /* @__PURE__ */ function() {
-    function Success2(value0, value19) {
+    function Success2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Success2.create = function(value0) {
-      return function(value19) {
-        return new Success2(value0, value19);
+      return function(value110) {
+        return new Success2(value0, value110);
       };
     };
     return Success2;
@@ -7601,14 +7601,14 @@
     return Chomp2;
   }();
   var Prefix = /* @__PURE__ */ function() {
-    function Prefix2(value0, value19) {
+    function Prefix2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Prefix2.create = function(value0) {
-      return function(value19) {
-        return new Prefix2(value0, value19);
+      return function(value110) {
+        return new Prefix2(value0, value110);
       };
     };
     return Prefix2;
@@ -8108,14 +8108,14 @@
   var apply1 = /* @__PURE__ */ apply(applyFn);
   var map13 = /* @__PURE__ */ map(functorFn);
   var RouteDuplex = /* @__PURE__ */ function() {
-    function RouteDuplex2(value0, value19) {
+    function RouteDuplex2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     RouteDuplex2.create = function(value0) {
-      return function(value19) {
-        return new RouteDuplex2(value0, value19);
+      return function(value110) {
+        return new RouteDuplex2(value0, value110);
       };
     };
     return RouteDuplex2;
@@ -8588,10 +8588,10 @@
   };
 
   // output/Web.HTML.HTMLElement/foreign.js
-  function _read(nothing, just, value19) {
-    var tag = Object.prototype.toString.call(value19);
+  function _read(nothing, just, value21) {
+    var tag = Object.prototype.toString.call(value21);
     if (tag.indexOf("[object HTML") === 0 && tag.indexOf("Element]") === tag.length - 8) {
-      return just(value19);
+      return just(value21);
     } else {
       return nothing;
     }
@@ -8626,13 +8626,6 @@
   function location(window2) {
     return function() {
       return window2.location;
-    };
-  }
-  function alert(str) {
-    return function(window2) {
-      return function() {
-        window2.alert(str);
-      };
     };
   }
 
@@ -8790,18 +8783,18 @@
   var clamp1 = /* @__PURE__ */ clamp(ordNumber);
   var show7 = /* @__PURE__ */ show(showNumber);
   var HSLA = /* @__PURE__ */ function() {
-    function HSLA2(value0, value19, value24, value33) {
+    function HSLA2(value0, value110, value24, value33) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
       this.value2 = value24;
       this.value3 = value33;
     }
     ;
     HSLA2.create = function(value0) {
-      return function(value19) {
+      return function(value110) {
         return function(value24) {
           return function(value33) {
-            return new HSLA2(value0, value19, value24, value33);
+            return new HSLA2(value0, value110, value24, value33);
           };
         };
       };
@@ -9131,13 +9124,13 @@
     }
   };
   var valList = function(dictVal) {
-    var value19 = value12(dictVal);
+    var value110 = value12(dictVal);
     return {
       value: function() {
         var $145 = intercalate4(fromString1(", "));
         return function($146) {
           return $145(function(v) {
-            return map16(value19)(v);
+            return map16(value110)(v);
           }($146));
         };
       }()
@@ -9165,12 +9158,12 @@
     value: fromString1
   };
   var valTuple = function(dictVal) {
-    var value19 = value12(dictVal);
+    var value110 = value12(dictVal);
     return function(dictVal1) {
       var value24 = value12(dictVal1);
       return {
         value: function(v) {
-          return append32(value19(v.value0))(append32(fromString1(" "))(value24(v.value1)));
+          return append32(value110(v.value0))(append32(fromString1(" "))(value24(v.value1)));
         }
       };
     };
@@ -9213,53 +9206,53 @@
     return BasicSize2;
   }();
   var SumSize = /* @__PURE__ */ function() {
-    function SumSize2(value0, value19) {
+    function SumSize2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     SumSize2.create = function(value0) {
-      return function(value19) {
-        return new SumSize2(value0, value19);
+      return function(value110) {
+        return new SumSize2(value0, value110);
       };
     };
     return SumSize2;
   }();
   var DiffSize = /* @__PURE__ */ function() {
-    function DiffSize2(value0, value19) {
+    function DiffSize2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     DiffSize2.create = function(value0) {
-      return function(value19) {
-        return new DiffSize2(value0, value19);
+      return function(value110) {
+        return new DiffSize2(value0, value110);
       };
     };
     return DiffSize2;
   }();
   var MultSize = /* @__PURE__ */ function() {
-    function MultSize2(value0, value19) {
+    function MultSize2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     MultSize2.create = function(value0) {
-      return function(value19) {
-        return new MultSize2(value0, value19);
+      return function(value110) {
+        return new MultSize2(value0, value110);
       };
     };
     return MultSize2;
   }();
   var DivSize = /* @__PURE__ */ function() {
-    function DivSize2(value0, value19) {
+    function DivSize2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     DivSize2.create = function(value0) {
-      return function(value19) {
-        return new DivSize2(value0, value19);
+      return function(value110) {
+        return new DivSize2(value0, value110);
       };
     };
     return DivSize2;
@@ -9338,14 +9331,14 @@
   var apply4 = /* @__PURE__ */ apply(/* @__PURE__ */ applyWriterT(semigroupArray)(applyIdentity));
   var bind5 = /* @__PURE__ */ bind(/* @__PURE__ */ bindWriterT(semigroupArray)(bindIdentity));
   var Property = /* @__PURE__ */ function() {
-    function Property3(value0, value19) {
+    function Property3(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Property3.create = function(value0) {
-      return function(value19) {
-        return new Property3(value0, value19);
+      return function(value110) {
+        return new Property3(value0, value110);
       };
     };
     return Property3;
@@ -9363,10 +9356,10 @@
     };
   }();
   var key = function(dictVal) {
-    var value19 = value12(dictVal);
+    var value21 = value12(dictVal);
     return function(k) {
       return function(v) {
-        return rule(new Property(cast(k), value19(v)));
+        return rule(new Property(cast(k), value21(v)));
       };
     };
   };
@@ -9448,6 +9441,9 @@
   var stretch = function(dict) {
     return dict.stretch;
   };
+  var spaceAround = function(dict) {
+    return dict.spaceAround;
+  };
   var row = /* @__PURE__ */ fromString7("row");
   var justifyContent = /* @__PURE__ */ key(valJustifyContentValue)(/* @__PURE__ */ fromString12("justify-content"));
   var isStringJustifyContentValue = {
@@ -9456,6 +9452,9 @@
     }
   };
   var fromString22 = /* @__PURE__ */ fromString4(isStringJustifyContentValue);
+  var spaceAroundJustifyContentValue = {
+    spaceAround: /* @__PURE__ */ fromString22("space-around")
+  };
   var isStringAlignItemsValue = {
     fromString: function($118) {
       return AlignItemsValue(fromString7($118));
@@ -9552,6 +9551,8 @@
   };
   var minWidth = /* @__PURE__ */ key4(/* @__PURE__ */ fromString9("min-width"));
   var minHeight = /* @__PURE__ */ key4(/* @__PURE__ */ fromString9("min-height"));
+  var marginLeft = /* @__PURE__ */ key4(/* @__PURE__ */ fromString9("margin-left"));
+  var left = /* @__PURE__ */ key4(/* @__PURE__ */ fromString9("left"));
   var height8 = /* @__PURE__ */ key4(/* @__PURE__ */ fromString9("height"));
 
   // output/Capability.Navigate/index.js
@@ -10025,14 +10026,14 @@
 
   // output/Data.Coyoneda/index.js
   var CoyonedaF = /* @__PURE__ */ function() {
-    function CoyonedaF2(value0, value19) {
+    function CoyonedaF2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     CoyonedaF2.create = function(value0) {
-      return function(value19) {
-        return new CoyonedaF2(value0, value19);
+      return function(value110) {
+        return new CoyonedaF2(value0, value110);
       };
     };
     return CoyonedaF2;
@@ -10311,14 +10312,14 @@
 
   // output/Halogen.Query.Input/index.js
   var RefUpdate = /* @__PURE__ */ function() {
-    function RefUpdate2(value0, value19) {
+    function RefUpdate2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     RefUpdate2.create = function(value0) {
-      return function(value19) {
-        return new RefUpdate2(value0, value19);
+      return function(value110) {
+        return new RefUpdate2(value0, value110);
       };
     };
     return RefUpdate2;
@@ -10351,18 +10352,18 @@
 
   // output/Halogen.VDom.Machine/index.js
   var Step = /* @__PURE__ */ function() {
-    function Step3(value0, value19, value24, value33) {
+    function Step3(value0, value110, value24, value33) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
       this.value2 = value24;
       this.value3 = value33;
     }
     ;
     Step3.create = function(value0) {
-      return function(value19) {
+      return function(value110) {
         return function(value24) {
           return function(value33) {
-            return new Step3(value0, value19, value24, value33);
+            return new Step3(value0, value110, value24, value33);
           };
         };
       };
@@ -10395,18 +10396,18 @@
     return Text3;
   }();
   var Elem = /* @__PURE__ */ function() {
-    function Elem3(value0, value19, value24, value33) {
+    function Elem3(value0, value110, value24, value33) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
       this.value2 = value24;
       this.value3 = value33;
     }
     ;
     Elem3.create = function(value0) {
-      return function(value19) {
+      return function(value110) {
         return function(value24) {
           return function(value33) {
-            return new Elem3(value0, value19, value24, value33);
+            return new Elem3(value0, value110, value24, value33);
           };
         };
       };
@@ -10414,18 +10415,18 @@
     return Elem3;
   }();
   var Keyed = /* @__PURE__ */ function() {
-    function Keyed2(value0, value19, value24, value33) {
+    function Keyed2(value0, value110, value24, value33) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
       this.value2 = value24;
       this.value3 = value33;
     }
     ;
     Keyed2.create = function(value0) {
-      return function(value19) {
+      return function(value110) {
         return function(value24) {
           return function(value33) {
-            return new Keyed2(value0, value19, value24, value33);
+            return new Keyed2(value0, value110, value24, value33);
           };
         };
       };
@@ -10453,16 +10454,16 @@
     return Grafted2;
   }();
   var Graft = /* @__PURE__ */ function() {
-    function Graft2(value0, value19, value24) {
+    function Graft2(value0, value110, value24) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
       this.value2 = value24;
     }
     ;
     Graft2.create = function(value0) {
-      return function(value19) {
+      return function(value110) {
         return function(value24) {
-          return new Graft2(value0, value19, value24);
+          return new Graft2(value0, value110, value24);
         };
       };
     };
@@ -10533,14 +10534,14 @@
   });
 
   // output/Halogen.VDom.Util/foreign.js
-  function unsafeGetAny(key7, obj) {
-    return obj[key7];
+  function unsafeGetAny(key8, obj) {
+    return obj[key8];
   }
-  function unsafeHasAny(key7, obj) {
-    return obj.hasOwnProperty(key7);
+  function unsafeHasAny(key8, obj) {
+    return obj.hasOwnProperty(key8);
   }
-  function unsafeSetAny(key7, val, obj) {
-    obj[key7] = val;
+  function unsafeSetAny(key8, val, obj) {
+    obj[key8] = val;
   }
   function forE2(a2, f) {
     var b2 = [];
@@ -11034,14 +11035,14 @@
   };
 
   // output/Foreign/foreign.js
-  function typeOf(value19) {
-    return typeof value19;
+  function typeOf(value21) {
+    return typeof value21;
   }
-  function tagOf(value19) {
-    return Object.prototype.toString.call(value19).slice(8, -1);
+  function tagOf(value21) {
+    return Object.prototype.toString.call(value21).slice(8, -1);
   }
-  var isArray = Array.isArray || function(value19) {
-    return Object.prototype.toString.call(value19) === "[object Array]";
+  var isArray = Array.isArray || function(value21) {
+    return Object.prototype.toString.call(value21) === "[object Array]";
   };
 
   // output/Foreign/index.js
@@ -11058,40 +11059,40 @@
     return ForeignError2;
   }();
   var TypeMismatch = /* @__PURE__ */ function() {
-    function TypeMismatch3(value0, value19) {
+    function TypeMismatch3(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     TypeMismatch3.create = function(value0) {
-      return function(value19) {
-        return new TypeMismatch3(value0, value19);
+      return function(value110) {
+        return new TypeMismatch3(value0, value110);
       };
     };
     return TypeMismatch3;
   }();
   var ErrorAtIndex = /* @__PURE__ */ function() {
-    function ErrorAtIndex2(value0, value19) {
+    function ErrorAtIndex2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     ErrorAtIndex2.create = function(value0) {
-      return function(value19) {
-        return new ErrorAtIndex2(value0, value19);
+      return function(value110) {
+        return new ErrorAtIndex2(value0, value110);
       };
     };
     return ErrorAtIndex2;
   }();
   var ErrorAtProperty = /* @__PURE__ */ function() {
-    function ErrorAtProperty2(value0, value19) {
+    function ErrorAtProperty2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     ErrorAtProperty2.create = function(value0) {
-      return function(value19) {
-        return new ErrorAtProperty2(value0, value19);
+      return function(value110) {
+        return new ErrorAtProperty2(value0, value110);
       };
     };
     return ErrorAtProperty2;
@@ -11124,19 +11125,19 @@
     };
   };
   var unsafeReadTagged = function(dictMonad) {
-    var pure19 = pure(applicativeExceptT(dictMonad));
+    var pure110 = pure(applicativeExceptT(dictMonad));
     var fail1 = fail(dictMonad);
     return function(tag) {
-      return function(value19) {
-        if (tagOf(value19) === tag) {
-          return pure19(unsafeFromForeign(value19));
+      return function(value21) {
+        if (tagOf(value21) === tag) {
+          return pure110(unsafeFromForeign(value21));
         }
         ;
         if (otherwise) {
-          return fail1(new TypeMismatch(tag, tagOf(value19)));
+          return fail1(new TypeMismatch(tag, tagOf(value21)));
         }
         ;
-        throw new Error("Failed pattern match at Foreign (line 123, column 1 - line 123, column 104): " + [tag.constructor.name, value19.constructor.name]);
+        throw new Error("Failed pattern match at Foreign (line 123, column 1 - line 123, column 104): " + [tag.constructor.name, value21.constructor.name]);
       };
     };
   };
@@ -11285,43 +11286,43 @@
     return Removed2;
   }();
   var Attribute = /* @__PURE__ */ function() {
-    function Attribute2(value0, value19, value24) {
+    function Attribute2(value0, value110, value24) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
       this.value2 = value24;
     }
     ;
     Attribute2.create = function(value0) {
-      return function(value19) {
+      return function(value110) {
         return function(value24) {
-          return new Attribute2(value0, value19, value24);
+          return new Attribute2(value0, value110, value24);
         };
       };
     };
     return Attribute2;
   }();
   var Property2 = /* @__PURE__ */ function() {
-    function Property3(value0, value19) {
+    function Property3(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Property3.create = function(value0) {
-      return function(value19) {
-        return new Property3(value0, value19);
+      return function(value110) {
+        return new Property3(value0, value110);
       };
     };
     return Property3;
   }();
   var Handler = /* @__PURE__ */ function() {
-    function Handler2(value0, value19) {
+    function Handler2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Handler2.create = function(value0) {
-      return function(value19) {
-        return new Handler2(value0, value19);
+      return function(value110) {
+        return new Handler2(value0, value110);
       };
     };
     return Handler2;
@@ -11338,26 +11339,26 @@
   }();
   var unsafeGetProperty = unsafeGetAny;
   var setProperty = unsafeSetAny;
-  var removeProperty = function(key7, el) {
-    var v = hasAttribute(nullImpl, key7, el);
+  var removeProperty = function(key8, el) {
+    var v = hasAttribute(nullImpl, key8, el);
     if (v) {
-      return removeAttribute(nullImpl, key7, el);
+      return removeAttribute(nullImpl, key8, el);
     }
     ;
-    var v1 = typeOf(unsafeGetAny(key7, el));
+    var v1 = typeOf(unsafeGetAny(key8, el));
     if (v1 === "string") {
-      return unsafeSetAny(key7, "", el);
+      return unsafeSetAny(key8, "", el);
     }
     ;
-    if (key7 === "rowSpan") {
-      return unsafeSetAny(key7, 1, el);
+    if (key8 === "rowSpan") {
+      return unsafeSetAny(key8, 1, el);
     }
     ;
-    if (key7 === "colSpan") {
-      return unsafeSetAny(key7, 1, el);
+    if (key8 === "colSpan") {
+      return unsafeSetAny(key8, 1, el);
     }
     ;
-    return unsafeSetAny(key7, jsUndefined, el);
+    return unsafeSetAny(key8, jsUndefined, el);
   };
   var propToStrKey = function(v) {
     if (v instanceof Attribute && v.value0 instanceof Just) {
@@ -11634,40 +11635,40 @@
     return Finalize2;
   }();
   var Receive = /* @__PURE__ */ function() {
-    function Receive2(value0, value19) {
+    function Receive2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Receive2.create = function(value0) {
-      return function(value19) {
-        return new Receive2(value0, value19);
+      return function(value110) {
+        return new Receive2(value0, value110);
       };
     };
     return Receive2;
   }();
   var Action2 = /* @__PURE__ */ function() {
-    function Action3(value0, value19) {
+    function Action3(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Action3.create = function(value0) {
-      return function(value19) {
-        return new Action3(value0, value19);
+      return function(value110) {
+        return new Action3(value0, value110);
       };
     };
     return Action3;
   }();
   var Query2 = /* @__PURE__ */ function() {
-    function Query4(value0, value19) {
+    function Query4(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Query4.create = function(value0) {
-      return function(value19) {
-        return new Query4(value0, value19);
+      return function(value110) {
+        return new Query4(value0, value110);
       };
     };
     return Query4;
@@ -11689,18 +11690,18 @@
     };
   };
   var Thunk = /* @__PURE__ */ function() {
-    function Thunk2(value0, value19, value24, value33) {
+    function Thunk2(value0, value110, value24, value33) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
       this.value2 = value24;
       this.value3 = value33;
     }
     ;
     Thunk2.create = function(value0) {
-      return function(value19) {
+      return function(value110) {
         return function(value24) {
           return function(value33) {
-            return new Thunk2(value0, value19, value24, value33);
+            return new Thunk2(value0, value110, value24, value33);
           };
         };
       };
@@ -11819,14 +11820,14 @@
     return function(nat) {
       return function(v) {
         if (v instanceof ComponentSlot) {
-          return unComponentSlot(function(slot4) {
+          return unComponentSlot(function(slot7) {
             return new ComponentSlot(mkComponentSlot({
-              get: slot4.get,
-              pop: slot4.pop,
-              set: slot4.set,
-              component: hoist3(dictFunctor)(nat)(slot4.component),
-              input: slot4.input,
-              output: slot4.output
+              get: slot7.get,
+              pop: slot7.pop,
+              set: slot7.set,
+              component: hoist3(dictFunctor)(nat)(slot7.component),
+              input: slot7.input,
+              output: slot7.output
             }));
           })(v.value0);
         }
@@ -11989,9 +11990,9 @@
   var style2 = /* @__PURE__ */ function() {
     var toString4 = function() {
       var $13 = joinWith("; ");
-      var $14 = foldMap3(monoidArray)(function(key7) {
+      var $14 = foldMap3(monoidArray)(function(key8) {
         return function(val) {
-          return [key7 + (": " + val)];
+          return [key8 + (": " + val)];
         };
       });
       return function($15) {
@@ -12025,17 +12026,17 @@
   };
 
   // output/Foreign.Index/foreign.js
-  function unsafeReadPropImpl(f, s, key7, value19) {
-    return value19 == null ? f : s(value19[key7]);
+  function unsafeReadPropImpl(f, s, key8, value21) {
+    return value21 == null ? f : s(value21[key8]);
   }
 
   // output/Foreign.Index/index.js
   var unsafeReadProp = function(dictMonad) {
     var fail3 = fail(dictMonad);
-    var pure19 = pure(applicativeExceptT(dictMonad));
+    var pure20 = pure(applicativeExceptT(dictMonad));
     return function(k) {
-      return function(value19) {
-        return unsafeReadPropImpl(fail3(new TypeMismatch("object", typeOf(value19))), pure19, k, value19);
+      return function(value21) {
+        return unsafeReadPropImpl(fail3(new TypeMismatch("object", typeOf(value21))), pure20, k, value21);
       };
     };
   };
@@ -12087,14 +12088,14 @@
       return $15(mouseHandler($16));
     };
   }();
-  var addForeignPropHandler = function(key7) {
+  var addForeignPropHandler = function(key8) {
     return function(prop3) {
       return function(reader) {
         return function(f) {
           var go2 = function(a2) {
             return composeKleisliFlipped2(reader)(readProp2(prop3))(unsafeToForeign(a2));
           };
-          return handler$prime(key7)(composeKleisli3(currentTarget)(function(e) {
+          return handler$prime(key8)(composeKleisli3(currentTarget)(function(e) {
             return either($$const(Nothing.value))(function($85) {
               return Just.create(f($85));
             })(runExcept(go2(e)));
@@ -12185,6 +12186,272 @@
     return dict.spaceEvenly;
   };
 
+  // output/Component.Message/index.js
+  var discard3 = /* @__PURE__ */ discard(discardUnit)(bindStyleM);
+  var component2 = function(dictMonadAff) {
+    var render2 = function(v) {
+      return div2([style2(discard3(themeFont)(function() {
+        return backgroundColor(paperColor);
+      }))])([text5(v.message)]);
+    };
+    return mkComponent({
+      initialState: function(v) {
+        return {
+          message: v
+        };
+      },
+      render: render2,
+      "eval": mkEval(defaultEval)
+    });
+  };
+
+  // output/CSS.Overflow/index.js
+  var fromString17 = /* @__PURE__ */ fromString4(isStringValue);
+  var fromString18 = /* @__PURE__ */ fromString4(isStringKey);
+  var valOverflow = {
+    value: function(v) {
+      return v;
+    }
+  };
+  var key6 = /* @__PURE__ */ key(valOverflow);
+  var overflowAuto = /* @__PURE__ */ fromString17("auto");
+  var overflow = /* @__PURE__ */ key6(/* @__PURE__ */ fromString18("overflow"));
+
+  // output/Halogen.HTML/index.js
+  var componentSlot2 = /* @__PURE__ */ componentSlot();
+  var slot_ = function() {
+    return function(dictIsSymbol) {
+      var componentSlot1 = componentSlot2(dictIsSymbol);
+      return function(dictOrd) {
+        var componentSlot22 = componentSlot1(dictOrd);
+        return function(label5) {
+          return function(p2) {
+            return function(component9) {
+              return function(input3) {
+                return widget(new ComponentSlot(componentSlot22(label5)(p2)(component9)(input3)($$const(Nothing.value))));
+              };
+            };
+          };
+        };
+      };
+    };
+  };
+  var slot = function() {
+    return function(dictIsSymbol) {
+      var componentSlot1 = componentSlot2(dictIsSymbol);
+      return function(dictOrd) {
+        var componentSlot22 = componentSlot1(dictOrd);
+        return function(label5) {
+          return function(p2) {
+            return function(component9) {
+              return function(input3) {
+                return function(outputQuery) {
+                  return widget(new ComponentSlot(componentSlot22(label5)(p2)(component9)(input3)(function($11) {
+                    return Just.create(outputQuery($11));
+                  })));
+                };
+              };
+            };
+          };
+        };
+      };
+    };
+  };
+
+  // output/Component.Modal/index.js
+  var discard4 = /* @__PURE__ */ discard(discardUnit)(bindStyleM);
+  var value15 = /* @__PURE__ */ value12(valString);
+  var center3 = /* @__PURE__ */ center(centerAlignItemsValue);
+  var center12 = /* @__PURE__ */ center(centerJustifyContentValue);
+  var value16 = /* @__PURE__ */ value12(valNumber);
+  var spaceAround2 = /* @__PURE__ */ spaceAround(spaceAroundJustifyContentValue);
+  var innerIsSymbol = {
+    reflectSymbol: function() {
+      return "inner";
+    }
+  };
+  var slot2 = /* @__PURE__ */ slot()(innerIsSymbol)(ordUnit);
+  var flexEnd2 = /* @__PURE__ */ flexEnd(flexEndJustifyContentValue);
+  var query2 = /* @__PURE__ */ query()(innerIsSymbol)(ordUnit);
+  var modify_3 = /* @__PURE__ */ modify_2(monadStateHalogenM);
+  var Affirmative = /* @__PURE__ */ function() {
+    function Affirmative2() {
+    }
+    ;
+    Affirmative2.value = new Affirmative2();
+    return Affirmative2;
+  }();
+  var Negative = /* @__PURE__ */ function() {
+    function Negative2() {
+    }
+    ;
+    Negative2.value = new Negative2();
+    return Negative2;
+  }();
+  var InnerOutput = /* @__PURE__ */ function() {
+    function InnerOutput2(value0) {
+      this.value0 = value0;
+    }
+    ;
+    InnerOutput2.create = function(value0) {
+      return new InnerOutput2(value0);
+    };
+    return InnerOutput2;
+  }();
+  var Input = /* @__PURE__ */ function() {
+    function Input4(value0) {
+      this.value0 = value0;
+    }
+    ;
+    Input4.create = function(value0) {
+      return new Input4(value0);
+    };
+    return Input4;
+  }();
+  var Output = /* @__PURE__ */ function() {
+    function Output3(value0) {
+      this.value0 = value0;
+    }
+    ;
+    Output3.create = function(value0) {
+      return new Output3(value0);
+    };
+    return Output3;
+  }();
+  var AffirmativeClicked = /* @__PURE__ */ function() {
+    function AffirmativeClicked2() {
+    }
+    ;
+    AffirmativeClicked2.value = new AffirmativeClicked2();
+    return AffirmativeClicked2;
+  }();
+  var NegativeClicked = /* @__PURE__ */ function() {
+    function NegativeClicked2() {
+    }
+    ;
+    NegativeClicked2.value = new NegativeClicked2();
+    return NegativeClicked2;
+  }();
+  var _inner = /* @__PURE__ */ function() {
+    return $$Proxy.value;
+  }();
+  var component3 = function(dictMonadAff) {
+    return function(innerComponent) {
+      var render2 = function(v) {
+        var buttonStyle = style2(discard4(themeFont)(function() {
+          return discard4(fontWeight(value15("500")))(function() {
+            return discard4(color(white))(function() {
+              return discard4(padding(rem2(0.5))(rem2(0.5))(rem2(0.5))(rem2(0.5)))(function() {
+                return discard4(backgroundColor(themeColor))(function() {
+                  return discard4(width8(rem2(8)))(function() {
+                    return discard4(marginLeft(rem2(2)))(function() {
+                      return fontSize(rem2(0.9));
+                    });
+                  });
+                });
+              });
+            });
+          });
+        }));
+        return div2([style2(discard4(display(flex))(function() {
+          return discard4(alignItems(center3))(function() {
+            return discard4(justifyContent(center12))(function() {
+              return discard4(position2(fixed))(function() {
+                return discard4(top3(new BasicSize(value16(0))))(function() {
+                  return discard4(left(new BasicSize(value16(0))))(function() {
+                    return discard4(width8(pct(100)))(function() {
+                      return discard4(height8(pct(100)))(function() {
+                        return discard4(overflow(overflowAuto))(function() {
+                          return discard4(backgroundColor(rgba(0)(0)(0)(0.4)))(function() {
+                            return zIndex(1);
+                          });
+                        });
+                      });
+                    });
+                  });
+                });
+              });
+            });
+          });
+        }))])([div2([style2(discard4(display(flex))(function() {
+          return discard4(flexDirection(column))(function() {
+            return discard4(justifyContent(spaceAround2))(function() {
+              return discard4(padding(rem2(1))(rem2(1))(rem2(1))(rem2(1)))(function() {
+                return discard4(backgroundColor(paperColor))(function() {
+                  return discard4(minWidth(rem2(40)))(function() {
+                    return minHeight(rem2(10));
+                  });
+                });
+              });
+            });
+          });
+        }))])([div2([style2(discard4(display(flex))(function() {
+          return discard4(flexDirection(column))(function() {
+            return padding(rem2(1))(rem2(1))(rem2(1))(rem2(1));
+          });
+        }))])([slot2(_inner)(unit)(innerComponent)(v.iInput)(Output.create)]), div2([style2(discard4(display(flex))(function() {
+          return discard4(flexDirection(row))(function() {
+            return discard4(alignItems(center3))(function() {
+              return discard4(justifyContent(flexEnd2))(function() {
+                return discard4(width8(pct(100)))(function() {
+                  return backgroundColor(paperColor);
+                });
+              });
+            });
+          });
+        }))])([button([buttonStyle, onClick($$const(AffirmativeClicked.value))])([text5("OK")]), button([buttonStyle, onClick($$const(NegativeClicked.value))])([text5("CANCEL")])])])]);
+      };
+      var handleQuery = query2(_inner)(unit);
+      var handleAction = function(v) {
+        if (v instanceof Input) {
+          return modify_3(function(v1) {
+            var $26 = {};
+            for (var $27 in v1) {
+              if ({}.hasOwnProperty.call(v1, $27)) {
+                $26[$27] = v1[$27];
+              }
+              ;
+            }
+            ;
+            $26.iInput = v.value0;
+            return $26;
+          });
+        }
+        ;
+        if (v instanceof Output) {
+          return raise(new InnerOutput(v.value0));
+        }
+        ;
+        if (v instanceof AffirmativeClicked) {
+          return raise(Affirmative.value);
+        }
+        ;
+        if (v instanceof NegativeClicked) {
+          return raise(Negative.value);
+        }
+        ;
+        throw new Error("Failed pattern match at Component.Modal (line 67, column 18 - line 71, column 40): " + [v.constructor.name]);
+      };
+      return mkComponent({
+        initialState: function(v) {
+          return {
+            iInput: v
+          };
+        },
+        render: render2,
+        "eval": mkEval({
+          handleAction,
+          handleQuery,
+          receive: function($31) {
+            return Just.create(Input.create($31));
+          },
+          initialize: defaultEval.initialize,
+          finalize: defaultEval.finalize
+        })
+      });
+    };
+  };
+
   // output/Data.Argonaut.Core/foreign.js
   function id2(x) {
     return x;
@@ -12273,40 +12540,40 @@
     return UnexpectedValue2;
   }();
   var AtIndex = /* @__PURE__ */ function() {
-    function AtIndex2(value0, value19) {
+    function AtIndex2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     AtIndex2.create = function(value0) {
-      return function(value19) {
-        return new AtIndex2(value0, value19);
+      return function(value110) {
+        return new AtIndex2(value0, value110);
       };
     };
     return AtIndex2;
   }();
   var AtKey = /* @__PURE__ */ function() {
-    function AtKey2(value0, value19) {
+    function AtKey2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     AtKey2.create = function(value0) {
-      return function(value19) {
-        return new AtKey2(value0, value19);
+      return function(value110) {
+        return new AtKey2(value0, value110);
       };
     };
     return AtKey2;
   }();
   var Named = /* @__PURE__ */ function() {
-    function Named2(value0, value19) {
+    function Named2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Named2.create = function(value0) {
-      return function(value19) {
-        return new Named2(value0, value19);
+      return function(value110) {
+        return new Named2(value0, value110);
       };
     };
     return Named2;
@@ -12401,7 +12668,7 @@
   // output/Data.Argonaut.Decode.Class/index.js
   var bind7 = /* @__PURE__ */ bind(bindEither);
   var lmap4 = /* @__PURE__ */ lmap(bifunctorEither);
-  var map29 = /* @__PURE__ */ map(functorMaybe);
+  var map30 = /* @__PURE__ */ map(functorMaybe);
   var gDecodeJsonNil = {
     gDecodeJson: function(v) {
       return function(v1) {
@@ -12483,7 +12750,7 @@
     var decodeJson1 = decodeJson(dictDecodeJson);
     return {
       decodeJsonField: function(j) {
-        return map29(decodeJson1)(j);
+        return map30(decodeJson1)(j);
       }
     };
   };
@@ -12868,19 +13135,19 @@
     return ContentType2;
   }();
   var RequestHeader = /* @__PURE__ */ function() {
-    function RequestHeader2(value0, value19) {
+    function RequestHeader2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     RequestHeader2.create = function(value0) {
-      return function(value19) {
-        return new RequestHeader2(value0, value19);
+      return function(value110) {
+        return new RequestHeader2(value0, value110);
       };
     };
     return RequestHeader2;
   }();
-  var value15 = function(v) {
+  var value17 = function(v) {
     if (v instanceof Accept) {
       return unwrap6(v.value0);
     }
@@ -13016,14 +13283,14 @@
 
   // output/Affjax.ResponseHeader/index.js
   var ResponseHeader = /* @__PURE__ */ function() {
-    function ResponseHeader2(value0, value19) {
+    function ResponseHeader2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     ResponseHeader2.create = function(value0) {
-      return function(value19) {
-        return new ResponseHeader2(value0, value19);
+      return function(value110) {
+        return new ResponseHeader2(value0, value110);
       };
     };
     return ResponseHeader2;
@@ -13045,7 +13312,7 @@
 
   // output/Data.FormURLEncoded/index.js
   var apply5 = /* @__PURE__ */ apply(applyMaybe);
-  var map30 = /* @__PURE__ */ map(functorMaybe);
+  var map31 = /* @__PURE__ */ map(functorMaybe);
   var traverse3 = /* @__PURE__ */ traverse(traversableArray)(applicativeMaybe);
   var toArray3 = function(v) {
     return v;
@@ -13057,16 +13324,16 @@
       }
       ;
       if (v.value1 instanceof Just) {
-        return apply5(map30(function(key7) {
+        return apply5(map31(function(key8) {
           return function(val) {
-            return key7 + ("=" + val);
+            return key8 + ("=" + val);
           };
         })(encodeFormURLComponent(v.value0)))(encodeFormURLComponent(v.value1.value0));
       }
       ;
       throw new Error("Failed pattern match at Data.FormURLEncoded (line 37, column 16 - line 39, column 114): " + [v.constructor.name]);
     };
-    var $37 = map30(joinWith("&"));
+    var $37 = map31(joinWith("&"));
     var $38 = traverse3(encodePart);
     return function($39) {
       return $37($38(toArray3($39)));
@@ -13291,7 +13558,7 @@
   var unsafeReadTagged2 = /* @__PURE__ */ unsafeReadTagged(monadIdentity);
   var alt7 = /* @__PURE__ */ alt(/* @__PURE__ */ altExceptT(semigroupNonEmptyList)(monadIdentity));
   var composeKleisliFlipped4 = /* @__PURE__ */ composeKleisliFlipped(/* @__PURE__ */ bindExceptT(monadIdentity));
-  var map31 = /* @__PURE__ */ map(functorMaybe);
+  var map33 = /* @__PURE__ */ map(functorMaybe);
   var any3 = /* @__PURE__ */ any(foldableArray)(heytingAlgebraBoolean);
   var eq4 = /* @__PURE__ */ eq(eqString);
   var bindFlipped6 = /* @__PURE__ */ bindFlipped(bindMaybe);
@@ -13310,14 +13577,14 @@
     return RequestContentError2;
   }();
   var ResponseBodyError = /* @__PURE__ */ function() {
-    function ResponseBodyError2(value0, value19) {
+    function ResponseBodyError2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     ResponseBodyError2.create = function(value0) {
-      return function(value19) {
-        return new ResponseBodyError2(value0, value19);
+      return function(value110) {
+        return new ResponseBodyError2(value0, value110);
       };
     };
     return ResponseBodyError2;
@@ -13410,7 +13677,7 @@
         }
         ;
         if (v2 instanceof FormURLEncoded) {
-          return note("Body contains values that cannot be encoded as application/x-www-form-urlencoded")(map31(unsafeToForeign)(encode(v2.value0)));
+          return note("Body contains values that cannot be encoded as application/x-www-form-urlencoded")(map33(unsafeToForeign)(encode(v2.value0)));
         }
         ;
         if (v2 instanceof Json) {
@@ -13429,7 +13696,7 @@
         };
       };
       var headers = function(reqContent) {
-        return addHeader(map31(ContentType.create)(bindFlipped6(toMediaType)(reqContent)))(addHeader(map31(Accept.create)(toMediaType2(req.responseFormat)))(req.headers));
+        return addHeader(map33(ContentType.create)(bindFlipped6(toMediaType)(reqContent)))(addHeader(map33(Accept.create)(toMediaType2(req.responseFormat)))(req.headers));
       };
       var ajaxRequest = function(v2) {
         return {
@@ -13438,7 +13705,7 @@
           headers: map113(function(h) {
             return {
               field: name15(h),
-              value: value15(h)
+              value: value17(h)
             };
           })(headers(req.content)),
           content: v2,
@@ -13446,7 +13713,7 @@
           username: toNullable(req.username),
           password: toNullable(req.password),
           withCredentials: req.withCredentials,
-          timeout: fromMaybe(0)(map31(function(v1) {
+          timeout: fromMaybe(0)(map33(function(v1) {
             return v1;
           })(req.timeout))
         };
@@ -13585,16 +13852,16 @@
   var lmap5 = /* @__PURE__ */ lmap(bifunctorEither);
   var apiCall = function(dictMonadAff) {
     var Monad0 = dictMonadAff.MonadEffect0().Monad0();
-    var bind112 = bind(Monad0.Bind1());
+    var bind111 = bind(Monad0.Bind1());
     var liftAff2 = liftAff(dictMonadAff);
-    var pure19 = pure(Monad0.Applicative0());
+    var pure20 = pure(Monad0.Applicative0());
     return function(dictEncodeJson) {
       var encodeJson4 = encodeJson(dictEncodeJson);
       return function(dictDecodeJson) {
         var decodeJson2 = decodeJson(dictDecodeJson);
         return function(request3) {
-          return bind112(liftAff2(post2(json2)("http://localhost:3000/")(new Just(json(encodeJson4(request3))))))(function(ajaxResult) {
-            return pure19(bind9(lmap5(printError)(ajaxResult))(function(v) {
+          return bind111(liftAff2(post2(json2)("http://localhost:3000/")(new Just(json(encodeJson4(request3))))))(function(ajaxResult) {
+            return pure20(bind9(lmap5(printError)(ajaxResult))(function(v) {
               return lmap5(printJsonDecodeError)(decodeJson2(v.body));
             }));
           });
@@ -13604,20 +13871,25 @@
   };
 
   // output/Component.Logon/index.js
-  var discard3 = /* @__PURE__ */ discard(discardUnit);
-  var discard1 = /* @__PURE__ */ discard3(bindStyleM);
-  var center3 = /* @__PURE__ */ center(centerAlignItemsValue);
-  var center12 = /* @__PURE__ */ center(centerJustifyContentValue);
+  var discard5 = /* @__PURE__ */ discard(discardUnit);
+  var discard1 = /* @__PURE__ */ discard5(bindStyleM);
+  var center4 = /* @__PURE__ */ center(centerAlignItemsValue);
+  var center13 = /* @__PURE__ */ center(centerJustifyContentValue);
   var spaceEvenly2 = /* @__PURE__ */ spaceEvenly(spaceEvenlyJustifyContentValue);
   var type_19 = /* @__PURE__ */ type_17(isPropInputType);
-  var value16 = /* @__PURE__ */ value12(valString);
-  var bind10 = /* @__PURE__ */ bind(bindEffect);
-  var modify_3 = /* @__PURE__ */ modify_2(monadStateHalogenM);
-  var bind12 = /* @__PURE__ */ bind(bindHalogenM);
+  var value18 = /* @__PURE__ */ value12(valString);
+  var slot3 = /* @__PURE__ */ slot()({
+    reflectSymbol: function() {
+      return "modal";
+    }
+  })(ordUnit);
+  var modify_4 = /* @__PURE__ */ modify_2(monadStateHalogenM);
+  var bind10 = /* @__PURE__ */ bind(bindHalogenM);
   var get4 = /* @__PURE__ */ get(monadStateHalogenM);
-  var discard22 = /* @__PURE__ */ discard3(bindHalogenM);
+  var discard22 = /* @__PURE__ */ discard5(bindHalogenM);
   var bindFlipped7 = /* @__PURE__ */ bindFlipped(bindHalogenM);
   var composeKleisliFlipped5 = /* @__PURE__ */ composeKleisliFlipped(bindHalogenM);
+  var pure10 = /* @__PURE__ */ pure(applicativeHalogenM);
   var Logon2 = /* @__PURE__ */ function() {
     function Logon3() {
     }
@@ -13625,19 +13897,34 @@
     Logon3.value = new Logon3();
     return Logon3;
   }();
-  var Input = /* @__PURE__ */ function() {
-    function Input3(value0) {
+  var Input2 = /* @__PURE__ */ function() {
+    function Input4(value0) {
       this.value0 = value0;
     }
     ;
-    Input3.create = function(value0) {
-      return new Input3(value0);
+    Input4.create = function(value0) {
+      return new Input4(value0);
     };
-    return Input3;
+    return Input4;
   }();
-  var component2 = function(dictMonadAff) {
-    var liftEffect9 = liftEffect(monadEffectHalogenM(dictMonadAff.MonadEffect0()));
+  var Modal = /* @__PURE__ */ function() {
+    function Modal3(value0) {
+      this.value0 = value0;
+    }
+    ;
+    Modal3.create = function(value0) {
+      return new Modal3(value0);
+    };
+    return Modal3;
+  }();
+  var _modal = /* @__PURE__ */ function() {
+    return $$Proxy.value;
+  }();
+  var component4 = function(dictMonadAff) {
+    var component1 = component3(dictMonadAff);
+    var component22 = component2(dictMonadAff);
     var apiCall2 = apiCall(monadAffHalogenM(dictMonadAff))(encodeJsonLogonRequest)(decodeJsonLogonResponse);
+    var liftEffect9 = liftEffect(monadEffectHalogenM(dictMonadAff.MonadEffect0()));
     return function(dictMonadAsk) {
       var ask2 = ask(monadAskHalogenM(dictMonadAsk));
       return function(dictNavigate) {
@@ -13673,8 +13960,8 @@
               }))])([div2([style2(discard1(paddingRight(vw(1)))(function() {
                 return discard1(display(flex))(function() {
                   return discard1(flexDirection(column))(function() {
-                    return discard1(alignItems(center3))(function() {
-                      return discard1(justifyContent(center12))(function() {
+                    return discard1(alignItems(center4))(function() {
+                      return discard1(justifyContent(center13))(function() {
                         return flexGrow(10);
                       });
                     });
@@ -13683,28 +13970,29 @@
               }))])([img([style2(width8(pct(40))), src9(bookCover)])]), div2([style2(discard1(display(flex))(function() {
                 return discard1(flexDirection(column))(function() {
                   return discard1(justifyContent(spaceEvenly2))(function() {
-                    return discard1(alignItems(center3))(function() {
+                    return discard1(alignItems(center4))(function() {
                       return flexGrow(3);
                     });
                   });
                 });
               }))])([div2([style2(discard1(display(flex))(function() {
                 return discard1(flexDirection(row))(function() {
-                  return discard1(alignItems(center3))(function() {
-                    return discard1(justifyContent(center12))(function() {
+                  return discard1(alignItems(center4))(function() {
+                    return discard1(justifyContent(center13))(function() {
                       return themeFont;
                     });
                   });
                 });
-              }))])([label4([style2(width8(rem2(6)))])([text5("Username: ")]), input([onValueInput(function($68) {
-                return Input.create(function(s) {
+              }))])([label4([style2(width8(rem2(6)))])([text5("Username: ")]), input([onValueInput(function($93) {
+                return Input2.create(function(s) {
                   return function(v1) {
                     return {
                       userName: s,
-                      password: v1.password
+                      password: v1.password,
+                      errorMessage: v1.errorMessage
                     };
                   };
-                }($68));
+                }($93));
               }), style2(discard1(backgroundColor(paperColor))(function() {
                 return discard1(width8(vw(8.3)))(function() {
                   return discard1(paddingLeft(rem2(0.5)))(function() {
@@ -13715,21 +14003,22 @@
                 });
               }))])]), div2([style2(discard1(display(flex))(function() {
                 return discard1(flexDirection(row))(function() {
-                  return discard1(alignItems(center3))(function() {
-                    return discard1(justifyContent(center12))(function() {
+                  return discard1(alignItems(center4))(function() {
+                    return discard1(justifyContent(center13))(function() {
                       return themeFont;
                     });
                   });
                 });
-              }))])([label4([style2(width8(rem2(6)))])([text5("Password: ")]), input([type_19(InputPassword.value), onValueInput(function($69) {
-                return Input.create(function(s) {
+              }))])([label4([style2(width8(rem2(6)))])([text5("Password: ")]), input([type_19(InputPassword.value), onValueInput(function($94) {
+                return Input2.create(function(s) {
                   return function(v1) {
                     return {
                       userName: v1.userName,
-                      password: s
+                      password: s,
+                      errorMessage: v1.errorMessage
                     };
                   };
-                }($69));
+                }($94));
               }), style2(discard1(backgroundColor(paperColor))(function() {
                 return discard1(width8(vw(8.3)))(function() {
                   return discard1(paddingLeft(rem2(0.5)))(function() {
@@ -13740,15 +14029,15 @@
                 });
               }))])])]), div2([style2(discard1(display(flex))(function() {
                 return discard1(flexDirection(row))(function() {
-                  return discard1(alignItems(center3))(function() {
-                    return discard1(justifyContent(center12))(function() {
+                  return discard1(alignItems(center4))(function() {
+                    return discard1(justifyContent(center13))(function() {
                       return paddingTop(vw(0.65));
                     });
                   });
                 });
               }))])([button([style2(discard1(backgroundColor(themeColor))(function() {
                 return discard1(themeFont)(function() {
-                  return discard1(fontWeight(value16("500")))(function() {
+                  return discard1(fontWeight(value18("500")))(function() {
                     return discard1(fontSize(vw(1)))(function() {
                       return discard1(width8(rem2(20)))(function() {
                         return discard1(height8(vw(3)))(function() {
@@ -13760,8 +14049,8 @@
                             return white;
                           }()))(function() {
                             return cursor(function() {
-                              var $49 = !logonDisabled;
-                              if ($49) {
+                              var $58 = !logonDisabled;
+                              if ($58) {
                                 return pointer;
                               }
                               ;
@@ -13773,65 +14062,121 @@
                     });
                   });
                 });
-              })), onClick($$const(Logon2.value)), disabled10(logonDisabled)])([text5("LOGON")])])]);
+              })), onClick($$const(Logon2.value)), disabled10(logonDisabled)])([text5("LOGON")])]), maybe(text5(""))(function(message2) {
+                return slot3(_modal)(unit)(component1(component22))(message2)(Modal.create);
+              })(v.errorMessage)]);
             };
-            var handleAction = function() {
-              var alertError = function(msg) {
-                return liftEffect9(bind10(windowImpl)(alert(msg)));
-              };
-              return function(v) {
-                if (v instanceof Input) {
-                  return modify_3(v.value0);
-                }
-                ;
-                if (v instanceof Logon2) {
-                  return bind12(get4)(function(v1) {
-                    return bind12(apiCall2({
-                      userName: v1.userName,
-                      password: v1.password
-                    }))(function(logonResponse) {
-                      if (logonResponse instanceof Left) {
-                        return alertError(logonResponse.value0);
-                      }
-                      ;
-                      if (logonResponse instanceof Right && logonResponse.value0 instanceof LogonResultsFailure) {
-                        return alertError("Invalid logon crediantials");
-                      }
-                      ;
-                      if (logonResponse instanceof Right && logonResponse.value0 instanceof LogonResultsSuccess) {
-                        return discard22(bindFlipped7(log5)(logEntry2(Info.value)("User logged on")))(function() {
-                          return bind12(ask2)(function(v2) {
-                            return discard22(liftEffect9(write(new Just({
-                              admin: logonResponse.value0.value0.admin,
-                              authToken: logonResponse.value0.value0.authToken
-                            }))(v2.userRef)))(function() {
-                              return composeKleisliFlipped5(navigate2)(logonRoute2)(function() {
-                                if (logonResponse.value0.value0.mustChangePassword) {
-                                  return PasswordTemporary.value;
-                                }
-                                ;
-                                return PasswordPermanent.value;
-                              }());
-                            });
+            var handleAction = function(v) {
+              if (v instanceof Input2) {
+                return modify_4(v.value0);
+              }
+              ;
+              if (v instanceof Logon2) {
+                return bind10(get4)(function(v1) {
+                  return bind10(apiCall2({
+                    userName: v1.userName,
+                    password: v1.password
+                  }))(function(logonResponse) {
+                    if (logonResponse instanceof Left) {
+                      return modify_4(function(v2) {
+                        var $66 = {};
+                        for (var $67 in v2) {
+                          if ({}.hasOwnProperty.call(v2, $67)) {
+                            $66[$67] = v2[$67];
+                          }
+                          ;
+                        }
+                        ;
+                        $66.errorMessage = new Just(logonResponse.value0);
+                        return $66;
+                      });
+                    }
+                    ;
+                    if (logonResponse instanceof Right && logonResponse.value0 instanceof LogonResultsFailure) {
+                      return modify_4(function(v2) {
+                        var $70 = {};
+                        for (var $71 in v2) {
+                          if ({}.hasOwnProperty.call(v2, $71)) {
+                            $70[$71] = v2[$71];
+                          }
+                          ;
+                        }
+                        ;
+                        $70.errorMessage = new Just("Invalid logon crediantials");
+                        return $70;
+                      });
+                    }
+                    ;
+                    if (logonResponse instanceof Right && logonResponse.value0 instanceof LogonResultsSuccess) {
+                      return discard22(bindFlipped7(log5)(logEntry2(Info.value)("User logged on")))(function() {
+                        return bind10(ask2)(function(v2) {
+                          return discard22(liftEffect9(write(new Just({
+                            admin: logonResponse.value0.value0.admin,
+                            authToken: logonResponse.value0.value0.authToken
+                          }))(v2.userRef)))(function() {
+                            return composeKleisliFlipped5(navigate2)(logonRoute2)(function() {
+                              if (logonResponse.value0.value0.mustChangePassword) {
+                                return PasswordTemporary.value;
+                              }
+                              ;
+                              return PasswordPermanent.value;
+                            }());
                           });
                         });
+                      });
+                    }
+                    ;
+                    throw new Error("Failed pattern match at Component.Logon (line 85, column 7 - line 92, column 104): " + [logonResponse.constructor.name]);
+                  });
+                });
+              }
+              ;
+              if (v instanceof Modal) {
+                if (v.value0 instanceof Affirmative) {
+                  return modify_4(function(v1) {
+                    var $85 = {};
+                    for (var $86 in v1) {
+                      if ({}.hasOwnProperty.call(v1, $86)) {
+                        $85[$86] = v1[$86];
                       }
                       ;
-                      throw new Error("Failed pattern match at Component.Logon (line 81, column 7 - line 88, column 104): " + [logonResponse.constructor.name]);
-                    });
+                    }
+                    ;
+                    $85.errorMessage = Nothing.value;
+                    return $85;
                   });
                 }
                 ;
-                throw new Error("Failed pattern match at Component.Logon (line 76, column 18 - line 88, column 104): " + [v.constructor.name]);
-              };
-            }();
+                if (v.value0 instanceof Negative) {
+                  return modify_4(function(v1) {
+                    var $88 = {};
+                    for (var $89 in v1) {
+                      if ({}.hasOwnProperty.call(v1, $89)) {
+                        $88[$89] = v1[$89];
+                      }
+                      ;
+                    }
+                    ;
+                    $88.errorMessage = Nothing.value;
+                    return $88;
+                  });
+                }
+                ;
+                if (v.value0 instanceof InnerOutput) {
+                  return pure10(unit);
+                }
+                ;
+                throw new Error("Failed pattern match at Component.Logon (line 93, column 21 - line 96, column 39): " + [v.value0.constructor.name]);
+              }
+              ;
+              throw new Error("Failed pattern match at Component.Logon (line 80, column 18 - line 96, column 39): " + [v.constructor.name]);
+            };
             return mkComponent({
-              initialState: function(v) {
-                return {
-                  userName: "",
-                  password: ""
-                };
-              },
+              initialState: $$const({
+                userName: "",
+                password: "",
+                errorMessage: Nothing.value
+              }),
               render: render2,
               "eval": mkEval({
                 handleAction,
@@ -13848,27 +14193,27 @@
   };
 
   // output/CSS.Text/index.js
-  var fromString17 = /* @__PURE__ */ fromString4(isStringKey);
-  var letterSpacing = /* @__PURE__ */ key(valSize)(/* @__PURE__ */ fromString17("letter-spacing"));
+  var fromString19 = /* @__PURE__ */ fromString4(isStringKey);
+  var letterSpacing = /* @__PURE__ */ key(valSize)(/* @__PURE__ */ fromString19("letter-spacing"));
 
   // output/CSS.Text.Shadow/index.js
   var valTuple5 = /* @__PURE__ */ valTuple(valSize);
-  var value17 = /* @__PURE__ */ value12(/* @__PURE__ */ valTuple(/* @__PURE__ */ valTuple5(valSize))(/* @__PURE__ */ valTuple5(valColor)));
-  var fromString18 = /* @__PURE__ */ fromString4(isStringValue);
-  var fromString19 = /* @__PURE__ */ fromString4(isStringKey);
+  var value19 = /* @__PURE__ */ value12(/* @__PURE__ */ valTuple(/* @__PURE__ */ valTuple5(valSize))(/* @__PURE__ */ valTuple5(valColor)));
+  var fromString20 = /* @__PURE__ */ fromString4(isStringValue);
+  var fromString110 = /* @__PURE__ */ fromString4(isStringKey);
   var TextShadow = /* @__PURE__ */ function() {
-    function TextShadow2(value0, value19, value24, value33) {
+    function TextShadow2(value0, value110, value24, value33) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
       this.value2 = value24;
       this.value3 = value33;
     }
     ;
     TextShadow2.create = function(value0) {
-      return function(value19) {
+      return function(value110) {
         return function(value24) {
           return function(value33) {
-            return new TextShadow2(value0, value19, value24, value33);
+            return new TextShadow2(value0, value110, value24, value33);
           };
         };
       };
@@ -13899,111 +14244,70 @@
   var valTextShadow = {
     value: function(v) {
       if (v instanceof TextShadow) {
-        return value17(new Tuple(new Tuple(v.value0, v.value1), new Tuple(v.value2, v.value3)));
+        return value19(new Tuple(new Tuple(v.value0, v.value1), new Tuple(v.value2, v.value3)));
       }
       ;
       if (v instanceof None2) {
-        return fromString18("none");
+        return fromString20("none");
       }
       ;
       if (v instanceof Initial) {
-        return fromString18("initial");
+        return fromString20("initial");
       }
       ;
       if (v instanceof Inherit) {
-        return fromString18("inherit");
+        return fromString20("inherit");
       }
       ;
       throw new Error("Failed pattern match at CSS.Text.Shadow (line 17, column 1 - line 21, column 41): " + [v.constructor.name]);
     }
   };
-  var key6 = /* @__PURE__ */ key(valTextShadow);
+  var key7 = /* @__PURE__ */ key(valTextShadow);
   var textShadow = function(h) {
     return function(v) {
       return function(b2) {
         return function(c) {
-          return key6(fromString19("text-shadow"))(new TextShadow(h, v, b2, c));
-        };
-      };
-    };
-  };
-
-  // output/Halogen.HTML/index.js
-  var componentSlot2 = /* @__PURE__ */ componentSlot();
-  var slot_ = function() {
-    return function(dictIsSymbol) {
-      var componentSlot1 = componentSlot2(dictIsSymbol);
-      return function(dictOrd) {
-        var componentSlot22 = componentSlot1(dictOrd);
-        return function(label5) {
-          return function(p2) {
-            return function(component7) {
-              return function(input3) {
-                return widget(new ComponentSlot(componentSlot22(label5)(p2)(component7)(input3)($$const(Nothing.value))));
-              };
-            };
-          };
-        };
-      };
-    };
-  };
-  var slot = function() {
-    return function(dictIsSymbol) {
-      var componentSlot1 = componentSlot2(dictIsSymbol);
-      return function(dictOrd) {
-        var componentSlot22 = componentSlot1(dictOrd);
-        return function(label5) {
-          return function(p2) {
-            return function(component7) {
-              return function(input3) {
-                return function(outputQuery) {
-                  return widget(new ComponentSlot(componentSlot22(label5)(p2)(component7)(input3)(function($11) {
-                    return Just.create(outputQuery($11));
-                  })));
-                };
-              };
-            };
-          };
+          return key7(fromString110("text-shadow"))(new TextShadow(h, v, b2, c));
         };
       };
     };
   };
 
   // output/Component.Page/index.js
-  var discard4 = /* @__PURE__ */ discard(discardUnit)(bindStyleM);
-  var center4 = /* @__PURE__ */ center(centerAlignItemsValue);
-  var center13 = /* @__PURE__ */ center(centerJustifyContentValue);
+  var discard6 = /* @__PURE__ */ discard(discardUnit)(bindStyleM);
+  var center5 = /* @__PURE__ */ center(centerAlignItemsValue);
+  var center14 = /* @__PURE__ */ center(centerJustifyContentValue);
   var flexStart2 = /* @__PURE__ */ flexStart(flexStartJustifyContentValue);
-  var value18 = /* @__PURE__ */ value12(valString);
-  var flexEnd2 = /* @__PURE__ */ flexEnd(flexEndJustifyContentValue);
+  var value20 = /* @__PURE__ */ value12(valString);
+  var flexEnd3 = /* @__PURE__ */ flexEnd(flexEndJustifyContentValue);
   var applySecond2 = /* @__PURE__ */ applySecond(applyStyleM);
-  var innerIsSymbol = {
+  var innerIsSymbol2 = {
     reflectSymbol: function() {
       return "inner";
     }
   };
-  var slot2 = /* @__PURE__ */ slot()(innerIsSymbol)(ordUnit);
-  var query2 = /* @__PURE__ */ query()(innerIsSymbol)(ordUnit);
-  var modify_4 = /* @__PURE__ */ modify_2(monadStateHalogenM);
-  var Input2 = /* @__PURE__ */ function() {
-    function Input3(value0) {
+  var slot4 = /* @__PURE__ */ slot()(innerIsSymbol2)(ordUnit);
+  var query3 = /* @__PURE__ */ query()(innerIsSymbol2)(ordUnit);
+  var modify_5 = /* @__PURE__ */ modify_2(monadStateHalogenM);
+  var Input3 = /* @__PURE__ */ function() {
+    function Input4(value0) {
       this.value0 = value0;
     }
     ;
-    Input3.create = function(value0) {
-      return new Input3(value0);
+    Input4.create = function(value0) {
+      return new Input4(value0);
     };
-    return Input3;
+    return Input4;
   }();
-  var Output = /* @__PURE__ */ function() {
-    function Output2(value0) {
+  var Output2 = /* @__PURE__ */ function() {
+    function Output3(value0) {
       this.value0 = value0;
     }
     ;
-    Output2.create = function(value0) {
-      return new Output2(value0);
+    Output3.create = function(value0) {
+      return new Output3(value0);
     };
-    return Output2;
+    return Output3;
   }();
   var Logoff2 = /* @__PURE__ */ function() {
     function Logoff3() {
@@ -14012,31 +14316,31 @@
     Logoff3.value = new Logoff3();
     return Logoff3;
   }();
-  var _inner = /* @__PURE__ */ function() {
+  var _inner2 = /* @__PURE__ */ function() {
     return $$Proxy.value;
   }();
-  var component3 = function(dictMonadAff) {
+  var component5 = function(dictMonadAff) {
     return function(dictNavigate) {
       var navigate2 = navigate(navigateHalogenM(dictNavigate));
       return function(style3) {
         return function(innerComponent) {
           var render2 = function(v) {
-            var defaultInnerStyle = discard4(display(flex))(function() {
-              return discard4(alignItems(center4))(function() {
-                return discard4(justifyContent(center13))(function() {
+            var defaultInnerStyle = discard6(display(flex))(function() {
+              return discard6(alignItems(center5))(function() {
+                return discard6(justifyContent(center14))(function() {
                   return minHeight(vh(90));
                 });
               });
             });
-            return div2([style2(paddingTop(rem2(5)))])([header([style2(discard4(position2(fixed))(function() {
-              return discard4(top3(px(0)))(function() {
-                return discard4(width8(pct(100)))(function() {
-                  return discard4(height8(rem2(4)))(function() {
-                    return discard4(boxShadow(new NonEmpty(bsColor(rgba(0)(0)(24)(0.75))(shadow(px(10))(px(10))), [bsColor(rgba(0)(0)(24)(0.75))(shadow(px(10))(px(20)))])))(function() {
-                      return discard4(display(flex))(function() {
-                        return discard4(alignItems(center4))(function() {
-                          return discard4(justifyContent(flexStart2))(function() {
-                            return discard4(backgroundColor(themeColor))(function() {
+            return div2([style2(paddingTop(rem2(5)))])([header([style2(discard6(position2(fixed))(function() {
+              return discard6(top3(px(0)))(function() {
+                return discard6(width8(pct(100)))(function() {
+                  return discard6(height8(rem2(4)))(function() {
+                    return discard6(boxShadow(new NonEmpty(bsColor(rgba(0)(0)(24)(0.75))(shadow(px(10))(px(10))), [bsColor(rgba(0)(0)(24)(0.75))(shadow(px(10))(px(20)))])))(function() {
+                      return discard6(display(flex))(function() {
+                        return discard6(alignItems(center5))(function() {
+                          return discard6(justifyContent(flexStart2))(function() {
+                            return discard6(backgroundColor(themeColor))(function() {
                               return zIndex(1);
                             });
                           });
@@ -14046,13 +14350,13 @@
                   });
                 });
               });
-            }))])([div2([style2(discard4(paddingLeft(rem2(1)))(function() {
-              return discard4(color(paperColor))(function() {
-                return discard4(display(flex))(function() {
-                  return discard4(flexDirection(row))(function() {
-                    return discard4(alignItems(center4))(function() {
-                      return discard4(flexBasis(px(0)))(function() {
-                        return discard4(flexGrow(1))(function() {
+            }))])([div2([style2(discard6(paddingLeft(rem2(1)))(function() {
+              return discard6(color(paperColor))(function() {
+                return discard6(display(flex))(function() {
+                  return discard6(flexDirection(row))(function() {
+                    return discard6(alignItems(center5))(function() {
+                      return discard6(flexBasis(px(0)))(function() {
+                        return discard6(flexGrow(1))(function() {
                           return flexShrink(1);
                         });
                       });
@@ -14060,36 +14364,36 @@
                   });
                 });
               });
-            }))])([img([style2(width8(px(40))), src9(bookCover)]), span4([style2(discard4(paddingLeft(rem2(1)))(function() {
-              return discard4(fontSize(rem2(1.3)))(function() {
-                return discard4(themeFont)(function() {
-                  return discard4(textShadow(px(0))(px(0))(px(5))(rgba(0)(0)(0)(1)))(function() {
-                    return discard4(fontWeight(value18("500")))(function() {
+            }))])([img([style2(width8(px(40))), src9(bookCover)]), span4([style2(discard6(paddingLeft(rem2(1)))(function() {
+              return discard6(fontSize(rem2(1.3)))(function() {
+                return discard6(themeFont)(function() {
+                  return discard6(textShadow(px(0))(px(0))(px(5))(rgba(0)(0)(0)(1)))(function() {
+                    return discard6(fontWeight(value20("500")))(function() {
                       return letterSpacing(rem2(0.05));
                     });
                   });
                 });
               });
-            }))])([text5("Functional Programming Made Easier")]), div2([style2(discard4(display(flex))(function() {
-              return discard4(flexGrow(1))(function() {
-                return discard4(justifyContent(flexEnd2))(function() {
+            }))])([text5("Functional Programming Made Easier")]), div2([style2(discard6(display(flex))(function() {
+              return discard6(flexGrow(1))(function() {
+                return discard6(justifyContent(flexEnd3))(function() {
                   return paddingRight(rem2(1));
                 });
               });
-            }))])([span4([style2(discard4(themeFont)(function() {
-              return discard4(fontWeight(value18("500")))(function() {
-                return discard4(color(white))(function() {
-                  return discard4(padding(rem2(1))(rem2(1))(rem2(1))(rem2(1)))(function() {
+            }))])([span4([style2(discard6(themeFont)(function() {
+              return discard6(fontWeight(value20("500")))(function() {
+                return discard6(color(white))(function() {
+                  return discard6(padding(rem2(1))(rem2(1))(rem2(1))(rem2(1)))(function() {
                     return cursor(pointer);
                   });
                 });
               });
-            })), onClick($$const(Logoff2.value))])([text5("Logoff")])])])]), div2([style2(applySecond2(defaultInnerStyle)(style3))])([slot2(_inner)(unit)(innerComponent)(v.iInput)(Output.create)])]);
+            })), onClick($$const(Logoff2.value))])([text5("Logoff")])])])]), div2([style2(applySecond2(defaultInnerStyle)(style3))])([slot4(_inner2)(unit)(innerComponent)(v.iInput)(Output2.create)])]);
           };
-          var handleQuery = query2(_inner)(unit);
+          var handleQuery = query3(_inner2)(unit);
           var handleAction = function(v) {
-            if (v instanceof Input2) {
-              return modify_4(function(v1) {
+            if (v instanceof Input3) {
+              return modify_5(function(v1) {
                 var $29 = {};
                 for (var $30 in v1) {
                   if ({}.hasOwnProperty.call(v1, $30)) {
@@ -14103,7 +14407,7 @@
               });
             }
             ;
-            if (v instanceof Output) {
+            if (v instanceof Output2) {
               return raise(v.value0);
             }
             ;
@@ -14124,7 +14428,7 @@
               handleAction,
               handleQuery,
               receive: function($34) {
-                return Just.create(Input2.create($34));
+                return Just.create(Input3.create($34));
               },
               initialize: defaultEval.initialize,
               finalize: defaultEval.finalize
@@ -14219,7 +14523,7 @@
       return "users";
     }
   };
-  var bind13 = /* @__PURE__ */ bind(bindEither);
+  var bind12 = /* @__PURE__ */ bind(bindEither);
   var getField5 = /* @__PURE__ */ getField2(decodeJsonString);
   var gDecodeJsonCons4 = /* @__PURE__ */ gDecodeJsonCons(/* @__PURE__ */ decodeFieldId(decodeJsonString))(gDecodeJsonNil);
   var getField22 = /* @__PURE__ */ getField2(/* @__PURE__ */ decodeRecord(/* @__PURE__ */ gDecodeJsonCons4(reasonIsSymbol)()())());
@@ -14305,11 +14609,11 @@
   };
   var decodeJsonQueryUsersFailu = {
     decodeJson: function(json3) {
-      return bind13(decodeJObject(json3))(function(obj) {
-        return bind13(getField5(obj)("tag"))(function(tag) {
+      return bind12(decodeJObject(json3))(function(obj) {
+        return bind12(getField5(obj)("tag"))(function(tag) {
           var $149 = tag === "QueryUsersFailureReason";
           if ($149) {
-            return bind13(getField22(obj)("contents"))(function(v) {
+            return bind12(getField22(obj)("contents"))(function(v) {
               if (v.reason === "NotAuthorized") {
                 return new Right(NotAuthorized.value);
               }
@@ -14330,10 +14634,10 @@
   var getField42 = /* @__PURE__ */ getField2(/* @__PURE__ */ decodeRecord(/* @__PURE__ */ gDecodeJsonCons(/* @__PURE__ */ decodeFieldId(decodeJsonQueryUsersFailu))(gDecodeJsonNil)(reasonIsSymbol)()())());
   var decodeJsonQueryUsersResul = {
     decodeJson: function(json3) {
-      return bind13(decodeJObject(json3))(function(obj) {
-        return bind13(getField5(obj)("tag"))(function(tag) {
+      return bind12(decodeJObject(json3))(function(obj) {
+        return bind12(getField5(obj)("tag"))(function(tag) {
           if (tag === "QueryUsersResultsFailure") {
-            return bind13(getField42(obj)("contents"))(function(v) {
+            return bind12(getField42(obj)("contents"))(function(v) {
               return new Right(new QueryUsersResultsFailure({
                 reason: v.reason
               }));
@@ -14341,7 +14645,7 @@
           }
           ;
           if (tag === "QueryUsersResultsSuccess") {
-            return bind13(getField33(obj)("contents"))(function(v) {
+            return bind12(getField33(obj)("contents"))(function(v) {
               return new Right(new QueryUsersResultsSuccess({
                 users: v.users
               }));
@@ -14356,11 +14660,11 @@
   var getField52 = /* @__PURE__ */ getField2(decodeJsonQueryUsersResul);
   var decodeJsonQueryUsersRespo = {
     decodeJson: function(json3) {
-      return bind13(decodeJObject(json3))(function(obj) {
-        return bind13(getField5(obj)("tag"))(function(tag) {
+      return bind12(decodeJObject(json3))(function(obj) {
+        return bind12(getField5(obj)("tag"))(function(tag) {
           var $158 = tag === "QueryUsersResponse";
           if ($158) {
-            return bind13(getField52(obj)("contents"))(function(userResults) {
+            return bind12(getField52(obj)("contents"))(function(userResults) {
               return new Right(userResults);
             });
           }
@@ -14372,23 +14676,27 @@
   };
 
   // output/Component.Users/index.js
-  var discard5 = /* @__PURE__ */ discard(discardUnit)(bindStyleM);
+  var discard7 = /* @__PURE__ */ discard(discardUnit)(bindStyleM);
   var mapFlipped3 = /* @__PURE__ */ mapFlipped(functorArray);
   var fromFoldable7 = /* @__PURE__ */ fromFoldable2(foldableList);
   var eq5 = /* @__PURE__ */ eq(/* @__PURE__ */ eqMaybe(eqUser));
   var flexStart3 = /* @__PURE__ */ flexStart(flexStartJustifyContentValue);
   var flexStart1 = /* @__PURE__ */ flexStart(flexStartAlignItemsValue);
-  var bind14 = /* @__PURE__ */ bind(bindEffect);
-  var bind15 = /* @__PURE__ */ bind(bindHalogenM);
-  var pure10 = /* @__PURE__ */ pure(applicativeHalogenM);
+  var slot5 = /* @__PURE__ */ slot()({
+    reflectSymbol: function() {
+      return "modal";
+    }
+  })(ordUnit);
+  var bind13 = /* @__PURE__ */ bind(bindHalogenM);
+  var pure11 = /* @__PURE__ */ pure(applicativeHalogenM);
   var when2 = /* @__PURE__ */ when(applicativeHalogenM);
+  var modify_6 = /* @__PURE__ */ modify_2(monadStateHalogenM);
   var show10 = /* @__PURE__ */ show(showQueryUsersFailureReas);
   var foldl3 = /* @__PURE__ */ foldl(foldableArray);
   var insert7 = /* @__PURE__ */ insert(ordString);
   var unwrap7 = /* @__PURE__ */ unwrap();
   var get5 = /* @__PURE__ */ get(monadStateHalogenM);
-  var modify_5 = /* @__PURE__ */ modify_2(monadStateHalogenM);
-  var bind22 = /* @__PURE__ */ bind(bindMaybe);
+  var bind14 = /* @__PURE__ */ bind(bindMaybe);
   var lookup9 = /* @__PURE__ */ lookup2(ordString);
   var Initialize2 = /* @__PURE__ */ function() {
     function Initialize3() {
@@ -14417,7 +14725,22 @@
     };
     return SelectedUserName2;
   }();
-  var component4 = function(dictMonadAff) {
+  var Modal2 = /* @__PURE__ */ function() {
+    function Modal3(value0) {
+      this.value0 = value0;
+    }
+    ;
+    Modal3.create = function(value0) {
+      return new Modal3(value0);
+    };
+    return Modal3;
+  }();
+  var _modal2 = /* @__PURE__ */ function() {
+    return $$Proxy.value;
+  }();
+  var component6 = function(dictMonadAff) {
+    var component1 = component3(dictMonadAff);
+    var component22 = component2(dictMonadAff);
     var liftEffect9 = liftEffect(monadEffectHalogenM(dictMonadAff.MonadEffect0()));
     var apiCall2 = apiCall(monadAffHalogenM(dictMonadAff))(encodeJsonQueryUsersReque)(decodeJsonQueryUsersRespo);
     return function(dictMonadAsk) {
@@ -14425,31 +14748,31 @@
       return function(dictNavigate) {
         var navigate2 = navigate(navigateHalogenM(dictNavigate));
         var render2 = function(v) {
-          var $51 = !v.authorized;
-          if ($51) {
+          var $60 = !v.authorized;
+          if ($60) {
             return text5("Not Authorized");
           }
           ;
-          return div2([style2(discard5(display(flex))(function() {
-            return discard5(flexDirection(row))(function() {
+          return div2([style2(discard7(display(flex))(function() {
+            return discard7(flexDirection(row))(function() {
               return flexGrow(1);
             });
-          }))])([div2([style2(discard5(display(flex))(function() {
-            return discard5(flexDirection(column))(function() {
-              return discard5(minWidth(rem2(20)))(function() {
+          }))])([div2([style2(discard7(display(flex))(function() {
+            return discard7(flexDirection(column))(function() {
+              return discard7(minWidth(rem2(20)))(function() {
                 return paddingRight(rem2(2));
               });
             });
           }))])([ul_(mapFlipped3(fromFoldable7(values(v.users)))(function(v1) {
             var isSelected = eq5(new Just(v1))(v.selectedUser);
-            return li([class_("list-group-item"), style2(discard5(backgroundColor(function() {
+            return li([class_("list-group-item"), style2(discard7(backgroundColor(function() {
               if (isSelected) {
                 return selectedColor;
               }
               ;
               return paperColor;
             }()))(function() {
-              return discard5(color(function() {
+              return discard7(color(function() {
                 if (isSelected) {
                   return white;
                 }
@@ -14463,25 +14786,25 @@
             var item = function(h) {
               return div2([style2(paddingBottom(rem2(0.5)))])([h]);
             };
-            return div2([style2(discard5(display(flex))(function() {
-              return discard5(flexDirection(row))(function() {
-                return discard5(flexBasis(pct(100)))(function() {
-                  return discard5(backgroundColor(paperColor))(function() {
+            return div2([style2(discard7(display(flex))(function() {
+              return discard7(flexDirection(row))(function() {
+                return discard7(flexBasis(pct(100)))(function() {
+                  return discard7(backgroundColor(paperColor))(function() {
                     return padding(rem2(2))(rem2(2))(rem2(2))(rem2(2));
                   });
                 });
               });
-            }))])([div2([style2(discard5(display(flex))(function() {
-              return discard5(flexDirection(column))(function() {
-                return discard5(justifyContent(flexStart3))(function() {
-                  return discard5(alignItems(flexStart1))(function() {
+            }))])([div2([style2(discard7(display(flex))(function() {
+              return discard7(flexDirection(column))(function() {
+                return discard7(justifyContent(flexStart3))(function() {
+                  return discard7(alignItems(flexStart1))(function() {
                     return minWidth(rem2(10));
                   });
                 });
               });
-            }))])([item(text5("User Name:")), item(text5("Name:")), item(text5("Administrator:"))]), div2([style2(discard5(display(flex))(function() {
-              return discard5(flexDirection(column))(function() {
-                return discard5(justifyContent(flexStart3))(function() {
+            }))])([item(text5("User Name:")), item(text5("Name:")), item(text5("Administrator:"))]), div2([style2(discard7(display(flex))(function() {
+              return discard7(flexDirection(column))(function() {
+                return discard7(justifyContent(flexStart3))(function() {
                   return alignItems(flexStart1);
                 });
               });
@@ -14492,105 +14815,163 @@
               ;
               return "No";
             }()))])]);
-          })(v.selectedUser)]);
+          })(v.selectedUser), maybe(text5(""))(function(message2) {
+            return slot5(_modal2)(unit)(component1(component22))(message2)(Modal2.create);
+          })(v.errorMessage)]);
         };
-        var handleAction = function() {
-          var alertError = function(msg) {
-            return liftEffect9(bind14(windowImpl)(alert(msg)));
-          };
-          return function(v) {
-            if (v instanceof Initialize2) {
-              return bind15(ask2)(function(v1) {
-                return bind15(liftEffect9(read(v1.userRef)))(function(loggedOnUser$prime) {
-                  return maybe(pure10(unit))(function(v2) {
-                    return when2(v2.admin)(bind15(apiCall2({
-                      authToken: v2.authToken
-                    }))(function(queryResponse) {
-                      if (queryResponse instanceof Left) {
-                        return alertError(queryResponse.value0);
-                      }
-                      ;
-                      if (queryResponse instanceof Right && queryResponse.value0 instanceof QueryUsersResultsFailure) {
-                        return alertError("Query Users: " + show10(queryResponse.value0.value0.reason));
-                      }
-                      ;
-                      if (queryResponse instanceof Right && queryResponse.value0 instanceof QueryUsersResultsSuccess) {
-                        var mkMap = function(f) {
-                          return foldl3(function(m) {
-                            return function(r) {
-                              return insert7(f(r))(r)(m);
-                            };
-                          })(empty4);
-                        };
-                        var usersMap = mkMap(function($88) {
-                          return function(v3) {
-                            return v3.userName;
-                          }(unwrap7($88));
-                        })(queryResponse.value0.value0.users);
-                        return bind15(get5)(function(v3) {
-                          return modify_5(function(v4) {
-                            var $70 = {};
-                            for (var $71 in v4) {
-                              if ({}.hasOwnProperty.call(v4, $71)) {
-                                $70[$71] = v4[$71];
-                              }
-                              ;
-                            }
-                            ;
-                            $70.authorized = true;
-                            $70.users = usersMap;
-                            $70.selectedUser = bind22(v3.initUserName)(flip(lookup9)(usersMap));
-                            return $70;
-                          });
-                        });
-                      }
-                      ;
-                      throw new Error("Failed pattern match at Component.Users (line 108, column 11 - line 121, column 18): " + [queryResponse.constructor.name]);
-                    }));
-                  })(loggedOnUser$prime);
-                });
-              });
-            }
-            ;
-            if (v instanceof UserSelected) {
-              return navigate2(new Users(new Just(v.value0.userName)));
-            }
-            ;
-            if (v instanceof SelectedUserName) {
-              return bind15(get5)(function(v1) {
-                return modify_5(function(v2) {
-                  var $83 = {};
-                  for (var $84 in v2) {
-                    if ({}.hasOwnProperty.call(v2, $84)) {
-                      $83[$84] = v2[$84];
+        var handleAction = function(v) {
+          if (v instanceof Initialize2) {
+            return bind13(ask2)(function(v1) {
+              return bind13(liftEffect9(read(v1.userRef)))(function(loggedOnUser$prime) {
+                return maybe(pure11(unit))(function(v2) {
+                  return when2(v2.admin)(bind13(apiCall2({
+                    authToken: v2.authToken
+                  }))(function(queryResponse) {
+                    if (queryResponse instanceof Left) {
+                      return modify_6(function(v3) {
+                        var $75 = {};
+                        for (var $76 in v3) {
+                          if ({}.hasOwnProperty.call(v3, $76)) {
+                            $75[$76] = v3[$76];
+                          }
+                          ;
+                        }
+                        ;
+                        $75.errorMessage = new Just(queryResponse.value0);
+                        return $75;
+                      });
                     }
                     ;
+                    if (queryResponse instanceof Right && queryResponse.value0 instanceof QueryUsersResultsFailure) {
+                      return modify_6(function(v3) {
+                        var $79 = {};
+                        for (var $80 in v3) {
+                          if ({}.hasOwnProperty.call(v3, $80)) {
+                            $79[$80] = v3[$80];
+                          }
+                          ;
+                        }
+                        ;
+                        $79.errorMessage = new Just("Query Users: " + show10(queryResponse.value0.value0.reason));
+                        return $79;
+                      });
+                    }
+                    ;
+                    if (queryResponse instanceof Right && queryResponse.value0 instanceof QueryUsersResultsSuccess) {
+                      var mkMap = function(f) {
+                        return foldl3(function(m) {
+                          return function(r) {
+                            return insert7(f(r))(r)(m);
+                          };
+                        })(empty4);
+                      };
+                      var usersMap = mkMap(function($113) {
+                        return function(v3) {
+                          return v3.userName;
+                        }(unwrap7($113));
+                      })(queryResponse.value0.value0.users);
+                      return bind13(get5)(function(v3) {
+                        return modify_6(function(v4) {
+                          var $86 = {};
+                          for (var $87 in v4) {
+                            if ({}.hasOwnProperty.call(v4, $87)) {
+                              $86[$87] = v4[$87];
+                            }
+                            ;
+                          }
+                          ;
+                          $86.authorized = true;
+                          $86.users = usersMap;
+                          $86.selectedUser = bind14(v3.initUserName)(flip(lookup9)(usersMap));
+                          return $86;
+                        });
+                      });
+                    }
+                    ;
+                    throw new Error("Failed pattern match at Component.Users (line 91, column 11 - line 104, column 18): " + [queryResponse.constructor.name]);
+                  }));
+                })(loggedOnUser$prime);
+              });
+            });
+          }
+          ;
+          if (v instanceof UserSelected) {
+            return navigate2(new Users(new Just(v.value0.userName)));
+          }
+          ;
+          if (v instanceof SelectedUserName) {
+            return bind13(get5)(function(v1) {
+              return modify_6(function(v2) {
+                var $99 = {};
+                for (var $100 in v2) {
+                  if ({}.hasOwnProperty.call(v2, $100)) {
+                    $99[$100] = v2[$100];
                   }
                   ;
-                  $83.selectedUser = bind22(v.value0)(flip(lookup9)(v1.users));
-                  return $83;
-                });
+                }
+                ;
+                $99.selectedUser = bind14(v.value0)(flip(lookup9)(v1.users));
+                return $99;
+              });
+            });
+          }
+          ;
+          if (v instanceof Modal2) {
+            if (v.value0 instanceof Affirmative) {
+              return modify_6(function(v1) {
+                var $105 = {};
+                for (var $106 in v1) {
+                  if ({}.hasOwnProperty.call(v1, $106)) {
+                    $105[$106] = v1[$106];
+                  }
+                  ;
+                }
+                ;
+                $105.errorMessage = Nothing.value;
+                return $105;
               });
             }
             ;
-            throw new Error("Failed pattern match at Component.Users (line 101, column 18 - line 125, column 73): " + [v.constructor.name]);
-          };
-        }();
+            if (v.value0 instanceof Negative) {
+              return modify_6(function(v1) {
+                var $108 = {};
+                for (var $109 in v1) {
+                  if ({}.hasOwnProperty.call(v1, $109)) {
+                    $108[$109] = v1[$109];
+                  }
+                  ;
+                }
+                ;
+                $108.errorMessage = Nothing.value;
+                return $108;
+              });
+            }
+            ;
+            if (v.value0 instanceof InnerOutput) {
+              return pure11(unit);
+            }
+            ;
+            throw new Error("Failed pattern match at Component.Users (line 109, column 21 - line 112, column 39): " + [v.value0.constructor.name]);
+          }
+          ;
+          throw new Error("Failed pattern match at Component.Users (line 84, column 18 - line 112, column 39): " + [v.constructor.name]);
+        };
         return mkComponent({
           initialState: function(v) {
             return {
               authorized: false,
               selectedUser: Nothing.value,
               users: empty4,
-              initUserName: v
+              initUserName: v,
+              errorMessage: Nothing.value
             };
           },
           render: render2,
           "eval": mkEval({
             handleAction,
             handleQuery: defaultEval.handleQuery,
-            receive: function($89) {
-              return Just.create(SelectedUserName.create($89));
+            receive: function($114) {
+              return Just.create(SelectedUserName.create($114));
             },
             initialize: new Just(Initialize2.value),
             finalize: defaultEval.finalize
@@ -14601,12 +14982,12 @@
   };
 
   // output/Component.Router/index.js
-  var discard6 = /* @__PURE__ */ discard(discardUnit);
-  var discard12 = /* @__PURE__ */ discard6(bindStyleM);
+  var discard8 = /* @__PURE__ */ discard(discardUnit);
+  var discard12 = /* @__PURE__ */ discard8(bindStyleM);
   var stretch2 = /* @__PURE__ */ stretch(stretchAlignItemsValue);
   var flexStart4 = /* @__PURE__ */ flexStart(flexStartJustifyContentValue);
-  var pure11 = /* @__PURE__ */ pure(applicativeStyleM);
-  var slot3 = /* @__PURE__ */ slot()({
+  var pure12 = /* @__PURE__ */ pure(applicativeStyleM);
+  var slot6 = /* @__PURE__ */ slot()({
     reflectSymbol: function() {
       return "logon";
     }
@@ -14622,19 +15003,19 @@
       return "changePassword";
     }
   })(ordUnit);
-  var bind16 = /* @__PURE__ */ bind(bindHalogenM);
-  var discard23 = /* @__PURE__ */ discard6(bindHalogenM);
-  var modify_6 = /* @__PURE__ */ modify_2(monadStateHalogenM);
-  var pure12 = /* @__PURE__ */ pure(applicativeHalogenM);
+  var bind15 = /* @__PURE__ */ bind(bindHalogenM);
+  var discard23 = /* @__PURE__ */ discard8(bindHalogenM);
+  var modify_7 = /* @__PURE__ */ modify_2(monadStateHalogenM);
+  var pure13 = /* @__PURE__ */ pure(applicativeHalogenM);
   var Navigate = /* @__PURE__ */ function() {
-    function Navigate2(value0, value19) {
+    function Navigate2(value0, value110) {
       this.value0 = value0;
-      this.value1 = value19;
+      this.value1 = value110;
     }
     ;
     Navigate2.create = function(value0) {
-      return function(value19) {
-        return new Navigate2(value0, value19);
+      return function(value110) {
+        return new Navigate2(value0, value110);
       };
     };
     return Navigate2;
@@ -14648,10 +15029,10 @@
   var _changePassword = /* @__PURE__ */ function() {
     return $$Proxy.value;
   }();
-  var component5 = function(dictMonadAff) {
-    var component1 = component3(dictMonadAff);
-    var component22 = component2(dictMonadAff);
-    var component32 = component4(dictMonadAff);
+  var component7 = function(dictMonadAff) {
+    var component1 = component5(dictMonadAff);
+    var component22 = component4(dictMonadAff);
+    var component32 = component6(dictMonadAff);
     var component42 = component(dictMonadAff);
     var liftEffect9 = liftEffect(monadEffectHalogenM(dictMonadAff.MonadEffect0()));
     return function(dictNavigate) {
@@ -14659,11 +15040,11 @@
       var component62 = component42(dictNavigate);
       var navigate2 = navigate(navigateHalogenM(dictNavigate));
       return function(dictMonadAsk) {
-        var component7 = component22(dictMonadAsk)(dictNavigate);
-        var component8 = component32(dictMonadAsk)(dictNavigate);
+        var component72 = component22(dictMonadAsk)(dictNavigate);
+        var component82 = component32(dictMonadAsk)(dictNavigate);
         var ask2 = ask(monadAskHalogenM(dictMonadAsk));
         return function(dictLogonRoute) {
-          var component9 = component7(dictLogonRoute);
+          var component9 = component72(dictLogonRoute);
           return function(dictLog) {
             var component10 = component9(dictLog);
             var render2 = function(v) {
@@ -14672,9 +15053,9 @@
                   return padding(rem2(2))(rem2(2))(rem2(2))(rem2(2));
                 });
               }));
-              var defaultPage = component52(pure11(unit));
+              var defaultPage = component52(pure12(unit));
               if (v.route instanceof Logon) {
-                return slot3(_logon)(unit)(defaultPage(component10))(unit)(absurd);
+                return slot6(_logon)(unit)(defaultPage(component10))(unit)(absurd);
               }
               ;
               if (v.route instanceof Logoff) {
@@ -14682,7 +15063,7 @@
               }
               ;
               if (v.route instanceof Users) {
-                return slot_1(_users)(unit)(wholePage(component8))(v.route.value0);
+                return slot_1(_users)(unit)(wholePage(component82))(v.route.value0);
               }
               ;
               if (v.route instanceof ChangePassword) {
@@ -14692,15 +15073,15 @@
               throw new Error("Failed pattern match at Component.Router (line 60, column 22 - line 64, column 96): " + [v.route.constructor.name]);
             };
             var handleQuery = function(v) {
-              return bind16(ask2)(function(v1) {
-                return bind16(liftEffect9(read(v1.userRef)))(function(ref2) {
+              return bind15(ask2)(function(v1) {
+                return bind15(liftEffect9(read(v1.userRef)))(function(ref2) {
                   return discard23(function() {
                     var $55 = isNothing(ref2);
                     if ($55) {
                       return navigate2(Logon.value);
                     }
                     ;
-                    return modify_6(function(v2) {
+                    return modify_7(function(v2) {
                       var $56 = {};
                       for (var $57 in v2) {
                         if ({}.hasOwnProperty.call(v2, $57)) {
@@ -14713,7 +15094,7 @@
                       return $56;
                     });
                   }())(function() {
-                    return pure12(new Just(v.value1));
+                    return pure13(new Just(v.value1));
                   });
                 });
               });
@@ -14738,27 +15119,27 @@
   };
 
   // output/Halogen.Aff.Util/index.js
-  var bind17 = /* @__PURE__ */ bind(bindAff);
+  var bind16 = /* @__PURE__ */ bind(bindAff);
   var liftEffect4 = /* @__PURE__ */ liftEffect(monadEffectAff);
   var bindFlipped8 = /* @__PURE__ */ bindFlipped(bindEffect);
   var composeKleisliFlipped6 = /* @__PURE__ */ composeKleisliFlipped(bindEffect);
-  var pure13 = /* @__PURE__ */ pure(applicativeAff);
+  var pure14 = /* @__PURE__ */ pure(applicativeAff);
   var bindFlipped1 = /* @__PURE__ */ bindFlipped(bindMaybe);
-  var pure14 = /* @__PURE__ */ pure(applicativeEffect);
+  var pure15 = /* @__PURE__ */ pure(applicativeEffect);
   var map34 = /* @__PURE__ */ map(functorEffect);
-  var discard7 = /* @__PURE__ */ discard(discardUnit);
+  var discard9 = /* @__PURE__ */ discard(discardUnit);
   var throwError2 = /* @__PURE__ */ throwError(monadThrowAff);
-  var selectElement = function(query3) {
-    return bind17(liftEffect4(bindFlipped8(composeKleisliFlipped6(function() {
-      var $16 = querySelector(query3);
+  var selectElement = function(query4) {
+    return bind16(liftEffect4(bindFlipped8(composeKleisliFlipped6(function() {
+      var $16 = querySelector(query4);
       return function($17) {
         return $16(toParentNode($17));
       };
     }())(document))(windowImpl)))(function(mel) {
-      return pure13(bindFlipped1(fromElement)(mel));
+      return pure14(bindFlipped1(fromElement)(mel));
     });
   };
-  var runHalogenAff = /* @__PURE__ */ runAff_(/* @__PURE__ */ either(throwException)(/* @__PURE__ */ $$const(/* @__PURE__ */ pure14(unit))));
+  var runHalogenAff = /* @__PURE__ */ runAff_(/* @__PURE__ */ either(throwException)(/* @__PURE__ */ $$const(/* @__PURE__ */ pure15(unit))));
   var awaitLoad = /* @__PURE__ */ makeAff(function(callback) {
     return function __do3() {
       var rs = bindFlipped8(readyState)(bindFlipped8(document)(windowImpl))();
@@ -14775,9 +15156,9 @@
       return nonCanceler;
     };
   });
-  var awaitBody = /* @__PURE__ */ discard7(bindAff)(awaitLoad)(function() {
-    return bind17(selectElement("body"))(function(body2) {
-      return maybe(throwError2(error("Could not find body")))(pure13)(body2);
+  var awaitBody = /* @__PURE__ */ discard9(bindAff)(awaitLoad)(function() {
+    return bind16(selectElement("body"))(function(body2) {
+      return maybe(throwError2(error("Could not find body")))(pure14)(body2);
     });
   });
 
@@ -14827,7 +15208,7 @@
       return f(v);
     };
   };
-  var initDriverState = function(component7) {
+  var initDriverState = function(component9) {
     return function(input3) {
       return function(handler3) {
         return function(lchs) {
@@ -14843,8 +15224,8 @@
             var subscriptions = $$new(new Just(empty4))();
             var forks = $$new(empty4)();
             var ds = {
-              component: component7,
-              state: component7.initialState(input3),
+              component: component9,
+              state: component9.initialState(input3),
               refs: empty4,
               children: empty5,
               childrenIn,
@@ -14872,15 +15253,15 @@
   var traverse_4 = /* @__PURE__ */ traverse_(applicativeEffect)(foldableMaybe);
   var bindFlipped9 = /* @__PURE__ */ bindFlipped(bindMaybe);
   var lookup10 = /* @__PURE__ */ lookup2(ordSubscriptionId);
-  var bind18 = /* @__PURE__ */ bind(bindAff);
+  var bind17 = /* @__PURE__ */ bind(bindAff);
   var liftEffect5 = /* @__PURE__ */ liftEffect(monadEffectAff);
-  var discard8 = /* @__PURE__ */ discard(discardUnit);
-  var discard13 = /* @__PURE__ */ discard8(bindAff);
+  var discard10 = /* @__PURE__ */ discard(discardUnit);
+  var discard13 = /* @__PURE__ */ discard10(bindAff);
   var traverse_12 = /* @__PURE__ */ traverse_(applicativeAff);
   var traverse_22 = /* @__PURE__ */ traverse_12(foldableList);
   var fork3 = /* @__PURE__ */ fork2(monadForkAff);
   var parSequence_2 = /* @__PURE__ */ parSequence_(parallelAff)(foldableList);
-  var pure15 = /* @__PURE__ */ pure(applicativeAff);
+  var pure16 = /* @__PURE__ */ pure(applicativeAff);
   var map35 = /* @__PURE__ */ map(functorCoyoneda);
   var parallel2 = /* @__PURE__ */ parallel(parallelAff);
   var map114 = /* @__PURE__ */ map(functorAff);
@@ -14907,7 +15288,7 @@
   };
   var queueOrRun = function(ref2) {
     return function(au) {
-      return bind18(liftEffect5(read(ref2)))(function(v) {
+      return bind17(liftEffect5(read(ref2)))(function(v) {
         if (v instanceof Nothing) {
           return au;
         }
@@ -14926,11 +15307,11 @@
         initializers: Nil.value,
         finalizers: Nil.value
       })(lchs)))(function() {
-        return bind18(liftEffect5(f))(function(result) {
-          return bind18(liftEffect5(read(lchs)))(function(v) {
+        return bind17(liftEffect5(f))(function(result) {
+          return bind17(liftEffect5(read(lchs)))(function(v) {
             return discard13(traverse_22(fork3)(v.finalizers))(function() {
               return discard13(parSequence_2(v.initializers))(function() {
-                return pure15(result);
+                return pure16(result);
               });
             });
           });
@@ -14941,7 +15322,7 @@
   var handleAff = /* @__PURE__ */ runAff_(/* @__PURE__ */ either(throwException)(/* @__PURE__ */ $$const(/* @__PURE__ */ pure(applicativeEffect)(unit))));
   var fresh = function(f) {
     return function(ref2) {
-      return bind18(liftEffect5(read(ref2)))(function(v) {
+      return bind17(liftEffect5(read(ref2)))(function(v) {
         return liftEffect5(modify$prime(function(i2) {
           return {
             state: i2 + 1 | 0,
@@ -14954,7 +15335,7 @@
   var evalQ = function(render2) {
     return function(ref2) {
       return function(q2) {
-        return bind18(liftEffect5(read(ref2)))(function(v) {
+        return bind17(liftEffect5(read(ref2)))(function(v) {
           return evalM(render2)(ref2)(v["component"]["eval"](new Query2(map35(Just.create)(liftCoyoneda(q2)), $$const(Nothing.value))));
         });
       };
@@ -14965,10 +15346,10 @@
       return function(v) {
         var evalChildQuery = function(ref2) {
           return function(cqb) {
-            return bind18(liftEffect5(read(ref2)))(function(v1) {
+            return bind17(liftEffect5(read(ref2)))(function(v1) {
               return unChildQueryBox(function(v2) {
                 var evalChild = function(v3) {
-                  return parallel2(bind18(liftEffect5(read(v3)))(function(dsx) {
+                  return parallel2(bind17(liftEffect5(read(v3)))(function(dsx) {
                     return unDriverStateX(function(ds) {
                       return evalQ(render2)(ds.selfRef)(v2.value1);
                     })(dsx);
@@ -14982,10 +15363,10 @@
         var go2 = function(ref2) {
           return function(v1) {
             if (v1 instanceof State) {
-              return bind18(liftEffect5(read(ref2)))(function(v2) {
+              return bind17(liftEffect5(read(ref2)))(function(v2) {
                 var v3 = v1.value0(v2.state);
                 if (unsafeRefEq(v2.state)(v3.value1)) {
-                  return pure15(v3.value0);
+                  return pure16(v3.value0);
                 }
                 ;
                 if (otherwise) {
@@ -15008,7 +15389,7 @@
                     lifecycleHandlers: v2.lifecycleHandlers
                   })(ref2)))(function() {
                     return discard13(handleLifecycle(v2.lifecycleHandlers)(render2(v2.lifecycleHandlers)(ref2)))(function() {
-                      return pure15(v3.value0);
+                      return pure16(v3.value0);
                     });
                   });
                 }
@@ -15018,13 +15399,13 @@
             }
             ;
             if (v1 instanceof Subscribe) {
-              return bind18(fresh(SubscriptionId)(ref2))(function(sid) {
-                return bind18(liftEffect5(subscribe(v1.value0(sid))(function(act) {
+              return bind17(fresh(SubscriptionId)(ref2))(function(sid) {
+                return bind17(liftEffect5(subscribe(v1.value0(sid))(function(act) {
                   return handleAff(evalF(render2)(ref2)(new Action(act)));
                 })))(function(finalize) {
-                  return bind18(liftEffect5(read(ref2)))(function(v2) {
+                  return bind17(liftEffect5(read(ref2)))(function(v2) {
                     return discard13(liftEffect5(modify_(map210(insert8(sid)(finalize)))(v2.subscriptions)))(function() {
-                      return pure15(v1.value1(sid));
+                      return pure16(v1.value1(sid));
                     });
                   });
                 });
@@ -15033,7 +15414,7 @@
             ;
             if (v1 instanceof Unsubscribe) {
               return discard13(liftEffect5(unsubscribe3(v1.value0)(ref2)))(function() {
-                return pure15(v1.value1);
+                return pure16(v1.value1);
               });
             }
             ;
@@ -15046,10 +15427,10 @@
             }
             ;
             if (v1 instanceof Raise) {
-              return bind18(liftEffect5(read(ref2)))(function(v2) {
-                return bind18(liftEffect5(read(v2.handlerRef)))(function(handler3) {
+              return bind17(liftEffect5(read(ref2)))(function(v2) {
+                return bind17(liftEffect5(read(v2.handlerRef)))(function(handler3) {
                   return discard13(queueOrRun(v2.pendingOuts)(handler3(v1.value0)))(function() {
-                    return pure15(v1.value1);
+                    return pure16(v1.value1);
                   });
                 });
               });
@@ -15065,15 +15446,15 @@
             }
             ;
             if (v1 instanceof Fork) {
-              return bind18(fresh(ForkId)(ref2))(function(fid) {
-                return bind18(liftEffect5(read(ref2)))(function(v2) {
-                  return bind18(liftEffect5($$new(false)))(function(doneRef) {
-                    return bind18(fork3($$finally(liftEffect5(function __do3() {
+              return bind17(fresh(ForkId)(ref2))(function(fid) {
+                return bind17(liftEffect5(read(ref2)))(function(v2) {
+                  return bind17(liftEffect5($$new(false)))(function(doneRef) {
+                    return bind17(fork3($$finally(liftEffect5(function __do3() {
                       modify_($$delete4(fid))(v2.forks)();
                       return write(true)(doneRef)();
                     }))(evalM(render2)(ref2)(v1.value0))))(function(fiber) {
                       return discard13(liftEffect5(unlessM2(read(doneRef))(modify_(insert12(fid)(fiber))(v2.forks))))(function() {
-                        return pure15(v1.value1(fid));
+                        return pure16(v1.value1(fid));
                       });
                     });
                   });
@@ -15082,28 +15463,28 @@
             }
             ;
             if (v1 instanceof Join) {
-              return bind18(liftEffect5(read(ref2)))(function(v2) {
-                return bind18(liftEffect5(read(v2.forks)))(function(forkMap) {
+              return bind17(liftEffect5(read(ref2)))(function(v2) {
+                return bind17(liftEffect5(read(v2.forks)))(function(forkMap) {
                   return discard13(traverse_32(joinFiber)(lookup12(v1.value0)(forkMap)))(function() {
-                    return pure15(v1.value1);
+                    return pure16(v1.value1);
                   });
                 });
               });
             }
             ;
             if (v1 instanceof Kill) {
-              return bind18(liftEffect5(read(ref2)))(function(v2) {
-                return bind18(liftEffect5(read(v2.forks)))(function(forkMap) {
+              return bind17(liftEffect5(read(ref2)))(function(v2) {
+                return bind17(liftEffect5(read(v2.forks)))(function(forkMap) {
                   return discard13(traverse_32(killFiber(error("Cancelled")))(lookup12(v1.value0)(forkMap)))(function() {
-                    return pure15(v1.value1);
+                    return pure16(v1.value1);
                   });
                 });
               });
             }
             ;
             if (v1 instanceof GetRef) {
-              return bind18(liftEffect5(read(ref2)))(function(v2) {
-                return pure15(v1.value1(lookup22(v1.value0)(v2.refs)));
+              return bind17(liftEffect5(read(ref2)))(function(v2) {
+                return pure16(v1.value1(lookup22(v1.value0)(v2.refs)));
               });
             }
             ;
@@ -15141,7 +15522,7 @@
         }
         ;
         if (v instanceof Action) {
-          return bind18(liftEffect5(read(ref2)))(function(v1) {
+          return bind17(liftEffect5(read(ref2)))(function(v1) {
             return evalM(render2)(ref2)(v1["component"]["eval"](new Action2(v.value0, unit)));
           });
         }
@@ -15152,8 +15533,8 @@
   };
 
   // output/Halogen.Aff.Driver/index.js
-  var bind19 = /* @__PURE__ */ bind(bindEffect);
-  var discard9 = /* @__PURE__ */ discard(discardUnit);
+  var bind18 = /* @__PURE__ */ bind(bindEffect);
+  var discard11 = /* @__PURE__ */ discard(discardUnit);
   var for_2 = /* @__PURE__ */ for_(applicativeEffect)(foldableMaybe);
   var traverse_5 = /* @__PURE__ */ traverse_(applicativeAff)(foldableList);
   var fork4 = /* @__PURE__ */ fork2(monadForkAff);
@@ -15161,12 +15542,12 @@
   var traverse_13 = /* @__PURE__ */ traverse_(applicativeEffect);
   var traverse_23 = /* @__PURE__ */ traverse_13(foldableMaybe);
   var traverse_33 = /* @__PURE__ */ traverse_13(foldableMap);
-  var discard24 = /* @__PURE__ */ discard9(bindAff);
+  var discard24 = /* @__PURE__ */ discard11(bindAff);
   var parSequence_3 = /* @__PURE__ */ parSequence_(parallelAff)(foldableList);
   var liftEffect6 = /* @__PURE__ */ liftEffect(monadEffectAff);
-  var pure16 = /* @__PURE__ */ pure(applicativeEffect);
+  var pure17 = /* @__PURE__ */ pure(applicativeEffect);
   var map36 = /* @__PURE__ */ map(functorEffect);
-  var pure17 = /* @__PURE__ */ pure(applicativeAff);
+  var pure18 = /* @__PURE__ */ pure(applicativeAff);
   var when3 = /* @__PURE__ */ when(applicativeEffect);
   var renderStateX2 = /* @__PURE__ */ renderStateX(functorEffect);
   var $$void6 = /* @__PURE__ */ $$void(functorAff);
@@ -15174,7 +15555,7 @@
   var renderStateX_2 = /* @__PURE__ */ renderStateX_(applicativeEffect);
   var tailRecM3 = /* @__PURE__ */ tailRecM(monadRecEffect);
   var voidLeft3 = /* @__PURE__ */ voidLeft(functorEffect);
-  var bind110 = /* @__PURE__ */ bind(bindAff);
+  var bind19 = /* @__PURE__ */ bind(bindAff);
   var liftEffect1 = /* @__PURE__ */ liftEffect(monadEffectEffect);
   var newLifecycleHandlers = /* @__PURE__ */ function() {
     return $$new({
@@ -15208,7 +15589,7 @@
     };
   };
   var runUI = function(renderSpec2) {
-    return function(component7) {
+    return function(component9) {
       return function(i2) {
         var squashChildInitializers = function(lchs) {
           return function(preInits) {
@@ -15261,9 +15642,9 @@
           return function(handler3) {
             return function(childrenInRef) {
               return function(childrenOutRef) {
-                return unComponentSlot(function(slot4) {
+                return unComponentSlot(function(slot7) {
                   return function __do3() {
-                    var childrenIn = map36(slot4.pop)(read(childrenInRef))();
+                    var childrenIn = map36(slot7.pop)(read(childrenInRef))();
                     var $$var2 = function() {
                       if (childrenIn instanceof Just) {
                         write(childrenIn.value0.value1)(childrenInRef)();
@@ -15271,12 +15652,12 @@
                         unDriverStateX(function(st) {
                           return function __do4() {
                             flip(write)(st.handlerRef)(function() {
-                              var $64 = maybe(pure17(unit))(handler3);
+                              var $64 = maybe(pure18(unit))(handler3);
                               return function($65) {
-                                return $64(slot4.output($65));
+                                return $64(slot7.output($65));
                               };
                             }())();
-                            return handleAff(evalM(render2)(st.selfRef)(st["component"]["eval"](new Receive(slot4.input, unit))))();
+                            return handleAff(evalM(render2)(st.selfRef)(st["component"]["eval"](new Receive(slot7.input, unit))))();
                           };
                         })(dsx)();
                         return childrenIn.value0.value0;
@@ -15284,27 +15665,27 @@
                       ;
                       if (childrenIn instanceof Nothing) {
                         return runComponent(lchs)(function() {
-                          var $66 = maybe(pure17(unit))(handler3);
+                          var $66 = maybe(pure18(unit))(handler3);
                           return function($67) {
-                            return $66(slot4.output($67));
+                            return $66(slot7.output($67));
                           };
-                        }())(slot4.input)(slot4.component)();
+                        }())(slot7.input)(slot7.component)();
                       }
                       ;
                       throw new Error("Failed pattern match at Halogen.Aff.Driver (line 213, column 14 - line 222, column 98): " + [childrenIn.constructor.name]);
                     }();
                     var isDuplicate = map36(function($68) {
-                      return isJust(slot4.get($68));
+                      return isJust(slot7.get($68));
                     })(read(childrenOutRef))();
                     when3(isDuplicate)(warn("Halogen: Duplicate slot address was detected during rendering, unexpected results may occur"))();
-                    modify_(slot4.set($$var2))(childrenOutRef)();
-                    return bind19(read($$var2))(renderStateX2(function(v) {
+                    modify_(slot7.set($$var2))(childrenOutRef)();
+                    return bind18(read($$var2))(renderStateX2(function(v) {
                       if (v instanceof Nothing) {
                         return $$throw("Halogen internal error: child was not initialized in renderChild");
                       }
                       ;
                       if (v instanceof Just) {
-                        return pure16(renderSpec2.renderChild(v.value0));
+                        return pure17(renderSpec2.renderChild(v.value0));
                       }
                       ;
                       throw new Error("Failed pattern match at Halogen.Aff.Driver (line 227, column 37 - line 229, column 50): " + [v.constructor.name]);
@@ -15413,9 +15794,9 @@
         var evalDriver = function(disposed) {
           return function(ref2) {
             return function(q2) {
-              return bind110(liftEffect6(read(disposed)))(function(v) {
+              return bind19(liftEffect6(read(disposed)))(function(v) {
                 if (v) {
-                  return pure17(Nothing.value);
+                  return pure18(Nothing.value);
                 }
                 ;
                 return evalQ(render2)(ref2)(q2);
@@ -15444,8 +15825,8 @@
             };
           };
         };
-        return bind110(liftEffect6(newLifecycleHandlers))(function(lchs) {
-          return bind110(liftEffect6($$new(false)))(function(disposed) {
+        return bind19(liftEffect6(newLifecycleHandlers))(function(lchs) {
+          return bind19(liftEffect6($$new(false)))(function(disposed) {
             return handleLifecycle(lchs)(function __do3() {
               var sio = create();
               var dsx = bindFlipped10(read)(runComponent(lchs)(function() {
@@ -15453,9 +15834,9 @@
                 return function($78) {
                   return liftEffect6($77($78));
                 };
-              }())(i2)(component7))();
+              }())(i2)(component9))();
               return unDriverStateX(function(st) {
-                return pure16({
+                return pure17({
                   query: evalDriver(disposed)(st.selfRef),
                   messages: sio.emitter,
                   dispose: dispose(disposed)(lchs)(dsx)
@@ -15542,13 +15923,13 @@
     };
   };
   var $$void7 = /* @__PURE__ */ $$void(functorEffect);
-  var pure18 = /* @__PURE__ */ pure(applicativeEffect);
+  var pure19 = /* @__PURE__ */ pure(applicativeEffect);
   var traverse_6 = /* @__PURE__ */ traverse_(applicativeEffect)(foldableMaybe);
   var unwrap8 = /* @__PURE__ */ unwrap();
   var when4 = /* @__PURE__ */ when(applicativeEffect);
   var not2 = /* @__PURE__ */ not(/* @__PURE__ */ heytingAlgebraFunction(/* @__PURE__ */ heytingAlgebraFunction(heytingAlgebraBoolean)));
   var identity12 = /* @__PURE__ */ identity(categoryFn);
-  var bind111 = /* @__PURE__ */ bind(bindAff);
+  var bind110 = /* @__PURE__ */ bind(bindAff);
   var liftEffect7 = /* @__PURE__ */ liftEffect(monadEffectAff);
   var map38 = /* @__PURE__ */ map(functorEffect);
   var bindFlipped11 = /* @__PURE__ */ bindFlipped(bindEffect);
@@ -15563,7 +15944,7 @@
           return $$void7(appendChild(v)(v2.value0));
         }
         ;
-        return pure18(unit);
+        return pure19(unit);
       };
     };
   };
@@ -15591,36 +15972,36 @@
         var buildWidget2 = function(spec) {
           var buildThunk2 = buildThunk(unwrap8)(spec);
           var $lazy_patch = $runtime_lazy9("patch", "Halogen.VDom.Driver", function() {
-            return function(st, slot4) {
+            return function(st, slot7) {
               if (st instanceof Just) {
-                if (slot4 instanceof ComponentSlot) {
+                if (slot7 instanceof ComponentSlot) {
                   halt(st.value0);
-                  return $lazy_renderComponentSlot(100)(slot4.value0);
+                  return $lazy_renderComponentSlot(100)(slot7.value0);
                 }
                 ;
-                if (slot4 instanceof ThunkSlot) {
-                  var step$prime = step3(st.value0, slot4.value0);
+                if (slot7 instanceof ThunkSlot) {
+                  var step$prime = step3(st.value0, slot7.value0);
                   return mkStep(new Step(extract2(step$prime), new Just(step$prime), $lazy_patch(103), done));
                 }
                 ;
-                throw new Error("Failed pattern match at Halogen.VDom.Driver (line 97, column 22 - line 103, column 79): " + [slot4.constructor.name]);
+                throw new Error("Failed pattern match at Halogen.VDom.Driver (line 97, column 22 - line 103, column 79): " + [slot7.constructor.name]);
               }
               ;
-              return $lazy_render(104)(slot4);
+              return $lazy_render(104)(slot7);
             };
           });
           var $lazy_render = $runtime_lazy9("render", "Halogen.VDom.Driver", function() {
-            return function(slot4) {
-              if (slot4 instanceof ComponentSlot) {
-                return $lazy_renderComponentSlot(86)(slot4.value0);
+            return function(slot7) {
+              if (slot7 instanceof ComponentSlot) {
+                return $lazy_renderComponentSlot(86)(slot7.value0);
               }
               ;
-              if (slot4 instanceof ThunkSlot) {
-                var step4 = buildThunk2(slot4.value0);
+              if (slot7 instanceof ThunkSlot) {
+                var step4 = buildThunk2(slot7.value0);
                 return mkStep(new Step(extract2(step4), new Just(step4), $lazy_patch(89), done));
               }
               ;
-              throw new Error("Failed pattern match at Halogen.VDom.Driver (line 84, column 7 - line 89, column 75): " + [slot4.constructor.name]);
+              throw new Error("Failed pattern match at Halogen.VDom.Driver (line 84, column 7 - line 89, column 75): " + [slot7.constructor.name]);
             };
           });
           var $lazy_renderComponentSlot = $runtime_lazy9("renderComponentSlot", "Halogen.VDom.Driver", function() {
@@ -15695,11 +16076,11 @@
       };
     };
   };
-  var runUI2 = function(component7) {
+  var runUI2 = function(component9) {
     return function(i2) {
       return function(element4) {
-        return bind111(liftEffect7(map38(toDocument)(bindFlipped11(document)(windowImpl))))(function(document2) {
-          return runUI(renderSpec(document2)(element4))(component7)(i2);
+        return bind110(liftEffect7(map38(toDocument)(bindFlipped11(document)(windowImpl))))(function(document2) {
+          return runUI(renderSpec(document2)(element4))(component9)(i2);
         });
       };
     };
@@ -15708,7 +16089,7 @@
   // output/Main/index.js
   var bind20 = /* @__PURE__ */ bind(bindAff);
   var hoist4 = /* @__PURE__ */ hoist3(functorAff);
-  var component6 = /* @__PURE__ */ component5(monadAffAppM)(navigateAppMRoute)(monadAskEnvAppM)(logonRouteAppMRoute)(logAppM);
+  var component8 = /* @__PURE__ */ component7(monadAffAppM)(navigateAppMRoute)(monadAskEnvAppM)(logonRouteAppMRoute)(logAppM);
   var liftEffect8 = /* @__PURE__ */ liftEffect(monadEffectAff);
   var matchesWith2 = /* @__PURE__ */ matchesWith(foldableEither);
   var when5 = /* @__PURE__ */ when(applicativeEffect);
@@ -15719,7 +16100,7 @@
     return runHalogenAff(bind20(awaitBody)(function(body2) {
       var router = hoist4(runAppM({
         userRef
-      }))(component6);
+      }))(component8);
       return bind20(runUI2(router)(unit)(body2))(function(io) {
         return liftEffect8(matchesWith2(parse(routeCodec))(function(old$prime) {
           return function($$new2) {
