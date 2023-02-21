@@ -5,7 +5,9 @@ import Prelude
 import Data.Argonaut (class DecodeJson, class EncodeJson, JsonDecodeError(..), encodeJson, (.:))
 import Data.Argonaut.Decode.Decoders (decodeJObject)
 import Data.Either (Either(..))
+import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe(..))
+import Data.Show.Generic (genericShow)
 import Data.UUID (UUID, parseUUID, toString)
 import Entity.User (UserRow)
 
@@ -35,6 +37,10 @@ instance DecodeJson CreateUserRequest where
       Left $ AtKey "tag" $ UnexpectedValue json
 
 data CreateUserResultsFailureReason = AlreadyExists | NotAuthenticated | NotAuthorized | FileIOError String
+
+derive instance Generic CreateUserResultsFailureReason _
+instance Show CreateUserResultsFailureReason where
+  show = genericShow
 
 instance EncodeJson CreateUserResultsFailureReason where
   encodeJson AlreadyExists = encodeJson
