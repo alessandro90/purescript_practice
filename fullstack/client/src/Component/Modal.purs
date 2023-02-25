@@ -3,19 +3,13 @@ module Component.Modal where
 import Prelude hiding (top)
 
 import AppTheme (paperColor, themeColor, themeFont)
+import CSS (cursor)
 import CSS.Background (backgroundColor)
-import CSS.Color (rgba, white)
+import CSS.Color (graytone, rgba, white)
 import CSS.Common (center)
+import CSS.Cursor (notAllowed)
 import CSS.Display (display, position, fixed, zIndex, flex)
-import CSS.Flexbox
-  ( alignItems
-  , justifyContent
-  , flexDirection
-  , row
-  , column
-  , flexEnd
-  , spaceAround
-  )
+import CSS.Flexbox (alignItems, justifyContent, flexDirection, row, column, flexEnd, spaceAround)
 import CSS.Font (FontWeight(..), fontWeight, color, fontSize)
 import CSS.Geometry (top, left, padding, width, height, marginLeft, minWidth, minHeight)
 import CSS.Overflow (overflow, overflowAuto)
@@ -44,10 +38,10 @@ data Output iOutput
 data Action iInput iOuput
   = Input iInput
   | Output (InnerOutput iOuput)
-  | AffirmativeClicked
-  | NegativeClicked
+  | AffirmativeClickedInternal
+  | NegativeClickedInternal
 
-type Slots iQuery iOutput = (inner :: H.Slot iQuery (InnerOutput iOutput) Unit)
+type Slots iQuery iOutput = (inner :: H.Slot (InnerQuery iQuery) (InnerOutput iOutput) Unit)
 
 _inner = Proxy :: Proxy "inner"
 
@@ -66,13 +60,20 @@ type Config =
   }
 
 data InnerOutput iOutput
-  = PassThrough iOutput
+  = PassThroughOutput iOutput
   | EnableAffirmative
   | DisableAffirmative
   | EnableNegative
   | DisableNegative
   | CloseAffirmative
   | CloseNegative
+  | ParentAffirmative
+  | ParentNegative
+
+data InnerQuery iQuery a
+  = AffirmativeClicked a
+  | NegativeClicked a
+  | PassThroughQuery iQuery a
 
 defaultConfig :: Config
 defaultConfig =
@@ -87,17 +88,14 @@ component
   :: ∀ iQuery iInput iOutput m
    . MonadAff m
   => Config
-  -> H.Component iQuery iInput (InnerOutput iOutput) m
-  -> H.Component iQuery iInput (Output iOutput) m
-component
-  { affirmativeLabel
-  , negativeLabel
-  , displayButtons
-  , affirmativeDisabled
-  , negativeDisabled
-  }
-  innerComponent = H.mkComponent
-  { initialState: { iInput: _, affirmativeDisabled, negativeDisabled }
+  -> H.Component (InnerQuery iQuery) iInput (InnerOutput iOutput) m
+  -> H.Component (InnerQuery iQuery) iInput (Output iOutput) m
+component config innerComponent = H.mkComponent
+  { initialState:
+      { iInput: _
+      , affirmativeDisabled: config.affirmativeDisabled
+      , negativeDisabled: config.negativeDisabled
+      }
   , render
   , eval: H.mkEval $ H.defaultEval
       { handleAction = handleAction
@@ -112,30 +110,32 @@ component
   handleAction = case _ of
     Input input -> H.modify_ _ { iInput = input }
     Output innerOutput -> case innerOutput of
-      PassThrough output -> H.raise $ InnerOutput output
+      PassThroughOutput output -> H.raise $ InnerOutput output
       EnableAffirmative -> H.modify_ _ { affirmativeDisabled = false }
       DisableAffirmative -> H.modify_ _ { affirmativeDisabled = true }
       EnableNegative -> H.modify_ _ { negativeDisabled = false }
       DisableNegative -> H.modify_ _ { negativeDisabled = true }
-      CloseAffirmative -> handleAction AffirmativeClicked
-      CloseNegative -> handleAction NegativeClicked
-    AffirmativeClicked -> H.raise Affirmative
-    NegativeClicked -> H.raise Negative
+      CloseAffirmative -> handleAction AffirmativeClickedInternal
+      CloseNegative -> handleAction NegativeClickedInternal
+      ParentAffirmative -> H.raise Affirmative
+      ParentNegative -> H.raise Negative
+    AffirmativeClickedInternal -> void $ H.tell _inner unit AffirmativeClicked
+    NegativeClickedInternal -> void $ H.tell _inner unit NegativeClicked
 
   handleQuery
     :: ∀ a
-     . iQuery a
+     . InnerQuery iQuery a
     -> H.HalogenM (State iInput) (Action iInput iOutput) (Slots iQuery iOutput) (Output iOutput) m (Maybe a)
   handleQuery = H.query _inner unit
 
   render :: State iInput -> H.ComponentHTML (Action iInput iOutput) (Slots iQuery iOutput) m
-  render { iInput } =
+  render { iInput, affirmativeDisabled, negativeDisabled } =
     let
-      displayAffirmative = case displayButtons of
+      displayAffirmative = case config.displayButtons of
         DisplayBothButtons -> true
         DisplayAffirmative -> true
         _ -> false
-      displayNegative = case displayButtons of
+      displayNegative = case config.displayButtons of
         DisplayBothButtons -> true
         DisplayNegative -> true
         _ -> false
@@ -182,26 +182,27 @@ component
                 ]
                 [ if not displayAffirmative then HH.text ""
                   else HH.button
-                    [ buttonStyle
+                    [ buttonStyle affirmativeDisabled
                     , HP.disabled affirmativeDisabled
-                    , HE.onClick $ const AffirmativeClicked
+                    , HE.onClick $ const AffirmativeClickedInternal
                     ]
-                    [ HH.text affirmativeLabel ]
+                    [ HH.text config.affirmativeLabel ]
                 , if not displayNegative then HH.text ""
                   else HH.button
-                    [ buttonStyle
+                    [ buttonStyle negativeDisabled
                     , HP.disabled negativeDisabled
-                    , HE.onClick $ const NegativeClicked
+                    , HE.onClick $ const NegativeClickedInternal
                     ]
-                    [ HH.text negativeLabel ]
+                    [ HH.text config.negativeLabel ]
                 ]
             ]
         ]
     where
-    buttonStyle = HC.style do
+    buttonStyle isDisabled = HC.style do
       themeFont
       fontWeight $ FontWeight $ value "500"
-      color white
+      color if isDisabled then (graytone 0.5) else white
+      when isDisabled $ cursor notAllowed
       padding (rem 0.5) (rem 0.5) (rem 0.5) (rem 0.5)
       backgroundColor themeColor
       width $ rem 8.0

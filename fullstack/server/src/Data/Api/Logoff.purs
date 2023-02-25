@@ -5,7 +5,9 @@ import Prelude
 import Data.Argonaut (class DecodeJson, class EncodeJson, JsonDecodeError(..), encodeJson, (.:))
 import Data.Argonaut.Decode.Decoders (decodeJObject)
 import Data.Either (Either(..))
+import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe(..))
+import Data.Show.Generic (genericShow)
 import Data.UUID (UUID, parseUUID, toString)
 
 newtype LogoffRequest = LogoffRequest { authToken :: UUID }
@@ -29,6 +31,10 @@ instance DecodeJson LogoffRequest where
       Left $ AtKey tag $ UnexpectedValue json
 
 data LogoffResponse = LogoffResponseFailure | LogoffResponseSuccess
+
+derive instance Generic LogoffResponse _
+instance Show LogoffResponse where
+  show = genericShow
 
 instance EncodeJson LogoffResponse where
   encodeJson LogoffResponseFailure = encodeJson { tag: "LogoffResponseFailure" }

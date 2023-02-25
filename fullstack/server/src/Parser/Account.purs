@@ -10,9 +10,9 @@ import Data.Maybe (Maybe(..))
 import Data.String (codePointFromChar)
 import Data.String.CodeUnits (fromCharArray)
 import Entity.Account (Account(..))
-import Parsing (ParserT)
-import Parsing.Combinators (sepBy)
-import Parsing.String (char, satisfy, string)
+import Parsing (ParserT, fail)
+import Parsing.Combinators (notFollowedBy, sepBy)
+import Parsing.String (anyChar, char, satisfy, string)
 
 type AccountParserT a = ParserT String Identity a
 
@@ -74,6 +74,6 @@ accountParser = do
 
 accountsParser :: AccountParserT (Array Account)
 accountsParser =
-  catMaybes <<< fromFoldable <$>
-    (Just <$> accountParser <|> pure Nothing)
-      `sepBy` char '\n'
+  ( (Just <$> accountParser <|> pure Nothing)
+      `sepBy` char '\n' <#> catMaybes <<< fromFoldable
+  ) <* (notFollowedBy anyChar <|> fail "Failed to parse complete file")

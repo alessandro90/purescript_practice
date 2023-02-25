@@ -24,9 +24,9 @@ main = do
     let router = H.hoist (runAppM { userRef }) Router.component
     io <- runUI router unit body
     liftEffect $ matchesWith (RouteDuplex.parse routeCodec)
-      \old' new -> when (old' /= Just new)
-        $ launchAff_
-        $ void
-        $ io.query
-        $ H.mkTell
-        $ Router.Navigate new
+      \_ new ->
+        launchAff_
+          $ void
+          $ io.query
+          $ H.mkTell
+          $ Router.Navigate new

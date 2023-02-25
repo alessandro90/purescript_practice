@@ -8,7 +8,7 @@ import CSS.Border (borderRadius)
 import CSS.Box (boxShadow, bsColor, shadow)
 import CSS.Color (graytone, rgba, white)
 import CSS.Common (center)
-import CSS.Cursor (cursor, notAllowed, pointer)
+import CSS.Cursor (cursor, notAllowed)
 import CSS.Display (display, flex)
 import CSS.Flexbox (flexDirection, column, row, flexGrow, alignItems, justifyContent)
 import CSS.Font (FontWeight(..), color, fontSize, fontWeight)
@@ -19,6 +19,7 @@ import CSS.Size (rem, px, pct, vw)
 import Capability.Log (class Log, LogLevel(..), log, logEntry)
 import Capability.LogonRoute (class LogonRoute, PasswordType(..), logonRoute)
 import Capability.Navigate (class Navigate, navigate)
+import Component.Modal (InnerQuery)
 import Component.Modal as Modal
 import Component.Modal.Common as ModalCommon
 import Component.Modal.Message as Message
@@ -58,7 +59,7 @@ data Action
 type Query :: ∀ k. k -> Type
 type Query = Const Void
 
-type Slots = (modal :: H.Slot Message.Query (Modal.Output Message.Output) Unit)
+type Slots = (modal :: H.Slot (InnerQuery Message.Query) (Modal.Output Message.Output) Unit)
 
 _modal = Proxy :: Proxy "modal"
 
@@ -200,7 +201,7 @@ component = H.mkComponent
                   width (rem 20.0)
                   height $ vw 3.0
                   color if logonDisabled then (graytone 0.5) else white
-                  cursor if not logonDisabled then pointer else notAllowed
+                  when logonDisabled $ cursor notAllowed
               , HE.onClick $ const Logon
               , HP.disabled logonDisabled
               ]
